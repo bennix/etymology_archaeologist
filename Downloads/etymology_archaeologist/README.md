@@ -1,171 +1,274 @@
-# Etymology Archaeologist Skill
+# 🏛️ Etymology Archaeologist - Claude AI Skill
+
+> **Transform vocabulary learning into an archaeological journey through language history**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Claude AI](https://img.shields.io/badge/Claude-AI%20Skill-blue.svg)](https://claude.ai)
+[![Language](https://img.shields.io/badge/Language-English%20Etymology-green.svg)]()
 
 ## 🔍 What is This?
 
-**Etymology Archaeologist (词源考古学家)** is a comprehensive Claude skill that transforms English vocabulary learning into an archaeological journey. Instead of simply memorizing definitions, you'll excavate the deep history of each word, understanding how ancient civilizations thought and communicated.
+**Etymology Archaeologist (词源考古学家)** is a comprehensive Claude AI skill that transforms English vocabulary learning into an archaeological journey. Instead of simply memorizing definitions, you'll excavate the deep history of each word, understanding how ancient civilizations thought and communicated.
+
+This skill turns Claude into your personal etymology tutor, taking you through time and space to dialogue with ancient Greek philosophers and Roman senators, understanding how they used language to capture the world.
+
+## 🤖 Claude AI Skill
+
+This is a **Claude AI Skill** - a specialized prompt that enhances Claude's capabilities in a specific domain. When you upload this skill to Claude, it becomes an expert etymology archaeologist with:
+
+- 📚 Deep knowledge of etymological sources (OED, Etymonline)
+- 🔬 Systematic 6-step analysis methodology
+- 🎨 Engaging storytelling and visualization
+- 🌍 Cross-linguistic pattern recognition
+- 📖 Educational pedagogy expertise
 
 ## ✨ Key Features
 
-- **6-Step Deep Analysis**: Every word gets a complete etymological excavation
-- **Root-First Approach**: Trace words back to Proto-Indo-European, Latin, and Greek origins
-- **Cultural Context**: Understand the historical and philosophical environment of word creation
-- **Visual Learning**: Reconstruct the "mental picture" ancient people had when creating words
-- **Cognate Networks**: Discover surprising connections between seemingly unrelated words
-- **Batch Processing**: Analyze entire documents or word lists automatically
+### 🔬 **6-Step Deep Analysis**
+Every word gets a complete etymological excavation following a proven methodology
 
-## 🎯 The 6-Step Process
+### 🌱 **Root-First Approach** 
+Trace words back to Proto-Indo-European, Latin, and Greek origins
 
-### 1️⃣ The Word Today (现代词义)
-Current definition, pronunciation (IPA), and usage
+### 🏛️ **Cultural Context**
+Understand the historical and philosophical environment of word creation
 
-### 2️⃣ Morpheme Breakdown (词素拆解)
-Deconstruct into prefix, root, and suffix components
+### 🎨 **Visual Learning**
+Reconstruct the "mental picture" ancient people had when creating words
 
-### 3️⃣ Etymological Roots (词源引述)
-Academic citations from OED, Etymonline, and other authorities
+### 🕸️ **Cognate Networks**
+Discover surprising connections between seemingly unrelated words
 
-### 4️⃣ Reconstructing the Original Concept (本义重现)
-Vivid storytelling of the word's birth and original meaning
+### 📄 **Batch Processing**
+Analyze entire documents or word lists automatically
 
-### 5️⃣ The Word's Journey (演变脉络)
-Timeline from ancient roots to modern usage
+## 🎯 The 6-Step Archaeological Process
 
-### 6️⃣ Cognate & Concept Link (同源智慧链接)
-Related word families and philosophical reflections
+### 1️⃣ **The Word Today (现代词义)**
+- Current definition and pronunciation (IPA)
+- Modern usage context
 
-## 💡 Example Usage
+### 2️⃣ **Morpheme Breakdown (词素拆解)**
+- Deconstruct into prefix, root, and suffix components
+- Explain each component's meaning and function
 
-### Analyze a Single Word
+### 3️⃣ **Etymological Roots (词源引述)**
+- Academic citations from OED, Etymonline, and other authorities
+- Proto-Indo-European (PIE) roots when applicable
+
+### 4️⃣ **Reconstructing the Original Concept (本义重现)**
+- Vivid storytelling of the word's birth
+- Cultural and historical context of creation
+
+### 5️⃣ **The Word's Journey (演变脉络)**
+- Timeline from ancient roots to modern usage
+- Semantic evolution and shifts
+
+### 6️⃣ **Cognate & Concept Link (同源智慧链接)**
+- Related word families and surprising connections
+- Philosophical reflections and modern applications
+
+## 🚀 How to Use This Skill
+
+### Step 1: Import to Claude
+1. Copy the content from `SKILL.md`
+2. Paste it into a new Claude conversation
+3. Claude will now operate as an Etymology Archaeologist
+
+### Step 2: Start Analyzing
+Choose your preferred method:
+
+#### 📝 **Single Word Analysis**
 ```
-User: "Analyze the word 'respect'"
+Simply ask: "Analyze the word 'respect'"
+```
 
-Claude will provide:
+#### 📚 **Batch Processing**
+```
+Upload a text file and say: "Analyze all words in this document"
+```
+
+#### 🎯 **Targeted Analysis**
+```
+"Analyze these words: philosophy, democracy, education"
+```
+
+## 💡 Example Analysis
+
+### Input: "respect"
+
+**Output Preview:**
+```
+📖 RESPECT
+
+【1. The Word Today (现代词义)】
+- Word: respect
 - IPA: /rɪˈspekt/
-- Breakdown: re- (back) + -spect- (to look)
-- Etymology: From Latin respectus "to look back at"
-- Original Concept: The Roman act of stopping and looking back
-- Journey: PIE *spek- → Latin → French → English
-- Cognates: spectacle, inspect, prospect, suspect
-- Reflection: What kind of "looking" is respect?
-```
+- Definition: n. admiration, esteem; v. to admire, hold in esteem
 
-### Batch Process Multiple Words
-```
-User: [Uploads text file with 50 words]
+【2. Morpheme Breakdown (词素拆解)】
+- re- (prefix): means 'back' or 'again' (回，再)
+- -spect- (root): from Latin specere, means 'to look' (看)
 
-Claude will:
-1. Extract all unique words
-2. Analyze each through 6 steps
-3. Show "未完待续" if approaching output limits
-4. Show "结束" when complete
+【3. Etymological Roots (词源引述)】
+【Etymology Source - Etymonline】: "from Latin respectus 'regard, a looking at,' literally 'act of looking back at one'..."
+
+【4. Reconstructing the Original Concept (本义重现)】
+Imagine an ancient Roman saying respectus: he's not simply 'looking' - he's 'looking back at' something...
+
+【5. The Word's Journey (演变脉络)】
+PIE *spek- → Latin respectus → Old French → Middle English → Modern English
+
+【6. Cognate & Concept Link (同源智慧链接)】
+Related words: spectacle, inspect, prospect, suspect, despise
+💡 Reflection: What kind of "looking" is respect?
 ```
 
 ## 📚 Use Cases
 
-- **Language Learners**: Build deep, memorable vocabulary
-- **Writers**: Understand nuance and choose precise words
-- **Students**: Excel at etymology and linguistics
-- **Curious Minds**: Explore the history of human thought
-- **Teachers**: Create engaging etymology lessons
+### 🎓 **For Educators**
+- Create engaging etymology lessons
+- Help students build memorable vocabulary
+- Demonstrate language evolution patterns
 
-## 🚀 How to Use
+### ✍️ **For Writers**
+- Understand word nuance and connotation
+- Choose precise vocabulary
+- Develop richer language skills
 
-1. Upload this skill to Claude
-2. Provide a single word or upload a text file
-3. Watch as Claude excavates the word's hidden history
+### 🌍 **For Language Learners**
+- Build deep, memorable vocabulary
+- Understand English word patterns
+- Connect with Indo-European language family
 
-### Single Word Analysis
-```
-Just ask: "Analyze the word 'philosophy'"
-```
+### 🧠 **For Curious Minds**
+- Explore the history of human thought
+- Understand cultural evolution through language
+- Discover surprising word connections
 
-### Batch Processing
-```
-Upload any text file and say: "Analyze all words in this file"
-```
+## 🎨 Smart Features
 
-## 🎓 Educational Value
+### 📏 **Automatic Length Management**
+- Monitors output length to prevent truncation
+- Shows "未完待续" (To Be Continued) when needed
+- Shows "结束" (End) when analysis is complete
+
+### 🔄 **Intelligent Batch Processing**
+- Automatically deduplicates words
+- Optional filtering of common stop words
+- Maintains consistent quality across all entries
+
+### ⚠️ **Error Handling**
+- Honest acknowledgment when etymology is unclear
+- Presents multiple theories when disputed
+- Explains neologisms and proper nouns appropriately
+
+## 📖 Educational Value
 
 This skill teaches:
-- **Systematic thinking**: Breaking complex things into components
-- **Historical awareness**: How language reflects cultural evolution
-- **Memory techniques**: Association through storytelling
-- **Cross-linguistic patterns**: Common roots across languages
-- **Critical thinking**: Questioning assumptions about "obvious" meanings
+- **Systematic Thinking**: Breaking complex concepts into components
+- **Historical Awareness**: How language reflects cultural evolution
+- **Memory Techniques**: Association through vivid storytelling
+- **Cross-linguistic Patterns**: Common roots across languages
+- **Critical Thinking**: Questioning assumptions about "obvious" meanings
 
-## 📖 Sources & Methodology
+## 🌍 Language Coverage
 
-Based on authoritative sources:
+- **Primary Focus**: English vocabulary analysis
+- **Source Languages**: Latin, Greek, Proto-Indo-European (PIE), Old French, Germanic roots
+- **Output Language**: Bilingual (English technical terms with Chinese explanations)
+
+## 📁 Repository Structure
+
+```
+etymology_archaeologist/
+├── README.md          # This comprehensive guide
+├── SKILL.md           # Core Claude skill document
+├── EXAMPLES.md        # Detailed analysis examples
+└── LICENSE.txt        # MIT license terms
+```
+
+## 📋 Requirements
+
+- **Claude AI** (any version that supports custom skills)
+- **Text input** (single words, word lists, or document upload)
+- **No additional software** required
+
+## 🔧 Technical Implementation
+
+### Input Processing
+- Single word: Immediate 6-step analysis
+- Multiple words: Sequential processing with progress tracking
+- File upload: Automatic word extraction and deduplication
+
+### Quality Assurance
+- Academic rigor with cited sources
+- Cultural sensitivity in historical contexts
+- Clear pedagogical focus
+- Engaging narrative style
+
+### Output Formatting
+- Structured markdown with emoji markers
+- Clear section headers for easy navigation
+- Consistent formatting across all analyses
+
+## 📚 Sources & Methodology
+
+### Authoritative Sources
 - **Online Etymology Dictionary** (etymonline.com)
 - **Oxford English Dictionary** (OED)
 - **Wiktionary**
 - Academic linguistic research
 
-Methodology:
-- Morphological analysis (structural breakdown)
-- Historical linguistics (language evolution)
-- Comparative philology (cognate relationships)
-- Cultural anthropology (contextual understanding)
-
-## 🌍 Languages Covered
-
-- **Primary**: English vocabulary analysis
-- **Source Languages**: Latin, Greek, Proto-Indo-European (PIE), Old French, Germanic roots
-- **Output Language**: Chinese (中文) explanations with English technical terms
-
-## ⚡ Smart Features
-
-### Automatic Length Management
-- Monitors output length
-- Shows "未完待续" (To Be Continued) when needed
-- Shows "结束" (End) when complete
-
-### Intelligent Batch Processing
-- Deduplicates words automatically
-- Skips common stop words (optional)
-- Maintains consistent quality across all entries
-
-### Error Handling
-- Honest acknowledgment when etymology is unclear
-- Presents multiple theories when disputed
-- Explains neologisms and proper nouns differently
-
-## 🎨 Output Style
-
-- **Structured**: Clear 6-step framework
-- **Visual**: Emoji markers for easy scanning (📖 🔍 📜 💡)
-- **Scholarly**: Cited sources and academic rigor
-- **Accessible**: Modern metaphors and storytelling
-- **Engaging**: Philosophical questions for reflection
-
-## 📝 Files Included
-
-- **SKILL.md**: Core skill document with complete instructions
-- **README.md**: This file - comprehensive usage guide
-- **EXAMPLES.md**: Three detailed example analyses (respect, philosophy, democracy)
-- **LICENSE.txt**: MIT open source license
-
-## 📄 License
-
-This skill is provided under the MIT License for educational and personal use. Etymology sources are credited to their respective authorities. See LICENSE.txt for complete details.
+### Methodology
+- **Morphological Analysis**: Structural breakdown of word components
+- **Historical Linguistics**: Tracing language evolution patterns
+- **Comparative Philology**: Identifying cognate relationships
+- **Cultural Anthropology**: Understanding contextual word creation
 
 ## ⚠️ Limitations
 
 - **Language Scope**: Focuses on English words with Indo-European origins
 - **Source Availability**: Some words may have uncertain or disputed etymologies
-- **Modern Terms**: Recent neologisms and technical jargon may lack deep historical roots
-- **Batch Size**: Very large files may require multiple runs with "未完待续" breaks
+- **Modern Terms**: Recent neologisms may lack deep historical roots
+- **Batch Size**: Very large files may require multiple processing sessions
+
+## 🤝 Contributing
+
+This is an open-source educational tool. Contributions welcome:
+- Suggest improvements to the analysis methodology
+- Report inaccuracies in etymological information
+- Propose additional features or use cases
+
+## 📄 License
+
+This skill is provided under the **MIT License** for educational and personal use. Etymology sources are credited to their respective authorities. See `LICENSE.txt` for complete details.
 
 ## 🌟 Why Etymology Matters
 
-Understanding word origins isn't just trivia—it's a window into:
-- How our ancestors understood the world
-- Why languages share common patterns
-- How concepts evolved across cultures
-- What makes communication possible
+Understanding word origins isn't just academic trivia—it's a window into:
+- **Human Cognition**: How our ancestors conceptualized the world
+- **Cultural Evolution**: How ideas spread and transformed across civilizations
+- **Language Patterns**: Why languages share common structural elements
+- **Communication**: What makes human language uniquely powerful
 
-Every word is a time capsule. This skill helps you open it.
+Every word is a time capsule containing thousands of years of human thought and culture. This skill helps you open those capsules and discover the treasures within.
 
 ---
 
-**Ready to excavate some words? Upload this skill to Claude and start your linguistic archaeology journey today!**
+## 🚀 Get Started
+
+**Ready to excavate some words?**
+
+1. Copy the content from [`SKILL.md`](./SKILL.md)
+2. Paste it into a new Claude conversation
+3. Start your linguistic archaeology journey today!
+
+**Example starter prompts:**
+- "Analyze the word 'philosophy'"
+- "What's the etymology of 'democracy'?"
+- "Analyze these words: respect, analyze, education"
+
+---
+
+*Transform your vocabulary learning from memorization to exploration. Every word has a story—let's uncover it together.*
