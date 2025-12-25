@@ -1,0 +1,14 @@
+\contentsline {chapter}{\numberline {7}Applied Case Study: Commercial Storyboard Analysis}{5}{chapter.7}%
+\contentsline {section}{\numberline {7.1}From Shot to Sequence: The Logic of AI Directors}{5}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Commercial Storyboard Case Study: Logitech G502 X PLUS}{5}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Overall Style Directive}{6}{subsection.7.2.1}%
+\contentsline {section}{\numberline {7.3}Why Write a ``Scene Timeline''}{7}{section.7.3}%
+\contentsline {section}{\numberline {7.4}The Interactive Mechanism of Shots and Language}{7}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}0--1.5 sec: The Close-up Launch}{7}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}1.5--4.5 sec: High-Speed Control}{8}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}4.5--6.0 sec: The Detail Power}{8}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}6.0--8.0 sec: Final Statement}{8}{subsection.7.4.4}%
+\contentsline {section}{\numberline {7.5}The Collaborative Principle of Sound and Image}{8}{section.7.5}%
+\contentsline {section}{\numberline {7.6}The Golden Temporal Structure of 8 Seconds}{9}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Replicable Template: The Power of Structure}{9}{section.7.7}%
+\contentsline {section}{\numberline {7.8}AI is a Cinematographer, Not a Magician}{10}{section.7.8}%

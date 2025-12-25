@@ -1,0 +1,28 @@
+\contentsline {chapter}{\numberline {2}How to Access Sora2}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}What is Sora2: A Generative Revolution from Text to Dynamic Imagery}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Redefining ``Creation''}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Differences from Sora 1}{5}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Official Access Points and Platform Channels}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Detailed Web Access Process}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}iOS Version Installation and Usage}{7}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Android Version}{8}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Regional Differences and Access Permissions}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Registration and Login: From Account System to Security Mechanisms}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}OpenAI's Unified Account System}{9}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Invitation System and Qualification Mechanism}{10}{subsection.2.4.2}%
+\contentsline {subsubsection}{Core Invitation Mechanism: Invitation Code System}{10}{subsection.2.4.2}%
+\contentsline {subsubsection}{Official Invitation Channels}{10}{subsection.2.4.2}%
+\contentsline {subsubsection}{Key Feature Access Mechanism (Cameo)}{11}{subsection.2.4.2}%
+\contentsline {subsubsection}{Internal Qualification Review and Security Mechanisms}{11}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Login Security and Privacy Protection}{11}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Initial Interface Explanation and Usage Tips}{11}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Main Feed Interface}{11}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Video Creation Interface}{12}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Activity and Notifications Panel}{12}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}User Profile and Management}{13}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Key Interface Design Principles}{13}{subsection.2.5.5}%
+\contentsline {subsection}{\numberline {2.5.6}Practical Usage Tips}{13}{subsection.2.5.6}%
+\contentsline {section}{\numberline {2.6}Network and Access Optimization Strategies}{14}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Common Issues and In-Depth Solutions}{14}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Ecosystem Extension: From Sora to the Creative Universe}{14}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Conclusion: Your Starting Point with Sora2}{15}{section.2.9}%

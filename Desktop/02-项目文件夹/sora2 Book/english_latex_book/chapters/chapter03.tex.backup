@@ -1,0 +1,303 @@
+\chapter{Writing Your First Prompt: From Text to Video}
+\label{ch:first-prompt}
+
+You've opened Sora2, created your first project, and the cursor blinks in the prompt box. This is the starting point of creation---a line of text is about to ignite the birth of a visual experience. For beginners, this moment feels like entering an unknown wilderness and stepping behind the scenes of cinema. The blank prompt box is the stage, and your words are the collective instructions for lighting, camera, and actors.
+
+In this chapter, we will not only discuss ``how to write,'' but also understand ``why to write this way.'' Sora2 prompts are not just language describing objects, but a textual extension of directorial thinking---connecting imagination with algorithms, poetry with logic. You will learn how to turn a sentence into a film, making the system not just ``understand'' your words, but ``feel'' your intention.
+
+\section{The True Meaning of Prompts: From Language to Shots}
+\index{prompts!definition}
+\index{cinematic language}
+
+In the world of Sora2, text is cinematic language. A prompt is not a command, but a \textbf{narrative visual construction grammar}\index{visual grammar}. It merges the rhythm of literature with the logic of photography: requiring both content accuracy and atmospheric extensibility. Good prompts are visual seeds that can grow light, shadow, and emotion within algorithms.
+
+We can break down the meaning of prompts into three layers:
+
+\begin{enumerate}
+\item \textbf{Literal Layer}: Elements appearing in the frame---characters, objects, scenes, props, weather, etc.
+\item \textbf{Cinematic Layer}\index{cinematic layer}: Camera angle, movement method, shot size, focal length, rhythm, and composition
+\item \textbf{Emotional Layer}\index{emotional layer}: Overall tone, psychological undercurrent, story atmosphere, audience expectations
+\end{enumerate}
+
+The relationship between these three is like the three major elements of film---script, photography, and music. When they are harmoniously aligned, Sora2 can generate shots with a sense of life.
+
+For example:
+
+\begin{quote}
+``A young woman rides a bicycle through narrow streets at dusk, the camera gliding beside her, wind tousling her hair, her laughter echoing in the sunset.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019073122437.png}
+\caption{Dynamic composition showing movement and emotional connection}
+\label{fig:ch03-bicycle}
+\end{figure}
+
+This sentence contains signals from all three layers: \textbf{environment} (dusk, narrow streets), \textbf{movement} (cycling, gliding), \textbf{emotion} (freedom, warmth, wind sensation). Sora2 will automatically fill in light direction, camera distance, color temperature, and rhythm.
+
+Conversely, if you only input ``a woman riding a bicycle,'' the algorithm cannot determine whether she's exercising in the morning, escaping, traveling, or dreaming. The loss of cinematic quality often isn't due to AI capability, but due to the lack of layered prompts.
+
+\section{Basic Structure of Prompts: The Four-Step Method}
+\index{prompt structure}
+\index{four-step method}
+
+A complete cinematic prompt should contain at least the following four elements:
+
+\begin{enumerate}
+\item \textbf{Setting}---Where are we? When? What lighting?
+\item \textbf{Action}---Who is doing what? Fast or slow rhythm?
+\item \textbf{Camera}---From which angle? Handheld, tracking, or aerial?
+\item \textbf{Tone}---What should the audience feel? Gentle? Tense? Lonely?
+\end{enumerate}
+
+You can naturally integrate these elements into sentences without being constrained by order. For example:
+
+\begin{quote}
+``At dawn on snowy ground, a fox slowly walks past, the camera follows at low angle, its footprints extending a lonely rhythm in the morning light.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019073539823.png}
+\caption{Low-angle tracking shot creating atmospheric storytelling}
+\label{fig:ch03-fox}
+\end{figure}
+
+In this text, Sora2 will not only generate visuals but also capture rhythm: snow brightness, pace speed, camera low-position movement, cold and quiet atmosphere.
+
+Prompts are like a river, each clause a change in flow rate. Mastering structure means mastering rhythm.
+
+\section{Sentence Patterns and Rhythm: Editing Film with Text}
+\index{sentence rhythm}
+\index{visual tempo}
+
+Film rhythm is often hidden in language structure. Sora2 judges shot transitions or continuity based on commas, periods, and subordinate clauses.
+
+\begin{itemize}
+\item \textbf{Short sentences}: Quick cuts, creating tension and impact
+\item \textbf{Long sentences}: Smooth continuous shots, creating immersion and lyricism
+\end{itemize}
+
+\textbf{Example 1 (Fast rhythm):}
+
+\begin{quote}
+``Rain. Sirens. Footsteps. Man turns back. Lights flicker.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019074404314.png}
+\caption{Staccato visual rhythm creating urgency}
+\label{fig:ch03-rain-sirens}
+\end{figure}
+
+\textbf{Example 2 (Slow rhythm):}
+
+\begin{quote}
+``Sunset filters through dusty windows, light dancing on book pages, air stands still.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019074859099.png}
+\caption{Long take with soft focus and warm light creating nostalgic mood}
+\label{fig:ch03-sunset-window}
+\end{figure}
+
+In creation, you can use \textbf{punctuation to control time}. Commas represent ``camera breathing,'' periods represent ``cut to new shot.'' When sentence rhythm aligns with visual rhythm, AI-generated segments exhibit natural cadence.
+
+\section{Light and Color: Emotional Codes of Visual Narrative}
+\index{lighting!emotional language}
+\index{color theory}
+
+In Sora2's understanding system, light is the language of emotion. When you use ``warm'' and ``cold,'' you're adjusting color temperature; when you write ``moonlight,'' ``neon,'' ``firelight,'' you're defining light sources. AI will choose contrast, saturation, shadow layers, and reflection relationships accordingly.
+
+\textbf{Example comparison:}
+
+\begin{quote}
+``A boy writes a letter under warm lamplight, soft jazz floating through the room.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019075250306.png}
+\caption{Warm lighting establishing intimate atmosphere}
+\label{fig:ch03-warm-lamp}
+\end{figure}
+
+$\rightarrow$ Temperature, music, and rhythm unified, creating cozy ambiance.
+
+\begin{quote}
+``A boy reviews under harsh fluorescent light, the clock's second hand crisply striking the air.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019081017786.png}
+\caption{Harsh lighting creating isolation and pressure}
+\label{fig:ch03-harsh-light}
+\end{figure}
+
+$\rightarrow$ Same scene, but becomes a symbol of loneliness and oppression.
+
+You can use light to control temporal feeling. For example: ``orange morning light'' suggests hope at dawn, ``blue-gray light'' implies night's oppression, ``silver moonlight'' evokes dreams and distance. AI is extremely sensitive to these adjectives; a single word can rewrite the entire visual rhythm.
+
+\section{Cinematographic Language: Giving Images Directorial Presence}
+\index{cinematographic techniques}
+\index{camera movements}
+
+Sora2 understands numerous photographic terms that you can directly invoke. For example:
+
+\begin{table}[H]
+\centering
+\caption{Camera Techniques and Their Effects}
+\label{tab:camera-techniques}
+\begin{tabular}{|l|p{5cm}|p{4cm}|}
+\hline
+\textbf{Type} & \textbf{Keywords} & \textbf{Effect} \\
+\hline
+Static shot & Tripod, fixed camera, eye-level & Stable, solemn \\
+Tracking shot & Following, pan, dolly & Dynamic, immersive \\
+Aerial shot & Bird's-eye view, drone perspective & Grand, detached \\
+Close-up & Macro, focus, eyes & Strong emotional tension \\
+Handheld & Shaky, immediacy, documentary feel & Authentic, chaotic \\
+Push/Pull & Slow zoom, push-pull & Oppressive, transitional, dramatic \\
+\hline
+\end{tabular}
+\end{table}
+
+For example:
+
+\begin{quote}
+``Handheld close-up, a firefighter's face flickering in firelight, sweat and ash intertwined.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019081441693.png}
+\caption{Handheld close-up creating immediate emotional intensity}
+\label{fig:ch03-firefighter}
+\end{figure}
+
+The system will automatically understand: high emotion, close distance, handheld movement, orange-red dominant color.
+
+If changed to:
+
+\begin{quote}
+``Aerial shot, the city burns into a red map, night torn open.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019081745619.png}
+\caption{Epic aerial perspective transforming narrative scale}
+\label{fig:ch03-aerial-city}
+\end{figure}
+
+That becomes epic macro-narrative. Different cinematographic language makes the same subject present completely different emotional levels.
+
+\section{Writing Emotion: Making Images Breathe}
+\index{emotional writing}
+\index{empathy in AI}
+
+AI's core is not generation, but \textbf{empathy}. The emotional words you provide are key clues for it to understand rhythm.
+
+For example:
+
+\begin{quote}
+``She pushes open the dust-covered door, light pouring in from the gap, as if time trembles.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019082258201.png}
+\caption{Metaphorical language creating temporal atmosphere}
+\label{fig:ch03-door-light}
+\end{figure}
+
+Here, ``as if time trembles'' makes the system understand to slow down, soft focus, low saturation. Emotional words affect not only visuals but also sound design, color tone, and action speed.
+
+Imagine writing ``the emotion of wind''---not just writing wind, but writing ``the touch of wind.'' Sora2 can read the psychological implications behind ``lonely wind,'' ``scorching wind,'' ``salt-laden wind,'' thereby changing the entire scene's tone.
+
+\section{Iteration and Direction: Balancing Refinement and Rhythm}
+\index{iterative refinement}
+\index{directorial control}
+
+Excellent prompts are not achieved in one go but obtained through repeated experimentation. You need to, like a director, continuously adjust rhythm and tone.
+
+The first generation might be too bright, the second too dark, the third with scattered composition. Adjust one variable each time: lighting, camera movement, tonal adjectives, emotional intensity. Observe changes---this is the process of training ``visual intuition.''
+
+\begin{quote}
+First draft: ``A woman stands on a rainy night street under neon lights, camera slowly rotates.''
+
+Second draft: ``A woman stands in a flickering neon-lit rain alley, rainwater dripping from her fingertips, blue-purple lights reflecting a lonely silhouette.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019082700484.png}
+\caption{Refined prompt with tactile details and emotional depth}
+\label{fig:ch03-neon-rain}
+\end{figure}
+
+The second version adds touch, color, and emotion; AI's response becomes more human. This is ``directorial writing''---controlling variables, adjusting rhythm, seeking authenticity.
+
+\section{From Single Shot to Sequence: Making Text Tell Stories}
+\index{narrative sequences}
+\index{shot progression}
+
+One prompt describes one moment, while multiple prompts can form \textbf{narrative beats}. Like film storyboards, you can link multiple sentences:
+
+\begin{enumerate}
+\item \textbf{Establishing shot} (Where)---Establish space and time
+\item \textbf{Action shot} (What)---Show events or changes
+\item \textbf{Emotional shot} (Why)---Reveal character state of mind
+\item \textbf{Closing shot} (Closure)---Leave blank space or symbolism
+\end{enumerate}
+
+\begin{quote}
+``Pre-dawn harbor, fog not yet dispersed. Fisherman lights lamp, light rippling on water surface. Camera rises, distant city begins to wake.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019083038795.png}
+\caption{Sequential narrative creating complete story arc}
+\label{fig:ch03-harbor}
+\end{figure}
+
+Four sentences, one story. Sora2 will recognize rhythmic layers, balancing transitions between visual and emotional elements.
+
+\section{Practice: Your First Sora2 Prompt}
+\index{practical exercise}
+
+Now, open Sora2 and input:
+
+\begin{quote}
+``A young woman stands on a rainy night street with flickering neon, water splashing at her feet, camera slowly circling around her.''
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019083423183.png}
+\caption{Your first Sora2 creation}
+\label{fig:ch03-first-prompt}
+\end{figure}
+
+After generation, analyze carefully. Does it need more emotion? Is the rhythm too fast? Add words: ``cold blue tones,'' ``melancholic atmosphere,'' ``slow motion,'' ``low jazz music.'' Generate again.
+
+You'll discover each word influences the frame's beat. Learning to shape through fine-tuning is true directorial skill.
+
+\section{Summary: The Cinematic Nature of Text}
+\index{textual cinema}
+
+In Sora2's world, \textbf{writing prompts is like writing poetry}. Text doesn't just convey information; it constructs imagery.
+
+\begin{itemize}
+\item Write shots with rhythm
+\item Write emotion with light
+\item Write time with sentence structure
+\end{itemize}
+
+When you can write a scene with light, wind, and breath in thirty words, you've completed the leap from ``language'' to ``vision.'' Sora2 becomes your camera, and your text becomes that invisible lens---capturing the world, capturing heartbeats.

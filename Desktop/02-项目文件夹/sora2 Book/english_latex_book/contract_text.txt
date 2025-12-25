@@ -1,0 +1,464 @@
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 1 of 8 
+ 
+ 
+THIS AGREEMENT is made as of December 5, 2025, between Apress Media, LLC (“We” or “Us”), located at 
+One New York Plaza, Suite 4600, New York, NY 10004 and Zhiping XU residing at Room 609, Yifu Building, 
+Handan Campus, Fudan University, Shanghai, 200433, China concerning a literary work tentatively titled “The 
+Handbook of Sora 2 Prompting” (the “Work”). The Work is tentatively described in Appendix A. The parties 
+agree:  
+1. GRANT OF RIGHTS AND TERM OF THIS AGREEMENT. You grant, convey, and transfer to Us the exclusive right 
+and license to publish, distribute, promote, advertise, sell and otherwise commercially exploit the Work in whole or 
+in part, in print, electronic, or any other form or medium, now known or hereaft er developed, in all languages 
+throughout the world, including all subsidiary rights for the duration of copyright in the Work, as well as the right to 
+sublicense any of the granted rights.  The duration of the copyright in the Work shall be the term of th is Agreement 
+unless it is terminated sooner as the Agreement provides. “Electronic form” shall include photographic, audio, video, 
+digital, laser, magnetic, or any other form, and for any medium now known or hereafter developed.  You agree to 
+inform Us upon the signing of this Agreement of any licenses or other rights granted to third parties of Your version 
+of the Work. 
+You may publish excerpts from the Work, or articles based on the Work, providing such excerpts or articles contain 
+appropriate references to the Work and no individual excerpt is more than 10% of the total Work , and provided that 
+such excerpts are not commercially sold. We must agree in writing to the publication of excerpts of greater than 10% 
+of the Work.  
+You have a non -exclusive, non-transferable right to use any materials derived from the Work, including examples, 
+text excerpts, line art, slides, transparencies, and the cover for use in courses and seminars taught directly by You or 
+directly supervised by You. 
+2. DELIVERY OF MANUSCRIPT AND SCHEDULES. On or before  February 28, 2026, You’ll deliver to Us the first 
+three chapters of the Work. At the present time the Work is anticipated to be  Two Hundred Fifty  manuscript pages 
+(250) in the Apress Word template or equivalent and be finished on  June 10, 2026, You’ll be responsible for writing 
+all chapters of the Work and for providing any necessary imagery (screenshots, charts, tables, illustrations) in final, 
+publishable quality. 
+You’ll also deliver all source code for the Work in a form suitable for downloading, and any other materials specified 
+in Appendix A or elsewhere in this Agreement.  
+We will prepare the index and table of contents; in which case You agree to review it and deliver Your comments on 
+it to Us within three days of receiving it from Us. 
+3. CONFORMING TO SCHEDULE. If You are unable to meet a deadline in the schedule that We agree to after the 
+acceptance of the first three chapters of Your Work You will notify Us in advance. If You fall more than four weeks 
+behind any deadline in Your schedule, and We, in Our sole di scretion, have not agreed in writing to extend Your 
+deadline, We may exercise the rights described in Section 4(1) or 4(2) of this Agreement, at our option.  
+4. ACCEPTANCE OR REJECTION OF MANUSCRIPT. Upon Our receipt of the first three chapters of Your manuscript, 
+We will inform You if the se chapters are satisfactory to Us in form or content. If not satisfactory to Us in form or 
+content, or if the content does not conform with any outline or description attached to this Agreement, or if market 
+conditions have changed so significantly that in Our sole judgment Your Work is not commercially viable We may, 
+at Our discretion, accept the chapters and/or the entire manuscript, reject the chapters and/or the entire manuscript, or 
+specify in writing what We need for You to do in order to make the manuscript acceptable to Us.  
+If You fail to deliver the complete manuscript within 45 days after the specified delivery date and despite having 
+received at least two reminders, or, if You fail to make satisfactory revisions to the manuscript within 30 days after 
+the date We agreed upon with You for when such revisions were due, We may terminate this Agreement. If We 
+reject Your Work for any reasons other than the quality of the submission or because You have breached any 
+representations or warranties in this Agreement, You may keep any monies advanced or granted to You.  
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 2 of 8 
+The options provided under this section of the Agreement are subject to Our sole discretion only, and shall be effective 
+upon Our written notification to You. 
+5. PERMISSIONS. You agree to obtain and, if necessary, pay for any permissions necessary for the use of materials 
+copyrighted or otherwise owned by Others that You wish to reproduce in Your Work. Permissions must be acceptable 
+to Us, and must be obtained in writing. You must provide Us with copies of all permissions when You deliver Your 
+completed manuscript to Us. 
+6. PUBLICATION. We agree to publish Your Work not later than six months from the time that We notify You that 
+We have accepted your final manuscript. If We accept the manuscript yet fail to publish the Work within six months 
+of acceptance, You may notify us of this and request for Us to remedy this. If within three months of you notifying 
+Us we still have failed to publish the Work, You may terminate this Agreement by notice to Us . All rights granted to 
+Us in this Agreement shall revert to You, and You may keep any money We paid You under this Agreement. Keeping 
+that money shall be Your only remedy for Our failure to publish the Work. If We accept Your manuscript and delay 
+publication because of delays: by third parties in the release of the software or hardware product that is the subject of 
+the Work, in the actualization of an event that may substantially improve the Work’s chances of success, or in instances 
+of Force Majeure, such delays will not be counted towards the six-month period described in this section. 
+7. ROYALTIES. 
+a) For sales directly attributed to the Work through direct, bulk, aggregator, or normal resale channels 
+We will pay You royalties as a percentage of the net receipts that We receive except that We will 
+not pay You royalties on a sale where We sell the print version of the  Work at a discount of sixty 
+percent (60%) or greater from its list price. The royalty rate shall be as follows:  
+▪ ten (10) percent of Our net receipts received on the first 2,000 copies of the Work sold; 
+▪ twelve (12) percent of Our net receipts received on copies sold between 2,001 and 3,000; 
+▪ fifteen (15) percent of Our net receipts received on all copies sold thereafter. 
+b) No more than 60 days after publication of the Work including the source code specified in Section 2 of this 
+Agreement, you will receive a one-time unrecoverable payment of Seven Hundred and Fifty dollars ($750) 
+for the inclusion of all or part of the Work in Our subscription packages. 
+ 
+  
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 3 of 8 
+c) For any rights pertaining to this work that We license, We will pay You a royalty of twenty-seven 
+and one half (27.50) percent of our net receipts. 
+d) Print copies sold at a discount of sixty (60) percent, or more generally, any copies on which monies 
+are paid according to Sections 7 b) or c) above, or copies sent for review or used for publicity will 
+not count towards determining the totals used in Section 7a).  
+e) For any new edition of the Work, sales of previous editions of the Work will not count towards 
+determining the totals used in Section 7a). 
+f) If You receive any overpayment of royalties from Us, due to returns from bookstores, dealers, or 
+other distributors, or because of Our error, We may retain an equal amount from any monies We 
+owe You until We have recovered the overpayment.  
+g) We may set up a reserve from royalties otherwise payable to You in a specific accounting period 
+against returns of copies of the Work. If We do, We may hold a percentage of the royalties otherwise 
+due You in reserve for six (6) accounting periods following that specific period. The reserve held in 
+that specific accounting period will not exceed twenty-five (25)  percent of the product of Your 
+applicable royalty rate times the sales for the Work in that specific period.  
+h) We may bundle the Work for sale with other products. In such case the royalty due You shall be the 
+highest royalty rate applicable to the format of the Work (print, electronic etc.) in effect in the quarter 
+when the sales of the bundle were made, multiplied by Our net receipts received for the bundle, 
+multiplied by a percentage derived from dividing the list price of Your Work by the sum of the list 
+prices of all the products in the bundle. 
+i) In the event there is a use of this Work that is not covered by any clause in this Section 7, we will 
+determine, in our sole discretion, the appropriate royalty for the use of the Work most in keeping 
+with the intent of this Section 7. 
+ 
+8. ACCOUNTING AND PAYMENT. Our accounting periods close on March 31, June 30, September 30, and 
+December 31. After first publication of Your Work, We will report to You within 90 days after the close of 
+each period the total sales including monies received for subsidiary rights sal es for that period. We will pay 
+You all monies due to You under this Agreement within 90 days after the close of each accounting peri od; 
+provided, however, that We will not be required to issue payment to You unless and until You are due a 
+minimum of $100.00.  
+9. NON-COMPETITION. During the term of this Agreement, You agree to not publish or furnish to any other 
+publisher any Work that is on the exact same subject and that targets the exact same market and that could hurt sales 
+of the Work. No original article that You write on the same topic as the Work that is not part of a published Work, or 
+any previously existing Work that You have written and has been commercially published, including a revision and/or 
+update thereof, whether in printed format or electronic format will be considered competing works under this Section 
+nor will articles based on the Work provided they are consistent with the provisions outlined in Section 1 of this 
+Agreement. Videos are not considered competing works under this clause. 
+10. COPYRIGHT AND AUTHORSHIP CREDIT. We shall place a copyright notice in Your name in all copies of the 
+Work and will request that licensees do the same. You’ll receive authorship credit as follows: Zhiping XU. 
+We reserve ownership of all of  Our and Our affiliates trademarks, logos, trade names, colophons and any items 
+prepared at Our expense such as the cover, interior art and index. 
+11. WARRANTY AND INDEMNITY. 
+(1) You warrant and represent to Us, and to third parties to or through whom We sell or license rights in 
+the Work: 
+a) That You are the sole author of the Work and own all rights granted under this Agreement;  
+b) That the Work is original (except for materials for which You have obtained permissions as 
+Section 5 requires) but has been previously published and that You are free to grant all the rights 
+described in Section 1.  
+c) That the Work does not infringe any other entity or person’s copyrights or other property rights, 
+nor does it violate the rights of privacy of, or libel, other persons or entities. 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 4 of 8 
+d) You have full power and authority to enter into this Agreement; 
+e) You have not prepared the Work as a part of your official duties as an officer or employee of the 
+United States Government or as a work-made-for-hire for the United States Government; 
+f) No third party is entitled to compensation with regard to the rights assigned under this 
+Agreement; 
+g) You have not granted or assigned any rights in the Work to any other person or entity;  
+h) The Work does not contain any obscene, indecent or scandalous material;  
+i) To the best of Your knowledge, no formula, procedure or prescription contained in the Work 
+would cause injury, damage or harm to persons or property if used or followed in accordance 
+with the instructions or warnings contained in the Work. 
+(2) You make no representations or warranties and shall have no obligation to indemnify Us with respect 
+to materials inserted in the Work at Our request. 
+(3) You agree to indemnify Us, Our affiliates and representatives (together “Indemnified Parties”)  for all 
+costs, expenses and liabilities (including reasonable attorney’s fees) arising from a judgment or 
+settlement of a legal proceeding based on a breach of the representations, warranties and indemnities 
+in this Agreement. You’ll pay the Indemnified Parties the reasonable costs and attorney’s fees the 
+Indemnified Parties incur in its defense.  We may withhold and place in an escrow account all monie s 
+payable to You under Section 8, up to the amount of the damages claimed. 
+12. ARTISTIC CONTROL. 
+(1) In cooperation with You, We will determine the title and subtitle of your Work. You will be sent a proof 
+of the Work’s front and back cover for you to review, prior to these covers being finalized. If You and 
+We don’t agree after You and We consult about any of these decisions, We’ll make the final decision, 
+based on Our experience as publisher and the investment We’re making in the Work.  
+(2) After copyediting the Work,  We’ll provide You with proofs, which You’ll promptly review and return 
+to Us within the time We specify. If You don’t return proofs to Us within the schedule, We may proceed 
+without Your corrections.  
+13. AUTHOR COPIES. You’ll receive 5 free copies of the Work, after which You’ll have the right to purchase 
+additional copies for personal use but not for resale, as well as other books published by Us under the Apress imprint, 
+also for personal use but not for resale, at a forty (40) percent discount from the list price. However on these copies 
+no royalties will be paid to You.  
+14. REPRINTS, REVISIONS AND NEW EDITIONS. 
+(1) You explicitly agree that You’ll promptly make every effort to provide Us with corrections to any errata 
+discovered by You, reported to You, or reported to Us after the publication of the Work for as long as 
+the Work remains in print. If You are writing th is Work based on a beta version of a software product, 
+then You explicitly agree to provide Us with updates that We may disseminate electronically to bring 
+the Work up to date for the first released version of the software.  Based on Our sole business judgment 
+We may publish corrected reprints from time to time based on the errata You submit as well as any errors 
+that may be reported to Us directly. Such corrected reprints will not constitute a “new edition” for the 
+purposes of Section 7. 
+(2) If We determine a new successor edition of the Work is necessary (whereby new edition We mean a 
+Work that will be published under a different ISBN number and be announced and promoted  to the 
+market as a new edition), w e will request that Yo u prepare the successor edition. When We wish to 
+initiate a new successor edition of the Work, and we have made at least three attempts to contact You 
+using the contact information we have on file for You, over a period of at least 60 days, without receiving 
+a response from You, We are free to pursue and publish a new edition of the Work, updated by another 
+author. If You agree to write the successor edition, but fall (60) or more days behind on the schedule set 
+forth by Us, or the manuscript for the revised Work that You submit to Us is, in Our sole discretion, not 
+acceptable, We may have the Work revised by a nother author or authors. In this event, We may, at Our 
+sole discretion, add the name of the revisor or revisors as additional authors. We retain the right to 
+continue to use Your name as one of the authors of the revised Work.  You shall receive 50% of the 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 5 of 8 
+financial consideration stipulated in Section 7 “Royalties” (if any) for the first following edition but shall 
+have no right or claim from any further subsequent editions of the Work. 
+15. DERIVATIVE WORKS. We shall have the right to use all or part of the Work in derivative works published by 
+Us (“Derivative Works”) in Our sole discretion. If We include all or part of the Work in a Derivative Work, You will 
+receive a pro-rata share of the total royalties pa id for that Derivative Work in the proportion that the material of the 
+Work used in the Derivative Work bears to the entire Derivative Work. If You so choose, You shall receive an 
+authorship credit of the Derivative Work, and the copyright notice will ref lect the derivative nature of the Derivative 
+Work. 
+16. SUCCESSORS AND ASSIGNS. This Agreement may not be assigned by either party without the written consent 
+of the other, except that You may assign payments due You as long as You provide Us with written notice of the 
+assignment, and We may assign this Agreement as part of Our sale or merger or sale of all or substantially all of Our 
+assets. If assigned, this Agreement shall bind the parties and their respective heirs, administrators, successors, and 
+assigns. 
+17. INFRINGEMENT. You and We shall have the right to make a claim or sue jointly for the infringement of the 
+rights granted under this Agreement to Us and, after deducting the expenses of making the claim and, if it occurs, 
+bringing and conducting the legal proceeding, to share equally in any recovery. If either party chooses not to join in 
+the claim or legal proceeding, the other party may proceed at its own expense, and, after that party deducts all the 
+expenses of making the claim and bringing the legal proceeding, any recovery shall be shared in proportion to the 
+current period’s royalty rate. We will have no liability to You for failing to pursue any potential claim. 
+18. TERMINATION FOR BREACH OF AGREEMENT.  
+(1) You’ll have the right to terminate this Agreement except for agreements on subsidiary rights already 
+made by written notice if:  
+a) The Work is not available for sale and We fail to place it available for sale again within 90 days of 
+notice, excepting instances of Force Majeure, after We receive notice from You that the Work is not 
+available for sale along with Your request that We reprint the Work. “Force Majeure” means either 
+party’s failure to perform any term or condition of this Agreement as a result of conditions beyond 
+its control such as, but not limited to, war, strikes, fires, floods, governmental restrictions, power 
+failures, labor disputes  or damage or destruction of any network facilities or servers, or failure of 
+any third party  to perform any agreement with Us which adversely affects Our ability to perform 
+Our obligations under this Agreement.  
+b) We fail to provide a statement of account or make any payment, as Section 9 requires, within 30 
+days after the statement or payment is due and then fail to correct the failure within 30 days of 
+receipt of written notice from You sent to Us. 
+(2) We’ll have the right to terminate this Agreement:  
+a) If you materially breach this Agreement and do not correct the breach within 60 days of your receipt 
+of Our written notice to you. 
+b) As stated in Section 4(1). 
+c) If market conditions have changed so substantially that publication of your book would no longer 
+be commercially viable. 
+(3) To the extent permitted by law, either of Us may terminate this Agreement in the event of the other’s 
+insolvency, bankruptcy, or assignment of assets for the benefit of creditors.  
+ 
+If You or We terminate the Agreement under this Section, We’ll revert all rights in the Work to You except 
+for subsidiary rights already sold or licensed. 
+ 
+19. PROMOTION. We’ll promote the Work, using Our reasonable judgment about the methods and channels of 
+promotion. You consent to Our use of Your name, portrait, picture, and/or likeness for promotion and advertising of 
+the Work, provided that use is dignified and consistent with Your reputation. You’ll assist in the promotion of the 
+Work, furnishing Us w ith leads or ideas for promotion as appropriate. At Our discretion We may assist You in 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 6 of 8 
+promoting the Work through Your own promotional channels, such as Your Web site, third party contacts, or 
+conferences or user’s groups which You attend or to which You belong.  
+20. ARBITRATION. Any dispute of any kind between You and Us arising out of or relating to this Agreement, its 
+performance or the Work shall be submitted to binding arbitration before a single neutral arbitrator knowledgeable 
+about the book publishing and computer software industries. The arbitration shall be conducted under the Commercial 
+Dispute Resolution Rules then in effect of the American Arbitration Association (“AAA Rules”) and, where not 
+inconsistent with the AAA Rules, New York state law. Proceedings shall be condu cted expeditiously and 
+economically, and the arbitrator shall administer the proceedings with an eye to minimizing their cost consistent with 
+a fair and informed resolution on the merits. The arbitrator shall award the prevailing party its reasonable attor neys’ 
+fees and costs (including but not limited to the portion of the arbitrator’s and the AAA’s fees and costs advanced or 
+owed by the prevailing party) if and only if it finds the non -prevailing party’s position was without substantial 
+justification; oth erwise the parties shall bear their own attorneys’ fees and costs incurred in connection with the 
+proceeding. Without detracting from the mandatory obligation to submit to binding arbitration provided herein, any 
+court proceedings arising out of or relating to any dispute within the scope of this paragraph (including but not limited 
+to seeking interim relief permitted by New York  state law, an order compelling arbitration and/or an order confirming, 
+vacating or modifying any arbitration award) shall be brought in the New York State Unified  Court System, and each 
+party agrees to be subject to the personal jurisdiction of those courts and that they are and will be proper venues.  
+21. NOTICE. Where notice is required under this Agreement, it must be given in writing by use of certified mail, 
+return receipt requested, or receipted courier service, sent to the addresses stated in this Agreement, and shall be 
+deemed received ten days after mailing. The addresses for notice may be changed by giving written notice of the new 
+address to the other party.  
+22. ENTIRE AGREEMENT AND MODIFICATIONS. This Agreement represents the entire agreement between the 
+parties. All modifications of this Agreement must be in writing and signed by both parties.  
+23. WAIVERS AND DEFAULTS. Any waiver of a breach or default under this Agreement shall not be deemed a 
+waiver of any other breach or default. 
+24. GOVERNING LAW. This Agreement shall be governed by the laws of New York that apply to contracts made 
+and to be performed in that state. 
+25. MISCELLANEOUS. Sections 11, 16, 20, 21, 22, 23, 24, and 25 shall survive the expiration or termination of this 
+Agreement.  Headings are for reference only and shall not be considered in the interpretation of this Agreement.  The 
+unenforceability of any provision of this Agreement shall not affect the enforceability of any other provision, and this 
+Agreement shall be interpreted without reference to  that unenforceable provision. This Agreement may be signed in 
+counterparts and by facsimile transmission.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 7 of 8 
+ 
+ 
+ 
+Zhiping XU 
+Author 
+X
+ 
+Email Address: zpxu@fudan.edu.cn 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Welmoed Spahr 
+For Apress 
+ 
+ 
+X
+ 
+ 
+ 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+
+ 
+ 
+ 
+1 New York Plaza, New York, NY 10004 | www.apress.com   Page 8 of 8 
+APPENDIX A: TENTATIVE DESCRIPTION 
+ 
+The Handbook of Sora Prompting 
+ 
+Table of Contents 
+Chapter 1 – Enter Sora2: Turning Language into Moving Images 
+Chapter 2 – Getting Started: Accounts, Interface, and Creative Setup 
+Chapter 3 – Writing Your First Prompt: From Text to Video 
+Chapter 4 – The Power of Cameos: Bringing People into Your Story 
+Chapter 5 – Storytelling in Seconds: Designing Short Scenes 
+Chapter 6 – Cinematic Language: Cameras, Movement, and Color 
+Chapter 7 – Building Multi-Shot Storyboards: From Idea to Sequence 
+Chapter 8 – Refining and Polishing: Directing Through Iteration 
+Chapter 9 – Publishing, Ethics, and the Future of AI Filmmaking 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Docusign Envelope ID: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+Certificate Of Completion
+Envelope Id: 11FD34FD-DB15-4E5C-B013-9200D94B83F8
+Status: Completed
+Subject: Contract for Book: The Handbook of Sora 2 Prompting
+Edition ID: 
+Source Envelope: 
+Document Pages: 8
+Signatures: 2
+Envelope Originator: 
+Certificate Pages: 2
+Initials: 0
+Flux Automation User
+AutoNav: Enabled
+EnvelopeId Stamping: Enabled
+Time Zone: (UTC-08:00) Pacific Time (US & Canada)
+MRPA/IT Procurement 0950
+Heidelberger Platz 3
+Berlin, Germany  14197
+flux_docusign@springernature.com
+IP Address: 35.204.153.224 
+Record Tracking
+Status: Original
+             12/5/2025 1:03:37 AM
+Holder: Flux Automation User
+             flux_docusign@springernature.com
+Location: DocuSign
+Signer Events
+Signature
+Timestamp
+Welmoed Spahr
+welmoed.spahr@springer.com
+Security Level: 
+      .None
+      ID: a552fec4-e352-4aed-95b6-a06dadebfd7d
+      12/10/2025 6:27:41 AM
+Signature Adoption: Pre-selected Style
+Using IP Address: 108.6.143.139
+Sent: 12/5/2025 1:03:38 AM
+Viewed: 12/10/2025 6:27:45 AM 
+Signed: 12/10/2025 6:28:10 AM
+Freeform Signing
+Electronic Record and Signature Disclosure: 
+      Not Offered via Docusign
+Zhiping XU
+zpxu@fudan.edu.cn
+Security Level: 
+      .None
+      ID: 6423618a-8ece-43c3-ad36-03b0f663eab6
+      12/6/2025 6:57:16 PM
+Signature Adoption: Pre-selected Style
+Using IP Address: 212.15.86.156
+Sent: 12/5/2025 1:03:38 AM
+Viewed: 12/6/2025 6:57:32 PM 
+Signed: 12/6/2025 6:58:51 PM
+Freeform Signing
+Electronic Record and Signature Disclosure: 
+      Not Offered via Docusign
+In Person Signer Events
+Signature
+Timestamp
+Editor Delivery Events
+Status
+Timestamp
+Agent Delivery Events
+Status
+Timestamp
+Intermediary Delivery Events
+Status
+Timestamp
+Certified Delivery Events
+Status
+Timestamp
+Carbon Copy Events
+Status
+Timestamp
+Witness Events
+Signature
+Timestamp
+Notary Events
+Signature
+Timestamp
+Envelope Summary Events
+Status
+Timestamps
+Envelope Sent
+Hashed/Encrypted
+12/5/2025 1:03:38 AM
+
+Envelope Summary Events
+Status
+Timestamps
+Certified Delivered
+Security Checked
+12/6/2025 6:57:32 PM
+Signing Complete
+Security Checked
+12/6/2025 6:58:51 PM
+Completed
+Security Checked
+12/10/2025 6:28:10 AM
+Payment Events
+Status
+Timestamps
+
+

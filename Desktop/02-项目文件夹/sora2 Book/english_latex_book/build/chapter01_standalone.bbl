@@ -1,0 +1,26 @@
+\begin{thebibliography}{}
+
+\bibitem[Brooks et~al., 2022]{brooks2022instructpix2pix}
+Brooks, T., Holynski, A., and Efros, A.~A. (2022).
+\newblock Instructpix2pix: Learning to follow image editing instructions.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 18392--18402.
+
+\bibitem[Goodfellow et~al., 2014]{goodfellow2014generative}
+Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair,
+  S., Courville, A., and Bengio, Y. (2014).
+\newblock Generative adversarial nets.
+\newblock {\em Advances in neural information processing systems}, 27.
+
+\bibitem[Manovich, 2001]{manovich2001language}
+Manovich, L. (2001).
+\newblock {\em The language of new media}.
+\newblock MIT press.
+
+\bibitem[Singer et~al., 2022]{singer2022make}
+Singer, U., Polyak, A., Hayes, T., Yin, X., An, J., Zhang, S., Hu, Q., Yang,
+  H., Ashual, O., Gafni, O., et~al. (2022).
+\newblock Make-a-video: Text-to-video generation without text-video data.
+\newblock {\em arXiv preprint arXiv:2209.14792}.
+
+\end{thebibliography}

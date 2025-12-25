@@ -1,0 +1,41 @@
+\contentsline {chapter}{\numberline {9}Publishing, Ethics, and the Future of AI Filmmaking}{5}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Export and Technical Preparation: The ``Last Mile'' of Work Landing}{5}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Format and Image Quality}{5}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Audio and Color Correction}{5}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.3}Metadata and Digital Fingerprinting}{6}{subsection.9.1.3}%
+\contentsline {section}{\numberline {9.2}Platform Strategy: Artistic Navigation in the Algorithmic World}{6}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}TikTok/Douyin}{6}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}YouTube Shorts and Instagram Reels}{6}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.2.3}Vimeo and LinkedIn}{6}{subsection.9.2.3}%
+\contentsline {subsection}{\numberline {9.2.4}Chinese Ecosystem (Bilibili, Xiaohongshu, Weibo)}{7}{subsection.9.2.4}%
+\contentsline {subsection}{\numberline {9.2.5}Cross-Platform Strategy Recommendations}{7}{subsection.9.2.5}%
+\contentsline {section}{\numberline {9.3}Attribution and Transparency: Artistic Integrity in the AI Era}{7}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Standardized Disclosure Practices}{7}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Legal Use of Others' Materials}{7}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}Creation Log System}{7}{subsection.9.3.3}%
+\contentsline {section}{\numberline {9.4}AI Video Generation Systems Comparison}{8}{section.9.4}%
+\contentsline {section}{\numberline {9.5}AI Ethics: Balancing ``Innovation'' and ``Responsibility''}{8}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Bias Recognition}{9}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Content Authenticity}{9}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Ethical Review Mechanisms}{9}{subsection.9.5.3}%
+\contentsline {subsection}{\numberline {9.5.4}Psychological Impact and Social Responsibility}{9}{subsection.9.5.4}%
+\contentsline {section}{\numberline {9.6}Building Audience and Community Influence}{9}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Brand Construction}{9}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Community Interaction}{9}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Feedback Mechanisms}{10}{subsection.9.6.3}%
+\contentsline {section}{\numberline {9.7}Commercialization and Professional Transition: Making AI Art Sustainable}{10}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Revenue Models}{10}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}Pricing Strategy}{10}{subsection.9.7.2}%
+\contentsline {subsection}{\numberline {9.7.3}Copyright and Contract Awareness}{10}{subsection.9.7.3}%
+\contentsline {section}{\numberline {9.8}AI Prompt Director: Core Profession of Human-Machine Interaction}{10}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}Professional Skills}{11}{subsection.9.8.1}%
+\contentsline {subsection}{\numberline {9.8.2}Professional Ecosystem}{11}{subsection.9.8.2}%
+\contentsline {section}{\numberline {9.9}AI and Traditional Cinema's Integrated Progress}{11}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}Hybrid Production Workflow Example}{11}{subsection.9.9.1}%
+\contentsline {section}{\numberline {9.10}Screening and Awards: The Global Stage of AI Imagery}{11}{section.9.10}%
+\contentsline {section}{\numberline {9.11}Culture and Social Responsibility: Making Technology Serve the Humanities}{12}{section.9.11}%
+\contentsline {subsection}{\numberline {9.11.1}Cultural Preservation}{12}{subsection.9.11.1}%
+\contentsline {subsection}{\numberline {9.11.2}Social Inspiration}{12}{subsection.9.11.2}%
+\contentsline {subsection}{\numberline {9.11.3}Public Education}{12}{subsection.9.11.3}%
+\contentsline {section}{\numberline {9.12}Technology Trends and Future Vision}{12}{section.9.12}%
+\contentsline {section}{\numberline {9.13}Conclusion: From Language to Legacy}{13}{section.9.13}%

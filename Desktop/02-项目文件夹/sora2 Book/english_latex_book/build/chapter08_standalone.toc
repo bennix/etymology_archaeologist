@@ -1,0 +1,29 @@
+\contentsline {chapter}{\numberline {8}Refinement and Polish: Through Iterative Guidance}{5}{chapter.8}%
+\contentsline {section}{\numberline {8.1}The Directorial Philosophy of Iteration: From Modifier to Co-Creator}{5}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Systematic Diagnosis: Visual Analysis Framework}{6}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Emotional Diagnosis}{6}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Visual Diagnosis}{6}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Narrative Diagnosis}{6}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Surgical Revision: The Art of Scalpel Cutting}{6}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Case 1: Tonal Layering Revision}{7}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Case 2: Lighting Adjustment Revision}{7}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Case 3: Character Psychology Revision}{8}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Emotional Calibration: Directing AI Character Performance}{8}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Emotional Layering}{8}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Action Replacing Emotion}{9}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Environment Reflecting Emotion}{9}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}Prompt Iteration Examples: Before/After/Result Analysis}{9}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Visual Polishing: Making Frames Speak}{10}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Composition}{10}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}Lighting}{10}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}Color}{10}{subsection.8.6.3}%
+\contentsline {section}{\numberline {8.7}Rhythm and Timing: Frames Also Breathe}{10}{section.8.7}%
+\contentsline {section}{\numberline {8.8}Performance Direction: Advanced Character Animation Techniques}{11}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}Interactive Level}{12}{subsection.8.8.1}%
+\contentsline {section}{\numberline {8.9}Technical Fixes: The Director's Emergency Kit}{12}{section.8.9}%
+\contentsline {section}{\numberline {8.10}Systematic Iteration Workflow: Five-Stage Method}{13}{section.8.10}%
+\contentsline {section}{\numberline {8.11}Iteration Completion Criteria: Quality Assessment Framework}{13}{section.8.11}%
+\contentsline {section}{\numberline {8.12}Collaboration and Feedback: Inviting Humans into the AI Directorial Room}{13}{section.8.12}%
+\contentsline {section}{\numberline {8.13}From Shot to Entire Film: The Director's Holistic Thinking}{14}{section.8.13}%
+\contentsline {section}{\numberline {8.14}The Philosophy of ``Good Enough'': Completion is Freedom}{14}{section.8.14}%
+\contentsline {section}{\numberline {8.15}Rhythmic Control: Applying Musical Principles to Visual Editing}{14}{section.8.15}%

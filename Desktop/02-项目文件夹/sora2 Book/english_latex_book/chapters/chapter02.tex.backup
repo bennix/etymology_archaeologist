@@ -1,0 +1,285 @@
+\chapter{How to Access Sora2}
+\label{ch:accessing-sora2}
+
+Before you truly begin crafting prompts and envisioning shots, you must first learn ``how to enter the world of Sora2.'' The purpose of this chapter is to help you thoroughly understand this gateway---what it is, where it is, how to use it, and why it is completely different from traditional video creation. We will provide a panoramic expansion from technical background, access methods, platform differences, registration and login, security mechanisms, network optimization, device selection, regional availability to ecosystem development directions, making this chapter approximately equivalent to 10-12 pages of A4 in depth and completeness.
+
+\section{What is Sora2: A Generative Revolution from Text to Dynamic Imagery}
+\index{Sora2!definition}
+\index{text-to-video generation}
+
+Sora2 is OpenAI's second-generation text-to-video system released in 2025, representing a milestone leap in the field of AI vision. It not only inherits the first-generation Sora's Text-to-Video capabilities but also integrates multimodal features such as images, voice, dialogue, sound effects, and physical simulation, allowing creators to directly generate ``complete cinematic narratives'' through ``textual language.''
+
+\subsection{Redefining ``Creation''}
+\index{creative workflow!AI transformation}
+
+In traditional film and television production, going from concept to finished product requires at least four stages: script, shooting, editing, and color grading. In Sora2's workflow, all of this is compressed into a single text description. Creators only need to write prompts in natural language, and Sora2 will automatically complete:
+
+\begin{itemize}
+\item Scene construction (light and shadow, color temperature, texture, physical relationships)
+\item Cinematographic language (push, pull, pan, tilt, depth of field control, motion trajectories)
+\item Audio design (dialogue, ambient sound, music matching)
+\item Emotional rendering (expressing through character expressions and lighting atmosphere)
+\end{itemize}
+
+\subsection{Differences from Sora 1}
+\index{Sora!version comparison}
+
+Compared to the first generation, Sora2's innovations include:
+
+\begin{enumerate}
+\item \textbf{Unified Cross-Modal Generation Engine}: Sora2 can generate complete videos with images, sound, and dialogue in one go, rather than stitching together multiple models.
+\item \textbf{Cameo Insertion System}\index{Cameo system}: Supports recording personal 3D facial models and voice characteristics on iOS applications to ``star'' in generated videos.
+\item \textbf{Real Physics Perception and Lighting Consistency}: The model understands laws such as ``gravity,'' ``fluids,'' and ``reflection,'' making scenes naturally physically logical.
+\item \textbf{Voice Synchronization System}: Dialogue tone, rhythm, and character lip movements perfectly match, with adjustments based on cultural context.
+\item \textbf{Extended Duration and Memory Capability}: Can generate up to 90-second clips (for pro users) while maintaining contextual continuity for ads, MVs, tutorials, and narrative films.
+\end{enumerate}
+
+Sora2's goal is not to replace human directors, but to give more ordinary people ``director-level creative power.''
+
+\section{Official Access Points and Platform Channels}
+\index{access methods}
+\index{platform channels}
+
+Currently, Sora2 provides three main access methods:
+
+\begin{enumerate}
+\item \textbf{Web Version (Desktop)}: Suitable for users who need precise control over shot parameters and export formats.
+\item \textbf{iOS Application (Sora App for iPhone)}: Portable version, suitable for creating and previewing anytime, anywhere.
+\item \textbf{API Interface (For Developers)}: Suitable for enterprises and research institutions for system integration.
+\end{enumerate}
+
+\subsection{Detailed Web Access Process}
+\index{web access}
+
+\begin{enumerate}
+\item Open a recommended browser (latest versions of Chrome, Safari, or Edge).
+\item Enter \texttt{https://sora.com} in the address bar (or jump from the OpenAI official website).
+\item The page displays buttons like ``Log in'' and ``Get Started''; click to enter.
+\item If you already have a ChatGPT/OpenAI account, log in directly; otherwise, register and fill out an access application.
+\item After successful login, you will see an interface containing the following modules:
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019064919144.png}
+\caption{Sora2 web interface showing main control panels}
+\label{fig:ch02-web-interface}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{Prompt Input Box}: Enter your text description.
+\item \textbf{Parameter Panel}: Select shot style, duration, resolution, color tone, aspect ratio (16:9 / 2.39:1).
+\item \textbf{Preview Window}: Real-time display of generation progress and results.
+\item \textbf{History Panel}: Saves each generation, supports reuse and variant generation.
+\item \textbf{Export/Share Function}: One-click download of MP4 or share links to social media.
+\end{itemize}
+
+\begin{quote}
+\textbf{Note}: If you see ``Waitlist'' or ``Invite Only'' after logging in, it means the current region is not yet fully open and requires an invitation code or waiting list placement.
+\end{quote}
+
+\subsection{iOS Version Installation and Usage}
+\index{iOS app}
+
+\begin{itemize}
+\item Open the App Store and search for \textbf{``Sora by OpenAI''}.
+\item If your region (such as the US, Japan, Canada) supports it, click install.
+\item After launching, follow instructions to log in to your OpenAI account.
+\item If prompted for an invitation code, enter the code from official or test invitation emails.
+\item Some regions may trigger identity verification upon first login, such as recording a short video to verify cameo functionality.
+\end{itemize}
+
+\begin{quote}
+According to Japanese media reports, the Sora2 app can be downloaded directly, but core generation features are still limited by \textbf{invitation system}.
+\end{quote}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{screenshot-login.png}
+\caption{Sora2 login interface on mobile devices}
+\label{fig:ch02-login-screen}
+\end{figure}
+
+\subsection{Android Version}
+\index{Android app}
+
+As of October 2025, the Android version is in pre-registration phase. Users can pre-order on Google Play. After official launch, it will support the same functional modules and account system as iOS.
+
+\section{Regional Differences and Access Permissions}
+\index{regional availability}
+\index{access restrictions}
+
+OpenAI's opening strategy for Sora2 adopts a ``regional phased'' model:
+
+\begin{table}[H]
+\centering
+\caption{Regional Availability of Sora2}
+\label{tab:regional-access}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Region} & \textbf{Status} & \textbf{Restrictions} & \textbf{Notes} \\
+\hline
+US / Canada & Open (Invite-only) & Requires invite code & Web \& iOS supported \\
+Japan & Downloadable, partial lock & Cameo needs invite & Good localization \\
+Europe & Partial pilot & GDPR review & Future compliance \\
+China / HK / Taiwan & Not yet open & Can use overseas account & Requires stable VPN \\
+\hline
+\end{tabular}
+\end{table}
+
+This regional strategy reflects both technical deployment needs and policy, privacy protection, and server location considerations. OpenAI plans to deploy regional nodes in more countries to synchronously improve generation speed and access quality.
+
+\section{Registration and Login: From Account System to Security Mechanisms}
+\index{account system}
+\index{security}
+
+\subsection{OpenAI's Unified Account System}
+
+Sora2 shares the same login architecture with ChatGPT. Users with existing OpenAI accounts can use them directly without creating new ones. All generated content is bound to the ``Drafts'' page under that account for easy synchronization and backup.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=\figheight]{image-20251019070326482.png}
+\caption{Unified OpenAI account dashboard}
+\label{fig:ch02-account}
+\end{figure}
+
+\subsection{Invitation System and Qualification Mechanism}
+\index{invitation system}
+
+Currently, three main user categories are opened:
+
+\begin{enumerate}
+\item \textbf{Early Experience Users}: Obtained through official testing invitations.
+\item \textbf{ChatGPT Plus Users}: Some premium subscribers automatically gain access.
+\item \textbf{Developers and Research Institutions}: Apply through API Beta channels.
+\end{enumerate}
+
+Invitation codes are usually distributed via email or OpenAI console. Each invitation code can only be bound to one account and cannot be transferred once activated.
+
+\subsection{Login Security and Privacy Protection}
+\index{privacy protection}
+\index{two-factor authentication}
+
+\begin{itemize}
+\item Enable two-factor authentication (2FA) recommended.
+\item Cameo uploads require authorization confirmation to avoid portrait and copyright disputes.
+\item System encrypts and stores generation history, allowing users to delete all data records.
+\end{itemize}
+
+\section{Initial Interface Explanation and Usage Tips}
+\index{user interface}
+
+Sora2's interface design is extremely simple, yet every detail serves creator efficiency. Its typical layout includes:
+
+\begin{enumerate}
+\item \textbf{Prompt Input Area}:
+\begin{itemize}
+\item Supports Chinese, English, and multilingual prompts
+\item Can use structured syntax (e.g., ``scene:'', ``lighting:'', ``emotion:'')
+\item Provides AI auto-completion suggestions
+\end{itemize}
+
+\item \textbf{Parameter Panel}:
+\begin{itemize}
+\item Preset templates: advertising, narrative, educational, documentary, animation, etc.
+\item Adjustable frame rate (24fps / 30fps / 120fps slow motion)
+\item Supports aspect ratio switching (9:16, 21:9, 2.39:1)
+\end{itemize}
+
+\item \textbf{Real-time Preview Area}:
+\begin{itemize}
+\item Can play while generating
+\item Supports multi-version comparison and frame-level pause
+\end{itemize}
+
+\item \textbf{History and Version Management}:
+\begin{itemize}
+\item Automatically saves each generation
+\item Can export prompt templates
+\end{itemize}
+\end{enumerate}
+
+\subsection{Practical Suggestions}
+
+\begin{itemize}
+\item Use concise sentence structures to describe camera actions (e.g., ``camera slowly pushes in on a crying child under rain'')
+\item Adjusting lighting parameters can greatly affect emotional expression
+\item Try using ``reference image'' uploads to guide style stability
+\end{itemize}
+
+\section{Network and Access Optimization Strategies}
+\index{network optimization}
+
+Since generation involves large data transfers, network stability is key. Recommendations:
+
+\begin{enumerate}
+\item Use high-speed broadband or enterprise-grade Wi-Fi
+\item If in restricted regions, use international network accelerators, but comply with local laws
+\item Disable browser plugins to avoid script conflicts
+\item Generate no more than two videos at a time to prevent system overload
+\item Regularly clear cache to maintain page performance
+\end{enumerate}
+
+\section{Common Issues and In-Depth Solutions}
+\index{troubleshooting}
+
+\begin{table}[H]
+\centering
+\caption{Common Issues and Solutions}
+\label{tab:troubleshooting}
+\small
+\begin{tabular}{|p{3cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{Issue} & \textbf{Cause} & \textbf{Suggested Solution} \\
+\hline
+Login stuck loading & Invite code not activated or region restricted & Re-verify email, confirm IP region \\
+\hline
+Video stuttering or loading failure & Network delay or GPU queue & Lower resolution, shorten duration \\
+\hline
+Audio delay & Model not fully synchronized & Can correct in external software after generation \\
+\hline
+Cannot save video & Permission restriction or storage full & Clear history or upgrade account \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{quote}
+\textbf{Tip}: If encountering ``Server Busy,'' try generating during off-peak hours (2-5 AM Beijing time).
+\end{quote}
+
+\section{Ecosystem Extension: From Sora to the Creative Universe}
+\index{ecosystem}
+\index{future applications}
+
+Sora2 is not just a tool, but a hub for the future content industry. Its ecosystem will gradually expand in the following directions:
+
+\begin{itemize}
+\item \textbf{Education Sector}: Teachers can quickly create classroom demonstration videos
+\item \textbf{Advertising Industry}: Brands can directly generate finished products from text scripts
+\item \textbf{Filmmaking}: Directors use Sora2 to quickly preview scenes or storyboards
+\item \textbf{Social Platforms}: Creator communities can share prompts and generated videos, realizing ``AI creative socialization''
+\end{itemize}
+
+Additionally, future support will include:
+
+\begin{itemize}
+\item \textbf{ChatGPT Integration}: Complete full-process video creation through natural conversational commands
+\item \textbf{DALL·E and Voice Engine Linkage}: Form complete creation chain
+\item \textbf{Enterprise API Services}: Provide customized model access for film, advertising, and educational enterprises
+\end{itemize}
+
+\section{Conclusion: Your Starting Point with Sora2}
+\index{getting started}
+
+To smoothly enter the world of Sora2, prepare the following:
+
+\begin{enumerate}
+\item A well-performing device (16GB RAM or more recommended)
+\item Stable and secure international network
+\item A valid OpenAI account and invitation code
+\item Basic understanding of prompt writing logic
+\item Creative passion---this is a more important activation key than technology
+\end{enumerate}
+
+Once you complete login, understand the interface, and master basic commands, you will have the qualifications to ``enter the Sora universe.'' In the following chapters, we will delve into how to construct light, shadow, and emotion through text, making every prompt you write a script-worthy directorial work.

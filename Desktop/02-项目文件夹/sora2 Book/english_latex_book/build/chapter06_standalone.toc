@@ -1,0 +1,24 @@
+\contentsline {chapter}{\numberline {6}Technical Framework of Multi-Shot Storyboarding}{5}{chapter.6}%
+\contentsline {section}{\numberline {6.1}From Shot Thinking to Sequence Thinking: The AI Director's First Step}{5}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Emotional Arc Construction: Systematic Audience Engagement}{6}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Visual Continuity: Making AI's World ``Coherent and Believable''}{7}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Character Consistency}{7}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Scene Consistency}{7}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Lighting Consistency}{7}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Color and Atmosphere}{7}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Camera Angle and Focal Length}{8}{subsection.6.3.5}%
+\contentsline {section}{\numberline {6.4}Transition Techniques: Creating Smooth Shot Sequences}{8}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Visual Matching (Match Cut)}{8}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Motion Transition}{9}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Color Bridge}{9}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Emotional Bridge}{9}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}Rhythm: Controlling Audience Breathing and Heartbeat}{10}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Iterative Creation Method: Polishing Repeatedly Like a Director}{11}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Storyboard Templates: Customizing Structures for Different Types}{12}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Three-Act Nine-Shot Structure}{12}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}Five-Shot Emotional Journey}{12}{subsection.6.7.2}%
+\contentsline {subsection}{\numberline {6.7.3}Eight-Shot Product Ad Structure}{12}{subsection.6.7.3}%
+\contentsline {section}{\numberline {6.8}Advanced Techniques: Temporal and Spatial Control in AI Narrative}{12}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Common Issues and Correction Strategies}{14}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Testing and Feedback: Making Works ``Come Alive''}{14}{section.6.10}%
+\contentsline {section}{\numberline {6.11}From Sequence to Short Film: Mastering ``The Art of Combination''}{14}{section.6.11}%

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: chapter05_standalone.aux
+The style file: apalike.bst
+Database file #1: ../references.bib
+Warning--empty journal in kahneman2011thinking
+You've used 5 entries,
+            1935 wiz_defined-function locations,
+            506 strings with 4687 characters,
+and the built_in function-call counts, 1850 in all, are:
+= -- 176
+> -- 71
+< -- 5
++ -- 24
+- -- 24
+* -- 146
+:= -- 335
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 36
+chr.to.int$ -- 5
+cite$ -- 6
+duplicate$ -- 74
+empty$ -- 129
+format.name$ -- 29
+if$ -- 356
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 29
+num.names$ -- 15
+pop$ -- 32
+preamble$ -- 1
+purify$ -- 37
+quote$ -- 0
+skip$ -- 60
+stack$ -- 0
+substring$ -- 110
+swap$ -- 9
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 28
+warning$ -- 1
+while$ -- 16
+width$ -- 0
+write$ -- 67
+(There was 1 warning)

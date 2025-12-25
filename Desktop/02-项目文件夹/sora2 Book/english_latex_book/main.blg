@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: apalike.bst
+A level-1 auxiliary file: chapters/chapter01.aux
+A level-1 auxiliary file: chapters/chapter02.aux
+A level-1 auxiliary file: chapters/chapter03.aux
+A level-1 auxiliary file: chapters/chapter04.aux
+A level-1 auxiliary file: chapters/chapter05.aux
+A level-1 auxiliary file: chapters/chapter06.aux
+A level-1 auxiliary file: chapters/chapter07.aux
+A level-1 auxiliary file: chapters/chapter08.aux
+A level-1 auxiliary file: chapters/chapter09.aux
+A level-1 auxiliary file: chapters/chapter10.aux
+A level-1 auxiliary file: chapters/chapter-sora2-vs-veo3-comparison.aux
+A level-1 auxiliary file: appendices/appendix_a.aux
+A level-1 auxiliary file: appendices/appendix_b.aux
+A level-1 auxiliary file: appendices/appendix_c.aux
+A level-1 auxiliary file: appendices/appendix_d.aux
+A level-1 auxiliary file: appendices/appendix_e.aux
+Database file #1: references.bib
+Warning--empty journal in kahneman2011thinking
+You've used 14 entries,
+            1935 wiz_defined-function locations,
+            574 strings with 6637 characters,
+and the built_in function-call counts, 5578 in all, are:
+= -- 535
+> -- 254
+< -- 11
++ -- 94
+- -- 88
+* -- 456
+:= -- 992
+add.period$ -- 44
+call.type$ -- 14
+change.case$ -- 111
+chr.to.int$ -- 14
+cite$ -- 15
+duplicate$ -- 210
+empty$ -- 364
+format.name$ -- 104
+if$ -- 1073
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 15
+newline$ -- 75
+num.names$ -- 42
+pop$ -- 99
+preamble$ -- 1
+purify$ -- 113
+quote$ -- 0
+skip$ -- 171
+stack$ -- 0
+substring$ -- 344
+swap$ -- 30
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 80
+warning$ -- 1
+while$ -- 43
+width$ -- 0
+write$ -- 182
+(There was 1 warning)

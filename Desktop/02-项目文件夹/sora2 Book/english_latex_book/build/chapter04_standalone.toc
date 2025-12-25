@@ -1,0 +1,26 @@
+\contentsline {chapter}{\numberline {4}The Power of Cameos}{5}{chapter.4}%
+\contentsline {section}{\numberline {4.1}What is a ``Cameo'': Character Integration and Narrative Structure}{5}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Self-Entrance: When the Creator Steps into Their Own Film}{6}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Setting Up Your Cameo: A Step-by-Step Guide}{7}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Initial Account Setup and Cameo Creation}{7}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Recording Requirements and Technical Specifications}{8}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Movement Patterns and Facial Expression Guidelines}{8}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Voice Recording and Audio Calibration}{9}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Quality Optimization and Best Practices}{9}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Managing Cameo Settings and Privacy Controls}{10}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Accessing Cameo Settings}{10}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Privacy and Access Control Options}{10}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Appearance and Presentation Controls}{11}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Content Review and Moderation}{11}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Updating and Retaking Your Cameo}{12}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Technical Limitations and Considerations}{12}{subsection.4.4.6}%
+\contentsline {section}{\numberline {4.5}The Ethics of Resemblance: When AI Sculpts Faces}{13}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Directing Performance with Words: The Director's Linguistic Alchemy}{13}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Spatial Drama: When Relationships Become Geometry}{14}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Avatar and Symbol: Metaphorical Character Design}{14}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Brand Cameos: The Materialization of Trust}{15}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Character Continuity: Maintaining Consistency Across Shots}{16}{section.4.10}%
+\contentsline {section}{\numberline {4.11}Emotional Echoes: When Characters Reappear}{17}{section.4.11}%
+\contentsline {section}{\numberline {4.12}Conclusion: Character Integration as Narrative Foundation}{18}{section.4.12}%
+\contentsline {section}{\numberline {4.13}Practical Guide: How to Direct Cameos in Sora2}{18}{section.4.13}%
+\contentsline {subsection}{\numberline {4.13.1}Step-by-Step Cameo Implementation}{18}{subsection.4.13.1}%

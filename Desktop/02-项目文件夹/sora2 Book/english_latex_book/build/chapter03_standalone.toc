@@ -1,0 +1,11 @@
+\contentsline {chapter}{\numberline {3}Writing Your First Prompt: From Text to Video}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}The True Meaning of Prompts: From Language to Shots}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Basic Structure of Prompts: The Four-Step Method}{6}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Sentence Patterns and Rhythm: Editing Film with Text}{7}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Light and Color: Emotional Codes of Visual Narrative}{9}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Cinematographic Language: Giving Images Directorial Presence}{11}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Writing Emotion: Making Images Breathe}{13}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Iteration and Direction: Balancing Refinement and Rhythm}{14}{section.3.7}%
+\contentsline {section}{\numberline {3.8}From Single Shot to Sequence: Making Text Tell Stories}{15}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Practice: Your First Sora2 Prompt}{16}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Summary: The Cinematic Nature of Text}{17}{section.3.10}%
