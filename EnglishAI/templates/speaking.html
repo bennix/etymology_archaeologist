@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}口语练习 - 中考英语助手{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2 class="mb-4">
+            <i class="bi bi-mic text-success"></i> 口语练习
+        </h2>
+
+        <!-- 题目卡片 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-chat-square-text"></i> 口语题目
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="lead">{{ topic }}</p>
+                <hr>
+                <p class="text-muted mb-0">
+                    <i class="bi bi-info-circle"></i>
+                    请点击下方按钮开始录音，说出你的回答（建议30-60秒）
+                </p>
+            </div>
+        </div>
+
+        <!-- 录音控制 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body text-center">
+                <button id="startRecord" class="btn btn-success btn-lg mb-3">
+                    <i class="bi bi-mic-fill"></i> 开始录音
+                </button>
+                <button id="stopRecord" class="btn btn-danger btn-lg mb-3" style="display: none;">
+                    <i class="bi bi-stop-fill"></i> 停止录音
+                </button>
+
+                <div id="recordingStatus" class="alert alert-info" style="display: none;">
+                    <i class="bi bi-circle-fill text-danger blink"></i> 录音中...
+                </div>
+
+                <div id="processingStatus" class="alert alert-warning" style="display: none;">
+                    <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    正在处理音频...
+                </div>
+            </div>
+        </div>
+
+        <!-- 转录结果 -->
+        <div id="transcriptCard" class="card shadow-sm mb-4" style="display: none;">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-file-earmark-text"></i> 语音转录
+                </h5>
+            </div>
+            <div class="card-body">
+                <p id="transcriptText" class="bg-light p-3 rounded"></p>
+            </div>
+        </div>
+
+        <!-- 评估结果 -->
+        <div id="evaluationCard" class="card shadow-sm" style="display: none;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-bar-chart"></i> 评估结果
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center mb-3">
+                    <div class="col-md-3 mb-3">
+                        <div class="score-box">
+                            <div class="score-label">流利度</div>
+                            <div class="score-value" id="fluency">-</div>
+                            <div class="score-total">/10</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="score-box">
+                            <div class="score-label">语法</div>
+                            <div class="score-value" id="grammar">-</div>
+                            <div class="score-total">/10</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="score-box">
+                            <div class="score-label">词汇</div>
+                            <div class="score-value" id="vocabulary">-</div>
+                            <div class="score-total">/10</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="score-box">
+                            <div class="score-label">内容</div>
+                            <div class="score-value" id="content">-</div>
+                            <div class="score-total">/10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success text-center">
+                    <h4>总分：<span id="totalScore">-</span> / 40</h4>
+                </div>
+
+                <hr>
+
+                <div id="feedbackSection">
+                    <h6><i class="bi bi-chat-left-quote"></i> 整体评价</h6>
+                    <p id="feedback" class="bg-light p-3 rounded"></p>
+
+                    <h6><i class="bi bi-lightbulb"></i> 改进建议</h6>
+                    <ul id="suggestions" class="list-unstyled"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid mt-4">
+            <a href="{{ url_for('speaking') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-clockwise"></i> 练习新题目
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let mediaRecorder;
+let audioChunks = [];
+
+document.getElementById('startRecord').addEventListener('click', async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+
+        audioChunks = [];
+
+        mediaRecorder.addEventListener('dataavailable', event => {
+            audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener('stop', () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            uploadAudio(audioBlob);
+        });
+
+        mediaRecorder.start();
+
+        document.getElementById('startRecord').style.display = 'none';
+        document.getElementById('stopRecord').style.display = 'inline-block';
+        document.getElementById('recordingStatus').style.display = 'block';
+
+    } catch (err) {
+        alert('无法访问麦克风：' + err.message);
+    }
+});
+
+document.getElementById('stopRecord').addEventListener('click', () => {
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach(track => track.stop());
+
+    document.getElementById('stopRecord').style.display = 'none';
+    document.getElementById('recordingStatus').style.display = 'none';
+    document.getElementById('processingStatus').style.display = 'block';
+});
+
+function uploadAudio(audioBlob) {
+    const formData = new FormData();
+    formData.append('audio', audioBlob, 'recording.wav');
+
+    fetch('{{ url_for("speaking") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('processingStatus').style.display = 'none';
+
+        if (data.error) {
+            alert('错误：' + data.error);
+            return;
+        }
+
+        // 显示转录
+        document.getElementById('transcriptText').textContent = data.transcript;
+        document.getElementById('transcriptCard').style.display = 'block';
+
+        // 显示评估
+        const eval = data.evaluation;
+        document.getElementById('fluency').textContent = eval.fluency || 0;
+        document.getElementById('grammar').textContent = eval.grammar || 0;
+        document.getElementById('vocabulary').textContent = eval.vocabulary || 0;
+        document.getElementById('content').textContent = eval.content || 0;
+        document.getElementById('totalScore').textContent = eval.total_score || 0;
+        document.getElementById('feedback').textContent = eval.feedback || '';
+
+        const suggestionsList = document.getElementById('suggestions');
+        suggestionsList.innerHTML = '';
+        (eval.suggestions || []).forEach(s => {
+            const li = document.createElement('li');
+            li.innerHTML = '<i class="bi bi-check2"></i> ' + s;
+            li.className = 'mb-2';
+            suggestionsList.appendChild(li);
+        });
+
+        document.getElementById('evaluationCard').style.display = 'block';
+
+        // 滚动到结果
+        document.getElementById('evaluationCard').scrollIntoView({ behavior: 'smooth' });
+    })
+    .catch(error => {
+        document.getElementById('processingStatus').style.display = 'none';
+        alert('上传失败：' + error);
+    });
+}
+</script>
+
+<style>
+.score-box {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+.score-label {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+.score-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0d6efd;
+}
+.score-total {
+    font-size: 14px;
+    color: #6c757d;
+}
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+</style>
+{% endblock %}

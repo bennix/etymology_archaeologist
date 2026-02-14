@@ -1,0 +1,18 @@
+# Flask Core
+Flask==3.0.0
+Flask-WTF==1.2.1
+Flask-Session==0.5.0
+
+# AI Models - Local
+torch>=2.1.0
+torchaudio>=2.1.0
+openai-whisper>=20231117
+chatterbox-tts>=1.0.0
+
+# AI Models - API
+requests==2.31.0
+openai==1.10.0
+
+# Utilities
+python-dotenv==1.0.0
+Werkzeug==3.0.1

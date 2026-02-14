@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}写作批改 - 中考英语助手{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <h2 class="mb-4">
+            <i class="bi bi-pencil text-warning"></i> 写作批改
+        </h2>
+
+        {% if error %}
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- 作文题目 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning">
+                <h5 class="mb-0">
+                    <i class="bi bi-chat-square-quote"></i> {{ prompt.title }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-0">{{ prompt.instruction }}</p>
+            </div>
+        </div>
+
+        {% if not evaluation %}
+        <!-- 写作模式 -->
+        <form method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="essay" class="form-label">
+                    <strong>在下方输入你的作文：</strong>
+                </label>
+                <textarea
+                    class="form-control"
+                    id="essay"
+                    name="essay"
+                    rows="15"
+                    placeholder="请在此输入你的英语作文..."
+                    required
+                ></textarea>
+                <div class="form-text">
+                    建议字数：80-100词
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                <a href="{{ url_for('writing') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-clockwise"></i> 换一个题目
+                </a>
+                <button type="submit" class="btn btn-warning btn-lg">
+                    <i class="bi bi-send"></i> 提交批改
+                </button>
+            </div>
+        </form>
+
+        {% else %}
+        <!-- 批改结果模式 -->
+
+        <!-- 作文原文 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-file-earmark-text"></i> 你的作文
+                </h5>
+            </div>
+            <div class="card-body">
+                <pre class="bg-light p-3 rounded essay-text">{{ essay }}</pre>
+            </div>
+        </div>
+
+        <!-- 总分 -->
+        <div class="alert alert-{{ 'success' if evaluation.total_score >= 12 else 'warning' }} text-center">
+            <h3 class="mb-0">
+                <i class="bi bi-trophy"></i> 总分：{{ evaluation.total_score }} / 20
+                ({{ (evaluation.total_score / 20 * 100) | int }}%)
+            </h3>
+        </div>
+
+        <!-- 分项评分 -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">内容 (Content)</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="progress flex-grow-1 me-3">
+                                <div class="progress-bar bg-primary" style="width: {{ (evaluation.content.score / 5 * 100) }}%"></div>
+                            </div>
+                            <strong>{{ evaluation.content.score }} / 5</strong>
+                        </div>
+                        <p class="small mb-0">{{ evaluation.content.feedback }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">结构 (Structure)</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="progress flex-grow-1 me-3">
+                                <div class="progress-bar bg-info" style="width: {{ (evaluation.structure.score / 5 * 100) }}%"></div>
+                            </div>
+                            <strong>{{ evaluation.structure.score }} / 5</strong>
+                        </div>
+                        <p class="small mb-0">{{ evaluation.structure.feedback }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">语法 (Grammar)</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="progress flex-grow-1 me-3">
+                                <div class="progress-bar bg-success" style="width: {{ (evaluation.grammar.score / 5 * 100) }}%"></div>
+                            </div>
+                            <strong>{{ evaluation.grammar.score }} / 5</strong>
+                        </div>
+                        <p class="small mb-0">{{ evaluation.grammar.feedback }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">词汇 (Vocabulary)</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="progress flex-grow-1 me-3">
+                                <div class="progress-bar bg-warning" style="width: {{ (evaluation.vocabulary.score / 5 * 100) }}%"></div>
+                            </div>
+                            <strong>{{ evaluation.vocabulary.score }} / 5</strong>
+                        </div>
+                        <p class="small mb-0">{{ evaluation.vocabulary.feedback }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 改进建议 -->
+        {% if evaluation.suggestions %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightbulb"></i> 改进建议
+                </h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    {% for suggestion in evaluation.suggestions %}
+                    <li class="mb-2">{{ suggestion }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 错误修正 -->
+        {% if evaluation.corrected_errors %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-exclamation-circle"></i> 错误修正
+                </h5>
+            </div>
+            <div class="card-body">
+                {% for error in evaluation.corrected_errors %}
+                <div class="mb-3 pb-3 border-bottom">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p class="text-danger mb-1"><strong>原文:</strong></p>
+                            <p class="bg-danger bg-opacity-10 p-2 rounded">{{ error.original }}</p>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-success mb-1"><strong>修正:</strong></p>
+                            <p class="bg-success bg-opacity-10 p-2 rounded">{{ error.corrected }}</p>
+                        </div>
+                    </div>
+                    <p class="small text-muted">
+                        <i class="bi bi-info-circle"></i> {{ error.explanation }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="d-grid">
+            <a href="{{ url_for('writing') }}" class="btn btn-warning btn-lg">
+                <i class="bi bi-arrow-clockwise"></i> 继续练习
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// 表单验证
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+
+<style>
+.essay-text {
+    white-space: pre-wrap;
+    line-height: 1.8;
+    font-size: 15px;
+}
+</style>
+{% endblock %}

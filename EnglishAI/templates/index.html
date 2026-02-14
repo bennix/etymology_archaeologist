@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - 中考英语助手{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4">🎓 中考英语助手</h1>
+    <p class="lead text-muted">听、说、读、写全方位练习，AI智能批改反馈</p>
+</div>
+
+<div class="row g-4">
+    <!-- 听力模块 -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-headphones display-1 text-primary"></i>
+                </div>
+                <h3 class="card-title">听力练习</h3>
+                <p class="card-text text-muted">
+                    AI生成真实对话场景，TTS语音合成，配套理解题
+                </p>
+                <a href="{{ url_for('listening') }}" class="btn btn-primary btn-lg">
+                    开始练习 <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    <i class="bi bi-check-circle"></i> 包含3道理解题
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- 口语模块 -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-mic display-1 text-success"></i>
+                </div>
+                <h3 class="card-title">口语练习</h3>
+                <p class="card-text text-muted">
+                    录音并转录文本，AI评估流利度、语法、词汇和内容
+                </p>
+                <a href="{{ url_for('speaking') }}" class="btn btn-success btn-lg">
+                    开始练习 <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    <i class="bi bi-check-circle"></i> 四维度评分 /40
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- 阅读模块 -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-file-text display-1 text-info"></i>
+                </div>
+                <h3 class="card-title">阅读理解</h3>
+                <p class="card-text text-muted">
+                    200-250词短文，单选+主观题，注重一词多义理解
+                </p>
+                <a href="{{ url_for('reading') }}" class="btn btn-info btn-lg">
+                    开始练习 <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    <i class="bi bi-check-circle"></i> 5道题目+详细解析
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- 写作模块 -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-pencil display-1 text-warning"></i>
+                </div>
+                <h3 class="card-title">写作批改</h3>
+                <p class="card-text text-muted">
+                    书信、议论文等常见题型，四维度批改+逐段点评
+                </p>
+                <a href="{{ url_for('writing') }}" class="btn btn-warning btn-lg">
+                    开始练习 <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    <i class="bi bi-check-circle"></i> 内容/结构/语法/词汇
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 历史成绩快速链接 -->
+<div class="text-center mt-5">
+    <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-clock-history"></i> 查看历史成绩
+    </a>
+</div>
+
+<!-- 提示信息 -->
+<div class="alert alert-info mt-4" role="alert">
+    <i class="bi bi-info-circle"></i>
+    <strong>提示：</strong>本系统基于高考3500词汇，特别关注一词多义场景。每次练习都会自动保存成绩。
+</div>
+{% endblock %}

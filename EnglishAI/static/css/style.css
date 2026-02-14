@@ -1,0 +1,225 @@
+/* 中考英语助手 - 自定义样式 */
+
+/* 全局样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* 卡片悬停效果 */
+.hover-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 导航栏 */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* 主内容区域 */
+main {
+    min-height: calc(100vh - 200px);
+}
+
+/* 按钮样式增强 */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* 表单样式 */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* 卡片样式 */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+    font-weight: 600;
+}
+
+/* 进度条 */
+.progress {
+    height: 24px;
+    border-radius: 12px;
+}
+
+.progress-bar {
+    font-weight: bold;
+}
+
+/* 徽章 */
+.badge {
+    padding: 0.4em 0.8em;
+    font-weight: 500;
+}
+
+/* 音频播放器 */
+audio {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 分数展示 */
+.score-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+/* 文章阅读区域 */
+.passage-text {
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+/* 作文文本区域 */
+.essay-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.8;
+}
+
+/* 表格增强 */
+.table {
+    font-size: 0.95rem;
+}
+
+.table thead th {
+    border-bottom-width: 2px;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* 加载动画 */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 成功/错误提示 */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* 首页卡片图标 */
+.display-1 {
+    font-size: 4rem;
+}
+
+/* 录音状态闪烁 */
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.3;
+    }
+}
+
+.blink {
+    animation: blink 1.5s linear infinite;
+}
+
+/* 分数盒子 */
+.score-box {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.score-box:hover {
+    transform: scale(1.05);
+}
+
+.score-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #0d6efd;
+    margin: 10px 0;
+}
+
+.score-label {
+    font-size: 14px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-total {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* 页脚 */
+footer {
+    margin-top: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+/* 折叠文本区域 */
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+}
+
+/* 表单验证样式 */
+.was-validated .form-control:valid {
+    border-color: #198754;
+}
+
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+}
+
+/* 空状态 */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 5rem;
+    color: #dee2e6;
+}

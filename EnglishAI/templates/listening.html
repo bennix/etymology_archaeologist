@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}听力练习 - 中考英语助手{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2 class="mb-4">
+            <i class="bi bi-headphones text-primary"></i> 听力练习
+        </h2>
+
+        {% if error %}
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if not result %}
+        <!-- 练习模式 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">听力材料</h5>
+
+                {% if audio_path %}
+                <!-- 音频播放器 -->
+                <div class="text-center my-4">
+                    <audio controls class="w-100" style="max-width: 600px;">
+                        <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
+                        您的浏览器不支持音频播放
+                    </audio>
+                </div>
+                {% endif %}
+
+                <!-- 对话文本（折叠） -->
+                <div class="accordion mb-3" id="transcriptAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#transcript">
+                                <i class="bi bi-file-text"></i> 查看文本（建议先听音频再查看）
+                            </button>
+                        </h2>
+                        <div id="transcript" class="accordion-collapse collapse" data-bs-parent="#transcriptAccordion">
+                            <div class="accordion-body">
+                                <pre class="bg-light p-3 rounded">{{ dialogue }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问题 -->
+        {% if questions %}
+        <form method="POST" class="needs-validation" novalidate>
+            {% for q in questions %}
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted">第 {{ loop.index }} 题</h6>
+                    <p class="fw-bold">{{ q.question }}</p>
+
+                    {% if q.options %}
+                    {% for option in q.options %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answers" value="{{ option[0] }}" id="q{{ loop.parent.index0 }}_{{ loop.index0 }}" required>
+                        <label class="form-check-label" for="q{{ loop.parent.index0 }}_{{ loop.index0 }}">
+                            {{ option }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <input type="text" class="form-control" name="answers" placeholder="请输入答案" required>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                <a href="{{ url_for('listening') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-clockwise"></i> 生成新题目
+                </a>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-check-circle"></i> 提交答案
+                </button>
+            </div>
+        </form>
+        {% else %}
+        <div class="alert alert-warning">
+            题目生成失败，请刷新重试
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- 结果模式 -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-{{ 'success' if result.score >= result.total * 0.6 else 'warning' }} text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-trophy"></i> 成绩：{{ result.score }} / {{ result.total }}
+                    ({{ (result.score / result.total * 100) | int }}%)
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if result.details %}
+                {% for detail in result.details %}
+                <div class="mb-3 pb-3 border-bottom">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h6 class="mb-2">第 {{ loop.index }} 题</h6>
+                        {% if detail.correct %}
+                        <span class="badge bg-success">✓ 正确</span>
+                        {% else %}
+                        <span class="badge bg-danger">✗ 错误</span>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-muted mb-1">
+                        你的答案: <strong>{{ detail.user_answer or '未作答' }}</strong>
+                    </p>
+                    {% if not detail.correct %}
+                    <p class="text-success mb-1">
+                        正确答案: <strong>{{ detail.correct_answer }}</strong>
+                    </p>
+                    {% endif %}
+                    <p class="small">
+                        <i class="bi bi-lightbulb"></i> {{ detail.explanation }}
+                    </p>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-grid">
+            <a href="{{ url_for('listening') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-clockwise"></i> 继续练习
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Bootstrap 表单验证
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Flask
+instance/
+.webassets-cache
+flask_session/
+
+# 环境变量
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 音频文件（生成的临时文件）
+static/audio/*.wav
+static/audio/*.mp3
+
+# 数据文件（可选，看是否要提交词汇库）
+# data/3500.txt
+# data/gaokao_vocab.json
+
+# 日志
+*.log
+
+# 测试
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 模型缓存（Chatterbox/Whisper下载的模型文件）
+.cache/
+models/
+checkpoints/
