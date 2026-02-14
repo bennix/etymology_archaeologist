@@ -80,7 +80,11 @@ class ModelManager:
             print(f"🤖 正在加载 Chatterbox TTS ({self.device})...")
             load_start = time.time()
 
-            self.chatterbox = ChatterboxTurboTTS.from_pretrained(device=self.device)
+            # 尝试加载模型，需要 HuggingFace token
+            self.chatterbox = ChatterboxTurboTTS.from_pretrained(
+                device=self.device,
+                token=True  # 自动使用已登录的 HF token
+            )
             self.chatterbox_sr = self.chatterbox.sr  # 采样率
 
             elapsed = time.time() - load_start
@@ -88,7 +92,11 @@ class ModelManager:
 
         except Exception as e:
             print(f"   ❌ Chatterbox 加载失败: {e}")
-            print(f"   → TTS 功能将不可用")
+            if "token" in str(e).lower():
+                print(f"   💡 提示: Chatterbox 需要 Hugging Face token")
+                print(f"   → 运行: huggingface-cli login")
+                print(f"   → 或访问: https://huggingface.co/settings/tokens")
+            print(f"   → TTS 功能暂时不可用，将使用文本模式")
             self.chatterbox = None
 
     def _load_whisper(self):
