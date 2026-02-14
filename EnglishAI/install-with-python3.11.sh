@@ -54,24 +54,40 @@ source venv/bin/activate
 PYTHON_VERSION=$(python --version)
 echo "✅ 当前 Python: $PYTHON_VERSION"
 
-# 6. 升级 pip
+# 6. 升级 pip 和构建工具
 echo ""
-echo "⬆️  升级 pip..."
+echo "⬆️  升级 pip 和构建工具..."
 pip install --upgrade pip setuptools wheel
 
-# 7. 安装 PyTorch（针对 M3 Max）
+# 安装构建依赖（修复 openai-whisper 问题）
+pip install setuptools-scm
+
+# 7. 安装 NumPy（先安装，避免依赖冲突）
+echo ""
+echo "📥 安装 NumPy..."
+pip install "numpy>=1.26.0,<2.0"
+
+# 8. 安装 PyTorch（针对 M3 Max）
 echo ""
 echo "📥 安装 PyTorch（可能需要 2-3 分钟）..."
 pip install torch torchaudio
 
-# 8. 安装其他依赖
+# 9. 安装 Whisper（直接从 git，避免构建问题）
 echo ""
-echo "📥 安装项目依赖..."
-pip install -r requirements.txt
+echo "📥 安装 OpenAI Whisper..."
+pip install git+https://github.com/openai/whisper.git
+
+# 10. 安装其他依赖（跳过 whisper，已单独安装）
+echo ""
+echo "📥 安装其他项目依赖..."
+pip install Flask==3.0.0 Flask-WTF==1.2.1 Flask-Session==0.5.0
+pip install chatterbox-tts==0.1.6
+pip install requests==2.31.0 openai==1.10.0
+pip install python-dotenv==1.0.0 Werkzeug==3.0.1
 
 echo "✅ 所有依赖安装完成"
 
-# 9. 创建必要目录
+# 11. 创建必要目录
 echo ""
 echo "📁 创建项目目录..."
 mkdir -p data
@@ -79,12 +95,12 @@ mkdir -p static/audio
 mkdir -p flask_session
 echo "✅ 目录创建完成"
 
-# 10. 测试导入
+# 12. 测试导入
 echo ""
 echo "🧪 测试关键模块..."
 python -c "import flask; import torch; print('✅ Flask:', flask.__version__); print('✅ PyTorch:', torch.__version__)"
 
-# 11. 显示系统信息
+# 13. 显示系统信息
 echo ""
 echo "=========================================="
 echo "✅ 安装完成！"
