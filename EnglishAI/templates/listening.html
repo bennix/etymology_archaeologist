@@ -61,8 +61,8 @@
                     {% if q.options %}
                     {% for option in q.options %}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="answers" value="{{ option[0] }}" id="q{{ loop.parent.index0 }}_{{ loop.index0 }}" required>
-                        <label class="form-check-label" for="q{{ loop.parent.index0 }}_{{ loop.index0 }}">
+                        <input class="form-check-input" type="radio" name="answers" value="{{ option[0] }}" id="q{{ loop.index0 }}_opt{{ loop.index }}" required>
+                        <label class="form-check-label" for="q{{ loop.index0 }}_opt{{ loop.index }}">
                             {{ option }}
                         </label>
                     </div>
