@@ -81,13 +81,24 @@ class ModelManager:
             print("🎙️  正在初始化 Edge TTS...")
             load_start = time.time()
 
-            # Edge TTS 配置
-            # 英语音色推荐: en-US-AriaNeural (女), en-US-GuyNeural (男)
-            self.tts_voice = "en-US-AriaNeural"  # 清晰、自然的美式英语女声
+            # 多音色配置（用于对话场景）
+            self.available_voices = [
+                "en-US-AriaNeural",     # 女声 - 清晰友好
+                "en-US-GuyNeural",      # 男声 - 专业稳重
+                "en-US-JennyNeural",    # 女声 - 温暖亲切
+                "en-US-EricNeural",     # 男声 - 年轻活力
+                "en-US-MichelleNeural", # 女声 - 成熟优雅
+                "en-US-RogerNeural"     # 男声 - 沉稳有力
+            ]
+
+            self.default_voice = "en-US-AriaNeural"  # 默认音色
+            self.speaker_voices = {}  # 角色-音色映射 {speaker_id: voice}
+            self.voice_index = 0  # 用于自动分配音色
 
             elapsed = time.time() - load_start
             print(f"   ✓ Edge TTS 初始化完成 ({elapsed:.3f}s)")
-            print(f"   → 音色: {self.tts_voice} (免费)")
+            print(f"   → 默认音色: {self.default_voice}")
+            print(f"   → 对话音色池: {len(self.available_voices)} 种")
 
         except Exception as e:
             print(f"   ❌ Edge TTS 初始化失败: {e}")
@@ -115,13 +126,15 @@ class ModelManager:
             print(f"   → STT 功能将不可用")
             self.whisper = None
 
-    def text_to_speech(self, text, language='en'):
+    def text_to_speech(self, text, language='en', speaker=None):
         """
         文本转语音 (使用 Edge TTS)
 
         Args:
             text: 要合成的文本
             language: 语言代码 (en, zh 等) - 暂未使用
+            speaker: 说话人标识（如 "A", "B", "teacher", "student"）
+                    同一对话中相同 speaker 使用相同音色
 
         Returns:
             str: 音频文件路径（相对于 static/）
@@ -130,15 +143,19 @@ class ModelManager:
             return None
 
         try:
+            # 确定使用的音色
+            voice = self._get_speaker_voice(speaker)
+
             # 生成唯一文件名
             filename = f"audio_{uuid.uuid4().hex[:12]}.mp3"
             filepath = os.path.join(self.audio_dir, filename)
 
             # 调用 Edge TTS (同步包装异步函数)
-            print(f"🎵 正在合成音频: {text[:50]}...")
+            speaker_info = f" ({speaker})" if speaker else ""
+            print(f"🎵 正在合成音频{speaker_info}: {text[:50]}...")
 
             # 运行异步 TTS
-            asyncio.run(self._async_text_to_speech(text, filepath))
+            asyncio.run(self._async_text_to_speech(text, filepath, voice))
 
             # 清理旧文件
             self._cleanup_old_audio_files()
@@ -150,9 +167,54 @@ class ModelManager:
             print(f"❌ TTS 合成失败: {e}")
             return None
 
-    async def _async_text_to_speech(self, text, filepath):
+    def _get_speaker_voice(self, speaker):
+        """
+        获取说话人的音色（自动分配并保持一致）
+
+        Args:
+            speaker: 说话人标识
+
+        Returns:
+            str: 音色名称
+        """
+        if speaker is None:
+            return self.default_voice
+
+        # 如果该说话人已有分配的音色，直接返回
+        if speaker in self.speaker_voices:
+            return self.speaker_voices[speaker]
+
+        # 为新说话人分配音色
+        voice = self.available_voices[self.voice_index % len(self.available_voices)]
+        self.speaker_voices[speaker] = voice
+        self.voice_index += 1
+
+        print(f"   → 分配音色: {speaker} → {voice}")
+        return voice
+
+    def reset_speaker_voices(self):
+        """重置说话人音色映射（开始新对话时调用）"""
+        self.speaker_voices = {}
+        self.voice_index = 0
+        print("🔄 已重置对话音色")
+
+    def set_speaker_voice(self, speaker, voice):
+        """
+        手动设置说话人音色
+
+        Args:
+            speaker: 说话人标识
+            voice: 音色名称（必须在 available_voices 中）
+        """
+        if voice in self.available_voices:
+            self.speaker_voices[speaker] = voice
+            print(f"✓ 设置音色: {speaker} → {voice}")
+        else:
+            print(f"⚠️  音色 {voice} 不在可用列表中")
+
+    async def _async_text_to_speech(self, text, filepath, voice):
         """异步调用 Edge TTS"""
-        communicate = edge_tts.Communicate(text, self.tts_voice)
+        communicate = edge_tts.Communicate(text, voice)
         await communicate.save(filepath)
 
     def speech_to_text(self, audio_file_path):
