@@ -6,17 +6,15 @@ Flask-Session==0.5.0
 # AI Models - Local (Python 3.11-3.13 recommended, 3.14 experimental)
 # For Python 3.14, install numpy first: pip install "numpy<2.0"
 torch>=2.1.0
-torchaudio>=2.1.0
 # openai-whisper: Install from git to avoid build issues
 # pip install git+https://github.com/openai/whisper.git
-chatterbox-tts>=0.1.6
 
 # NumPy compatibility (required for Python 3.14)
 numpy>=1.26.0,<2.0
 
 # AI Models - API
 requests==2.31.0
-openai==1.10.0
+openai==1.10.0  # 用于 OpenAI TTS API
 
 # Utilities
 python-dotenv==1.0.0

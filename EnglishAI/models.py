@@ -1,5 +1,5 @@
 """
-本地模型管理器 - Chatterbox TTS + Whisper STT
+本地模型管理器 - OpenAI TTS + Whisper STT
 单例模式，应用启动时预加载所有模型
 """
 import os
@@ -10,18 +10,18 @@ import whisper
 from pathlib import Path
 from config import Config
 
-# 检查 Chatterbox 是否安装
+# 初始化 OpenAI TTS 客户端
 try:
-    from chatterbox.tts_turbo import ChatterboxTurboTTS
-    CHATTERBOX_AVAILABLE = True
+    from openai import OpenAI
+    TTS_AVAILABLE = True
 except ImportError:
-    print("⚠️  Chatterbox 未安装，TTS 功能将不可用")
-    print("   安装方法: pip install chatterbox-tts")
-    CHATTERBOX_AVAILABLE = False
+    print("⚠️  OpenAI 未安装，TTS 功能将不可用")
+    print("   安装方法: pip install openai")
+    TTS_AVAILABLE = False
 
 class ModelManager:
     """
-    统一管理 Chatterbox 和 Whisper 模型
+    统一管理 OpenAI TTS 和 Whisper 模型
     单例模式确保全局只加载一次
     """
     _instance = None
@@ -37,7 +37,7 @@ class ModelManager:
             return
 
         print("\n" + "="*60)
-        print("🚀 正在加载本地 AI 模型...")
+        print("🚀 正在初始化 AI 模型...")
         print("="*60)
 
         start_time = time.time()
@@ -46,10 +46,10 @@ class ModelManager:
         self.device = self._detect_device()
         print(f"🖥️  计算设备: {self.device.upper()}")
 
-        # 2. 加载 Chatterbox TTS
-        self.chatterbox = None
-        if CHATTERBOX_AVAILABLE:
-            self._load_chatterbox()
+        # 2. 初始化 OpenAI TTS 客户端
+        self.openai_client = None
+        if TTS_AVAILABLE:
+            self._init_openai_tts()
 
         # 3. 加载 Whisper STT
         self.whisper = None
@@ -74,29 +74,30 @@ class ModelManager:
         else:
             return "cpu"
 
-    def _load_chatterbox(self):
-        """加载 Chatterbox Turbo TTS"""
+    def _init_openai_tts(self):
+        """初始化 OpenAI TTS 客户端"""
         try:
-            print(f"🤖 正在加载 Chatterbox TTS ({self.device})...")
+            print("🎙️  正在初始化 OpenAI TTS...")
             load_start = time.time()
 
-            # HuggingFace token 通过 huggingface_hub login 自动使用
-            self.chatterbox = ChatterboxTurboTTS.from_pretrained(
-                device=self.device
-            )
-            self.chatterbox_sr = self.chatterbox.sr  # 采样率
+            # 初始化 OpenAI 客户端
+            self.openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
+
+            # TTS 配置
+            self.tts_model = "tts-1-hd"  # 高质量模型 (或用 tts-1 更快)
+            self.tts_voice = "alloy"     # 可选: alloy, echo, fable, onyx, nova, shimmer
 
             elapsed = time.time() - load_start
-            print(f"   ✓ Chatterbox 加载完成 ({elapsed:.1f}s)")
+            print(f"   ✓ OpenAI TTS 初始化完成 ({elapsed:.3f}s)")
+            print(f"   → 模型: {self.tts_model}, 音色: {self.tts_voice}")
 
         except Exception as e:
-            print(f"   ❌ Chatterbox 加载失败: {e}")
-            if "token" in str(e).lower():
-                print(f"   💡 提示: Chatterbox 需要 Hugging Face token")
-                print(f"   → 运行: huggingface-cli login")
-                print(f"   → 或访问: https://huggingface.co/settings/tokens")
+            print(f"   ❌ OpenAI TTS 初始化失败: {e}")
+            if "api_key" in str(e).lower():
+                print(f"   💡 提示: 需要配置 OpenAI API Key")
+                print(f"   → 在 config.py 中设置 OPENAI_API_KEY")
             print(f"   → TTS 功能暂时不可用，将使用文本模式")
-            self.chatterbox = None
+            self.openai_client = None
 
     def _load_whisper(self):
         """加载 Whisper STT"""
@@ -121,30 +122,35 @@ class ModelManager:
 
     def text_to_speech(self, text, language='en'):
         """
-        文本转语音
+        文本转语音 (使用 OpenAI TTS API)
 
         Args:
             text: 要合成的文本
-            language: 语言代码 (en, zh 等)
+            language: 语言代码 (en, zh 等) - 暂未使用，OpenAI 会自动检测
 
         Returns:
             str: 音频文件路径（相对于 static/）
         """
-        if not self.chatterbox:
+        if not self.openai_client:
             return None
 
         try:
             # 生成唯一文件名
-            filename = f"audio_{uuid.uuid4().hex[:12]}.wav"
+            filename = f"audio_{uuid.uuid4().hex[:12]}.mp3"
             filepath = os.path.join(self.audio_dir, filename)
 
-            # 调用 Chatterbox 生成音频
+            # 调用 OpenAI TTS API
             print(f"🎵 正在合成音频: {text[:50]}...")
-            wav = self.chatterbox.generate(text)
+
+            response = self.openai_client.audio.speech.create(
+                model=self.tts_model,
+                voice=self.tts_voice,
+                input=text,
+                response_format="mp3"  # 或 "wav", "opus", "aac", "flac"
+            )
 
             # 保存音频文件
-            import torchaudio
-            torchaudio.save(filepath, wav.cpu(), self.chatterbox_sr)
+            response.stream_to_file(filepath)
 
             # 清理旧文件
             self._cleanup_old_audio_files()
@@ -191,7 +197,8 @@ class ModelManager:
     def _cleanup_old_audio_files(self):
         """清理过多的音频文件，保留最新的 N 个"""
         try:
-            audio_files = list(Path(self.audio_dir).glob('audio_*.wav'))
+            # 支持多种音频格式
+            audio_files = list(Path(self.audio_dir).glob('audio_*.*'))
 
             if len(audio_files) > Config.MAX_AUDIO_FILES:
                 # 按修改时间排序
@@ -211,9 +218,9 @@ class ModelManager:
         """获取模型状态"""
         return {
             'device': self.device,
-            'chatterbox': self.chatterbox is not None,
+            'tts': self.openai_client is not None,
             'whisper': self.whisper is not None,
-            'audio_count': len(list(Path(self.audio_dir).glob('audio_*.wav')))
+            'audio_count': len(list(Path(self.audio_dir).glob('audio_*.*')))
         }
 
 # 全局单例

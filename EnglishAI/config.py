@@ -22,6 +22,10 @@ class Config:
     ZENMUX_API_KEY = "sk-ss-v1-b7ae6ebbc63886d9624802371f77eb170e135be724207a7a0e538c768fd197cc"
     ZENMUX_BASE_URL = "https://zenmux.ai/api/v1"
 
+    # OpenAI API 配置 (用于 TTS)
+    # 获取方法: https://platform.openai.com/api-keys
+    OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY') or "your-openai-api-key-here"
+
     # AI 模型配置
     MODELS = {
         'content_generator': 'moonshotai/kimi-k2-thinking-turbo',
