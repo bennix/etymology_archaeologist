@@ -16,32 +16,24 @@ print("📝 步骤 1: 检查 Hugging Face 登录状态")
 print("-" * 60)
 
 try:
-    from huggingface_hub import HfFolder
+    from huggingface_hub import get_token, login
 
-    token = HfFolder.get_token()
+    token = get_token()
     if token:
         print("✅ 已登录 Hugging Face")
+        print(f"   Token: {token[:10]}...{token[-10:]}")
     else:
-        print("❌ 未登录 Hugging Face")
+        print("⚠️  未检测到 Hugging Face token")
+        print("   但之前的登录可能已保存")
         print()
-        print("请先运行: python setup_huggingface.py")
-        print("或手动登录:")
-        print()
-
-        from huggingface_hub import login
-        user_token = input("请输入 Hugging Face token (或按回车跳过): ").strip()
-
-        if user_token:
-            print("🔐 正在登录...")
-            login(token=user_token)
-            print("✅ 登录成功")
-        else:
-            print("⚠️  跳过登录，某些模型可能无法下载")
 
 except ImportError:
     print("❌ huggingface_hub 未安装")
     print("请运行: pip install huggingface_hub")
     sys.exit(1)
+except Exception as e:
+    print(f"⚠️  检查登录状态时出错: {e}")
+    print("   继续尝试下载...")
 
 print()
 
