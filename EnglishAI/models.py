@@ -1,5 +1,5 @@
 """
-本地模型管理器 - OpenAI TTS + Whisper STT
+本地模型管理器 - Edge TTS + Whisper STT
 单例模式，应用启动时预加载所有模型
 """
 import os
@@ -7,21 +7,22 @@ import uuid
 import time
 import torch
 import whisper
+import asyncio
 from pathlib import Path
 from config import Config
 
-# 初始化 OpenAI TTS 客户端
+# 初始化 Edge TTS
 try:
-    from openai import OpenAI
+    import edge_tts
     TTS_AVAILABLE = True
 except ImportError:
-    print("⚠️  OpenAI 未安装，TTS 功能将不可用")
-    print("   安装方法: pip install openai")
+    print("⚠️  Edge TTS 未安装，TTS 功能将不可用")
+    print("   安装方法: pip install edge-tts")
     TTS_AVAILABLE = False
 
 class ModelManager:
     """
-    统一管理 OpenAI TTS 和 Whisper 模型
+    统一管理 Edge TTS 和 Whisper 模型
     单例模式确保全局只加载一次
     """
     _instance = None
@@ -46,10 +47,10 @@ class ModelManager:
         self.device = self._detect_device()
         print(f"🖥️  计算设备: {self.device.upper()}")
 
-        # 2. 初始化 OpenAI TTS 客户端
-        self.openai_client = None
+        # 2. 初始化 Edge TTS
+        self.tts_available = TTS_AVAILABLE
         if TTS_AVAILABLE:
-            self._init_openai_tts()
+            self._init_edge_tts()
 
         # 3. 加载 Whisper STT
         self.whisper = None
@@ -74,30 +75,24 @@ class ModelManager:
         else:
             return "cpu"
 
-    def _init_openai_tts(self):
-        """初始化 OpenAI TTS 客户端"""
+    def _init_edge_tts(self):
+        """初始化 Edge TTS"""
         try:
-            print("🎙️  正在初始化 OpenAI TTS...")
+            print("🎙️  正在初始化 Edge TTS...")
             load_start = time.time()
 
-            # 初始化 OpenAI 客户端
-            self.openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
-
-            # TTS 配置
-            self.tts_model = "tts-1-hd"  # 高质量模型 (或用 tts-1 更快)
-            self.tts_voice = "alloy"     # 可选: alloy, echo, fable, onyx, nova, shimmer
+            # Edge TTS 配置
+            # 英语音色推荐: en-US-AriaNeural (女), en-US-GuyNeural (男)
+            self.tts_voice = "en-US-AriaNeural"  # 清晰、自然的美式英语女声
 
             elapsed = time.time() - load_start
-            print(f"   ✓ OpenAI TTS 初始化完成 ({elapsed:.3f}s)")
-            print(f"   → 模型: {self.tts_model}, 音色: {self.tts_voice}")
+            print(f"   ✓ Edge TTS 初始化完成 ({elapsed:.3f}s)")
+            print(f"   → 音色: {self.tts_voice} (免费)")
 
         except Exception as e:
-            print(f"   ❌ OpenAI TTS 初始化失败: {e}")
-            if "api_key" in str(e).lower():
-                print(f"   💡 提示: 需要配置 OpenAI API Key")
-                print(f"   → 在 config.py 中设置 OPENAI_API_KEY")
+            print(f"   ❌ Edge TTS 初始化失败: {e}")
             print(f"   → TTS 功能暂时不可用，将使用文本模式")
-            self.openai_client = None
+            self.tts_available = False
 
     def _load_whisper(self):
         """加载 Whisper STT"""
@@ -122,16 +117,16 @@ class ModelManager:
 
     def text_to_speech(self, text, language='en'):
         """
-        文本转语音 (使用 OpenAI TTS API)
+        文本转语音 (使用 Edge TTS)
 
         Args:
             text: 要合成的文本
-            language: 语言代码 (en, zh 等) - 暂未使用，OpenAI 会自动检测
+            language: 语言代码 (en, zh 等) - 暂未使用
 
         Returns:
             str: 音频文件路径（相对于 static/）
         """
-        if not self.openai_client:
+        if not self.tts_available:
             return None
 
         try:
@@ -139,18 +134,11 @@ class ModelManager:
             filename = f"audio_{uuid.uuid4().hex[:12]}.mp3"
             filepath = os.path.join(self.audio_dir, filename)
 
-            # 调用 OpenAI TTS API
+            # 调用 Edge TTS (同步包装异步函数)
             print(f"🎵 正在合成音频: {text[:50]}...")
 
-            response = self.openai_client.audio.speech.create(
-                model=self.tts_model,
-                voice=self.tts_voice,
-                input=text,
-                response_format="mp3"  # 或 "wav", "opus", "aac", "flac"
-            )
-
-            # 保存音频文件
-            response.stream_to_file(filepath)
+            # 运行异步 TTS
+            asyncio.run(self._async_text_to_speech(text, filepath))
 
             # 清理旧文件
             self._cleanup_old_audio_files()
@@ -161,6 +149,11 @@ class ModelManager:
         except Exception as e:
             print(f"❌ TTS 合成失败: {e}")
             return None
+
+    async def _async_text_to_speech(self, text, filepath):
+        """异步调用 Edge TTS"""
+        communicate = edge_tts.Communicate(text, self.tts_voice)
+        await communicate.save(filepath)
 
     def speech_to_text(self, audio_file_path):
         """
@@ -218,7 +211,7 @@ class ModelManager:
         """获取模型状态"""
         return {
             'device': self.device,
-            'tts': self.openai_client is not None,
+            'tts': self.tts_available,
             'whisper': self.whisper is not None,
             'audio_count': len(list(Path(self.audio_dir).glob('audio_*.*')))
         }

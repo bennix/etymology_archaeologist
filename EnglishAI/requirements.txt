@@ -14,7 +14,8 @@ numpy>=1.26.0,<2.0
 
 # AI Models - API
 requests==2.31.0
-openai==1.10.0  # 用于 OpenAI TTS API
+openai==1.10.0  # 用于 Zenmux API 调用
+edge-tts>=7.0.0  # 免费 TTS（微软 Edge）
 
 # Utilities
 python-dotenv==1.0.0
