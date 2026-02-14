@@ -80,10 +80,9 @@ class ModelManager:
             print(f"🤖 正在加载 Chatterbox TTS ({self.device})...")
             load_start = time.time()
 
-            # 尝试加载模型，需要 HuggingFace token
+            # HuggingFace token 通过 huggingface_hub login 自动使用
             self.chatterbox = ChatterboxTurboTTS.from_pretrained(
-                device=self.device,
-                token=True  # 自动使用已登录的 HF token
+                device=self.device
             )
             self.chatterbox_sr = self.chatterbox.sr  # 采样率
 
@@ -102,12 +101,14 @@ class ModelManager:
     def _load_whisper(self):
         """加载 Whisper STT"""
         try:
-            print(f"🎤 正在加载 Whisper {Config.WHISPER_MODEL_SIZE} ({self.device})...")
+            # Whisper 不支持 MPS 稀疏张量操作，强制使用 CPU
+            whisper_device = "cpu"
+            print(f"🎤 正在加载 Whisper {Config.WHISPER_MODEL_SIZE} ({whisper_device})...")
             load_start = time.time()
 
             self.whisper = whisper.load_model(
                 Config.WHISPER_MODEL_SIZE,
-                device=self.device
+                device=whisper_device
             )
 
             elapsed = time.time() - load_start
@@ -171,11 +172,11 @@ class ModelManager:
         try:
             print(f"🎤 正在转录音频: {audio_file_path}...")
 
-            # Whisper 转录
+            # Whisper 转录（使用 CPU，不支持 fp16）
             result = self.whisper.transcribe(
                 audio_file_path,
                 language='en',  # 指定英语
-                fp16=(self.device != 'cpu')  # CPU 不支持 fp16
+                fp16=False  # CPU 不支持 fp16
             )
 
             text = result['text'].strip()

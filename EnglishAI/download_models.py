@@ -69,8 +69,11 @@ try:
     import whisper
 
     print("⬇️  正在下载 Whisper base 模型...")
-    model = whisper.load_model("base", device=device)
+    # Whisper 不支持 MPS 稀疏张量，使用 CPU
+    whisper_device = "cpu"
+    model = whisper.load_model("base", device=whisper_device)
     print("✅ Whisper 模型下载完成")
+    print(f"   (使用设备: {whisper_device})")
 
     # 测试
     print("🧪 测试 Whisper...")
@@ -95,11 +98,10 @@ try:
 
     print("⬇️  正在下载 Chatterbox Turbo 模型...")
     print("   (首次下载约 350MB，可能需要几分钟)")
+    print(f"   (使用设备: {device})")
 
-    model = ChatterboxTurboTTS.from_pretrained(
-        device=device,
-        token=True  # 使用已登录的 HF token
-    )
+    # HuggingFace token 通过 huggingface_hub login 自动使用
+    model = ChatterboxTurboTTS.from_pretrained(device=device)
 
     print("✅ Chatterbox 模型下载完成")
 
