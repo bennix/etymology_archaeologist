@@ -53,6 +53,7 @@
         {% if questions %}
         <form method="POST" class="needs-validation" novalidate>
             {% for q in questions %}
+            {% set question_idx = loop.index0 %}
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-3 text-muted">第 {{ loop.index }} 题</h6>
@@ -61,8 +62,8 @@
                     {% if q.options %}
                     {% for option in q.options %}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="answers" value="{{ option[0] }}" id="q{{ loop.index0 }}_opt{{ loop.index }}" required>
-                        <label class="form-check-label" for="q{{ loop.index0 }}_opt{{ loop.index }}">
+                        <input class="form-check-input" type="radio" name="answers" value="{{ option[0] }}" id="q{{ question_idx }}_opt{{ loop.index }}" required>
+                        <label class="form-check-label" for="q{{ question_idx }}_opt{{ loop.index }}">
                             {{ option }}
                         </label>
                     </div>
