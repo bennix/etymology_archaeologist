@@ -76,9 +76,13 @@ struct ZenmuxService {
         let apiMessages: [[String: String]] = messages.map {
             ["role": $0.role == .user ? "user" : "assistant", "content": $0.content]
         }
+        var allMessages: [[String: String]] = [
+            ["role": "system", "content": "你是一个数学/物理解题助手。以下是刚刚生成的解题报告，用户可能对报告中的内容进行追问。请基于报告内容回答。" + language.systemPromptSuffix]
+        ]
+        allMessages += apiMessages
         let body: [String: Any] = [
             "model": "anthropic/claude-sonnet-4.5",
-            "messages": apiMessages,
+            "messages": allMessages,
             "stream": true
         ]
         var request = try buildRequest(apiKey: apiKey, body: body)
