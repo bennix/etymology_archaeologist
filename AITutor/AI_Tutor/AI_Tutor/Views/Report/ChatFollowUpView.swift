@@ -90,7 +90,9 @@ struct ChatFollowUpView: View {
                 apiKey: appState.settings.apiKey,
                 language: appState.settings.outputLanguage
             ) { chunk in
-                appState.reportMessages[assistantIndex].content += chunk
+                Task { @MainActor in
+                    appState.reportMessages[assistantIndex].content += chunk
+                }
             }
         } catch {
             appState.reportMessages[assistantIndex].content = "❌ 出错：\(error.localizedDescription)"
