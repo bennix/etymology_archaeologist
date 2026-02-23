@@ -41,7 +41,7 @@ struct ExtractionLoadingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("GPT-5.2 正在分析\(dots)")
+                Text("GPT-4o 正在分析\(dots)")
                     .font(.title3.bold())
                 Text("识别公式 · 提取已知条件 · 拆分题目")
                     .font(.subheadline)

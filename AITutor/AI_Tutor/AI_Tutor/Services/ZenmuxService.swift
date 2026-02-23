@@ -24,7 +24,7 @@ struct ZenmuxService {
             ])
         }
         let body: [String: Any] = [
-            "model": "openai/gpt-5.2",
+            "model": "openai/gpt-4o",
             "messages": [["role": "user", "content": contentArray]]
         ]
         let request = try buildRequest(apiKey: apiKey, body: body)
