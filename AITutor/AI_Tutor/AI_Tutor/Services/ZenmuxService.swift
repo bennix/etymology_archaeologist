@@ -20,7 +20,7 @@ struct ZenmuxService {
             let base64 = jpeg.base64EncodedString()
             contentArray.append([
                 "type": "image_url",
-                "image_url": ["url": "data:image/jpeg;base64,\(base64)"]
+                "image_url": "data:image/jpeg;base64,\(base64)"
             ])
         }
         let body: [String: Any] = [
