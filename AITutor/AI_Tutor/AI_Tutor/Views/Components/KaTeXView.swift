@@ -45,6 +45,10 @@ struct KaTeXView: UIViewRepresentable {
         }
     }
 
+    static func dismantleUIView(_ webView: WKWebView, coordinator: Coordinator) {
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "heightChanged")
+    }
+
     class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
         var parent: KaTeXView
         var pendingContent: String = ""

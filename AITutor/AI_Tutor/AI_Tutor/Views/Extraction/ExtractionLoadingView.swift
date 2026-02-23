@@ -14,7 +14,6 @@ struct ExtractionLoadingView: View {
                 errorView(message: error)
             } else if !appState.problems.isEmpty {
                 Color.clear
-                    .onAppear { navigateToConfirmation = true }
             }
         }
         .navigationTitle("分析中")
@@ -102,6 +101,7 @@ struct ExtractionLoadingView: View {
             )
             let parsed = ProblemParser.parse(from: raw)
             appState.problems = parsed
+            navigateToConfirmation = true
         } catch {
             appState.extractionError = error.localizedDescription
         }

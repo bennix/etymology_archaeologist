@@ -73,10 +73,11 @@ struct SolvingContainerView: View {
         }
         .onChange(of: allABComplete) { _, complete in
             if complete {
-                // Auto-navigate after short delay
                 Task {
                     try? await Task.sleep(for: .seconds(1))
-                    navigateToExpertC = true
+                    if !navigateToExpertC {
+                        navigateToExpertC = true
+                    }
                 }
             }
         }
@@ -147,7 +148,7 @@ struct SolvingContainerView: View {
                 apiKey: appState.settings.apiKey,
                 language: appState.settings.outputLanguage
             ) { chunk in
-                solution.content += chunk
+                Task { @MainActor in solution.content += chunk }
             }
         } catch {
             solution.errorMessage = error.localizedDescription

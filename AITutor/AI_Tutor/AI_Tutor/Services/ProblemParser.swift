@@ -7,7 +7,7 @@ struct ProblemParser {
         var cleaned = response
         if let start = response.range(of: "["),
            let end = response.range(of: "]", options: .backwards) {
-            cleaned = String(response[start.lowerBound...end.upperBound])
+            cleaned = String(response[start.lowerBound..<end.upperBound])
         }
 
         guard let data = cleaned.data(using: .utf8),

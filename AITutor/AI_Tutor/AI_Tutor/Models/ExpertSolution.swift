@@ -2,7 +2,7 @@
 import Foundation
 import Observation
 
-enum ExpertType {
+enum ExpertType: Equatable, Hashable {
     case a, b, c
 
     var displayName: String {

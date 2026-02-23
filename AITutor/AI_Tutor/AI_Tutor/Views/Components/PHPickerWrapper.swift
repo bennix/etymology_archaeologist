@@ -31,7 +31,9 @@ struct PHPickerWrapper: UIViewControllerRepresentable {
             for result in results {
                 group.enter()
                 result.itemProvider.loadObject(ofClass: UIImage.self) { object, _ in
-                    if let img = object as? UIImage { loaded.append(img) }
+                    if let img = object as? UIImage {
+                        DispatchQueue.main.async { loaded.append(img) }
+                    }
                     group.leave()
                 }
             }
