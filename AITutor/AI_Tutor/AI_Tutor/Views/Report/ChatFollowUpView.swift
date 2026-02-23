@@ -126,13 +126,33 @@ struct ChatBubbleView: View {
                         .background(Color.blue)
                         .foregroundStyle(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 18))
+                } else if message.isStreaming {
+                    // Plain text while streaming — instant per-chunk display
+                    VStack(alignment: .leading, spacing: 2) {
+                        if message.content.isEmpty {
+                            HStack(spacing: 6) {
+                                Circle().frame(width: 6, height: 6)
+                                    .foregroundStyle(.secondary)
+                                Text("AI 思考中...")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else {
+                            Text(message.content)
+                                .font(.system(.body, design: .default))
+                                .textSelection(.enabled)
+                            Text("▌")
+                                .foregroundStyle(.blue)
+                                .font(.body)
+                        }
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 10)
+                    .background(Color(.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
                 } else {
-                    // AI message: use KaTeX for LaTeX/Markdown rendering
-                    let displayContent = message.content.isEmpty && message.isStreaming
-                        ? "▌"
-                        : message.content
-
-                    DynamicKaTeXView(content: displayContent)
+                    // Streaming complete — render LaTeX/Markdown
+                    DynamicKaTeXView(content: message.content)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
                         .background(Color(.systemGray6))
