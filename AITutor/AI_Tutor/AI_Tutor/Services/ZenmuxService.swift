@@ -28,7 +28,14 @@ struct ZenmuxService {
             "messages": [["role": "user", "content": contentArray]]
         ]
         let request = try buildRequest(apiKey: apiKey, body: body)
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, urlResponse) = try await URLSession.shared.data(for: request)
+        if let http = urlResponse as? HTTPURLResponse, http.statusCode != 200 {
+            let msg = (try? JSONDecoder().decode(APIError.self, from: data))?.error.message
+                ?? String(data: data, encoding: .utf8)
+                ?? "HTTP \(http.statusCode)"
+            throw NSError(domain: "ZenmuxService", code: http.statusCode,
+                          userInfo: [NSLocalizedDescriptionKey: msg])
+        }
         let response = try JSONDecoder().decode(ChatCompletionResponse.self, from: data)
         return response.choices.first?.message.content ?? ""
     }
@@ -168,6 +175,11 @@ struct ZenmuxService {
 }
 
 // MARK: - Response decodable models
+private struct APIError: Decodable {
+    struct ErrorBody: Decodable { let message: String }
+    let error: ErrorBody
+}
+
 private struct ChatCompletionResponse: Decodable {
     let choices: [Choice]
     struct Choice: Decodable {
