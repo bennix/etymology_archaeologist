@@ -263,6 +263,8 @@
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "用于拍摄数学/物理题目图片进行 AI 分析";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从相册选择题目图片进行 AI 分析";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -295,6 +297,8 @@
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "用于拍摄数学/物理题目图片进行 AI 分析";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从相册选择题目图片进行 AI 分析";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
