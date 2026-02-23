@@ -92,13 +92,10 @@ struct ExpertCDetailView: View {
     let content: String
 
     var body: some View {
-        ScrollView {
-            DynamicKaTeXView(content: content)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 8)
-        }
-        .navigationTitle("题目 \(problem.number) · 专家总评")
-        .navigationBarTitleDisplayMode(.inline)
+        FullPageKaTeXView(content: content)
+            .navigationTitle("题目 \(problem.number) · 专家总评")
+            .navigationBarTitleDisplayMode(.inline)
+            .ignoresSafeArea(edges: .bottom)
     }
 }
 
@@ -146,20 +143,14 @@ struct SolutionsDetailTab: View {
 
             // Content
             if let problem = currentProblem {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        if let sol = appState.solution(for: problem, expert: selectedExpert) {
-                            if sol.content.isEmpty {
-                                Text("暂无内容")
-                                    .foregroundStyle(.secondary)
-                                    .padding()
-                            } else {
-                                DynamicKaTeXView(content: sol.content)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                            }
-                        }
-                    }
+                if let sol = appState.solution(for: problem, expert: selectedExpert),
+                   !sol.content.isEmpty {
+                    FullPageKaTeXView(content: sol.content)
+                        .ignoresSafeArea(edges: .bottom)
+                } else {
+                    Spacer()
+                    Text("暂无内容").foregroundStyle(.secondary)
+                    Spacer()
                 }
             }
         }

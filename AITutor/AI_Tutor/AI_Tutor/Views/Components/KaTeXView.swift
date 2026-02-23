@@ -85,6 +85,61 @@ struct KaTeXView: UIViewRepresentable {
     }
 }
 
+// MARK: - Full-page KaTeX view (scrolling handled by WKWebView itself)
+/// Use this for dedicated full-screen pages where the WebView fills all available space.
+struct FullPageKaTeXView: UIViewRepresentable {
+    let content: String
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+
+    func makeUIView(context: Context) -> WKWebView {
+        let config = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: config)
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        webView.scrollView.isScrollEnabled = true   // native scroll inside WebView
+        webView.navigationDelegate = context.coordinator
+
+        if let templateURL = Bundle.main.url(
+            forResource: "katex_template",
+            withExtension: "html",
+            subdirectory: "katex"
+        ), var html = try? String(contentsOf: templateURL, encoding: .utf8) {
+            html = html.replacingOccurrences(of: "CONTENT_PLACEHOLDER", with: "")
+            webView.loadHTMLString(html, baseURL: templateURL.deletingLastPathComponent())
+        }
+        return webView
+    }
+
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        context.coordinator.pendingContent = content
+        if context.coordinator.isPageLoaded {
+            context.coordinator.injectContent(into: webView)
+        }
+    }
+
+    class Coordinator: NSObject, WKNavigationDelegate {
+        var parent: FullPageKaTeXView
+        var pendingContent = ""
+        var isPageLoaded = false
+
+        init(_ parent: FullPageKaTeXView) { self.parent = parent }
+
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            isPageLoaded = true
+            injectContent(into: webView)
+        }
+
+        func injectContent(into webView: WKWebView) {
+            let escaped = pendingContent
+                .replacingOccurrences(of: "\\", with: "\\\\")
+                .replacingOccurrences(of: "`", with: "\\`")
+                .replacingOccurrences(of: "$", with: "\\$")
+            webView.evaluateJavaScript("window.updateContent(`\(escaped)`);", completionHandler: nil)
+        }
+    }
+}
+
 // MARK: - Dynamic-height wrapper for use in ScrollView
 struct DynamicKaTeXView: View {
     let content: String
