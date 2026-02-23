@@ -31,10 +31,7 @@ struct ReportView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 ShareLink(
                     item: appState.fullReport(),
-                    preview: SharePreview(
-                        "AI 解题报告",
-                        systemImage: "doc.richtext"
-                    )
+                    preview: SharePreview("AI 解题报告")
                 ) {
                     Image(systemName: "square.and.arrow.up")
                 }
