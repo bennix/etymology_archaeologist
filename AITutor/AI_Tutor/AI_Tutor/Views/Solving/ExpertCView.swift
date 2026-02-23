@@ -49,37 +49,22 @@ struct ExpertCView: View {
                 .background(.regularMaterial)
             }
 
-            // Expert C content
+            // Expert C streaming content
             if let problem = currentProblem {
                 expertCContent(for: problem)
             }
-
-            // Bottom: View Report button
-            Divider()
-            Button {
-                buildInitialReport()
-                navigateToReport = true
-            } label: {
-                HStack {
-                    Image(systemName: "doc.richtext.fill")
-                    Text(allCComplete ? "查看完整解题报告" : "专家总评生成中...")
-                        .font(.headline)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(allCComplete ? Color.purple : Color.gray.opacity(0.4))
-                .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
-            }
-            .disabled(!allCComplete)
-            .padding()
-            .background(.regularMaterial)
         }
         .navigationTitle("专家总评")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $navigateToReport) {
             ReportView()
+        }
+        .onChange(of: allCComplete) { _, complete in
+            if complete && !navigateToReport {
+                buildInitialReport()
+                navigateToReport = true
+            }
         }
     }
 
@@ -105,7 +90,9 @@ struct ExpertCView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(.green)
                             } else {
-                                ProgressView().scaleEffect(0.8).tint(.purple)
+                                Text(solution.content.isEmpty ? "等待中" : "生成中")
+                                    .font(.caption)
+                                    .foregroundStyle(.purple)
                             }
                         }
                         .padding(14)
@@ -113,30 +100,36 @@ struct ExpertCView: View {
 
                         Divider()
 
-                        // Content
-                        if solution.content.isEmpty {
-                            VStack(spacing: 12) {
-                                ProgressView().tint(.purple).scaleEffect(1.2)
+                        // Content — plain text while streaming, KaTeX after complete
+                        if solution.content.isEmpty && solution.isStreaming {
+                            HStack(spacing: 8) {
+                                Circle().frame(width: 7, height: 7)
+                                    .foregroundStyle(.purple).opacity(0.8)
                                 Text("Claude Sonnet 4.5 正在综合评估两种解法...")
                                     .foregroundStyle(.secondary)
-                                    .multilineTextAlignment(.center)
+                                    .font(.subheadline)
                             }
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.vertical, 40)
-                        } else {
-                            DynamicKaTeXView(content: solution.content)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-
+                            .padding(.horizontal, 16)
+                        } else if !solution.content.isEmpty {
                             if solution.isStreaming {
-                                HStack(spacing: 6) {
-                                    ProgressView().scaleEffect(0.7).tint(.purple)
-                                    Text("正在生成...")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                .padding(.horizontal, 16)
-                                .id("cBottom")
+                                Text(solution.content)
+                                    .font(.system(.body, design: .default))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .textSelection(.enabled)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 8)
+
+                                Text("▌")
+                                    .foregroundStyle(.purple)
+                                    .font(.body)
+                                    .padding(.leading, 12)
+                                    .id("cursor")
+                            } else {
+                                DynamicKaTeXView(content: solution.content)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
                             }
                         }
 
