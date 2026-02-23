@@ -29,25 +29,31 @@ struct StreamingSolutionView: View {
 
                     if let sol = solution {
                         if sol.content.isEmpty && sol.isStreaming {
-                            // Waiting state
-                            HStack(spacing: 10) {
-                                ProgressView().tint(.blue)
+                            // Waiting for first token
+                            HStack(spacing: 8) {
+                                Circle().frame(width: 7, height: 7).foregroundStyle(.blue)
+                                    .opacity(0.8)
                                 Text("\(modelLabel) 正在思考...")
                                     .foregroundStyle(.secondary)
                                     .font(.subheadline)
                             }
                             .padding(.top, 8)
                         } else if !sol.content.isEmpty {
-                            DynamicKaTeXView(content: sol.content)
-
                             if sol.isStreaming {
-                                HStack(spacing: 6) {
-                                    ProgressView().scaleEffect(0.7).tint(.blue)
-                                    Text("正在生成...")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                .id("streamingIndicator")
+                                // Plain text while streaming — renders every chunk instantly
+                                Text(sol.content)
+                                    .font(.system(.body, design: .default))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .textSelection(.enabled)
+
+                                // Blinking cursor
+                                Text("▌")
+                                    .foregroundStyle(.blue)
+                                    .font(.body)
+                                    .id("cursor")
+                            } else {
+                                // Fully streamed — render LaTeX/Markdown
+                                DynamicKaTeXView(content: sol.content)
                             }
                         }
 
@@ -83,9 +89,9 @@ struct StreamingSolutionView: View {
                 .foregroundStyle(.green)
                 .font(.caption)
         } else if sol.isStreaming {
-            Label("生成中", systemImage: "circle.dotted")
-                .foregroundStyle(.blue)
+            Text(sol.content.isEmpty ? "等待中" : "生成中")
                 .font(.caption)
+                .foregroundStyle(.blue)
         }
     }
 }
