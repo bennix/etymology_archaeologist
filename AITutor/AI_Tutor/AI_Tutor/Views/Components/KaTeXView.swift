@@ -88,16 +88,37 @@ struct KaTeXView: UIViewRepresentable {
 // MARK: - Dynamic-height wrapper for use in ScrollView
 struct DynamicKaTeXView: View {
     let content: String
-    @State private var height: CGFloat = 100
+    @State private var height: CGFloat = 40
+    @State private var isReady = false
 
     var body: some View {
-        KaTeXView(content: content) { newHeight in
-            if abs(newHeight - height) > 1 {
-                withAnimation(.easeInOut(duration: 0.15)) {
-                    height = max(newHeight, 40)
+        ZStack(alignment: .topLeading) {
+            // WebView loads in background; shown only after first heightChanged
+            KaTeXView(content: content) { newHeight in
+                if abs(newHeight - height) > 1 {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        height = max(newHeight, 40)
+                    }
+                }
+                if !isReady {
+                    withAnimation(.easeIn(duration: 0.2)) { isReady = true }
                 }
             }
+            .frame(height: isReady ? height : 1)
+            .opacity(isReady ? 1 : 0)
+
+            // Loading placeholder — visible until KaTeX fires its first heightChanged
+            if !isReady {
+                HStack(spacing: 8) {
+                    ProgressView().scaleEffect(0.75)
+                    Text("排版中…")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 4)
+                .padding(.vertical, 10)
+            }
         }
-        .frame(height: height)
     }
 }
