@@ -40,7 +40,7 @@ struct ReportView: View {
     }
 }
 
-// MARK: - Tab 0: Expert C synthesis (rendered KaTeX)
+// MARK: - Tab 0: Expert C summary — tappable cards → full-screen detail
 struct ExpertCSummaryTab: View {
     @Environment(AppState.self) private var appState
 
@@ -48,34 +48,57 @@ struct ExpertCSummaryTab: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(spacing: 12) {
                 ForEach(selectedProblems) { problem in
                     if let sol = appState.solution(for: problem, expert: .c), !sol.content.isEmpty {
-                        VStack(alignment: .leading, spacing: 0) {
-                            HStack(spacing: 6) {
-                                Image(systemName: "star.fill").foregroundStyle(.yellow)
-                                Text("题目 \(problem.number) · 专家总评")
-                                    .font(.subheadline.bold())
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.purple.opacity(0.08))
+                        NavigationLink(destination: ExpertCDetailView(problem: problem, content: sol.content)) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "star.fill")
+                                    .foregroundStyle(.yellow)
+                                    .font(.title3)
 
-                            DynamicKaTeXView(content: sol.content)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("题目 \(problem.number) · 专家总评")
+                                        .font(.headline)
+                                        .foregroundStyle(.primary)
+                                    Text(sol.content.prefix(60).replacingOccurrences(of: "\n", with: " ") + "…")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .lineLimit(2)
+                                }
+
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(.tertiary)
+                                    .font(.caption)
+                            }
+                            .padding(14)
+                            .background(Color(.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
                         }
-                        .background(Color(.systemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
                         .padding(.horizontal)
                     }
                 }
-                .padding(.vertical, 8)
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, 12)
         }
+    }
+}
+
+// MARK: - Full-screen Expert C detail (KaTeX rendered)
+struct ExpertCDetailView: View {
+    let problem: Problem
+    let content: String
+
+    var body: some View {
+        ScrollView {
+            DynamicKaTeXView(content: content)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 8)
+        }
+        .navigationTitle("题目 \(problem.number) · 专家总评")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
