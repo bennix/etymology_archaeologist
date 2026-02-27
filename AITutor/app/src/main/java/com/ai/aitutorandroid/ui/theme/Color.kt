@@ -2,10 +2,24 @@ package com.ai.aitutorandroid.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Primary — blue accent matching iOS #007AFF
+val Primary = Color(0xFF007AFF)
+val PrimaryDark = Color(0xFF0A84FF)
+val OnPrimary = Color.White
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Surface
+val Surface = Color(0xFFF2F2F7)
+val SurfaceDark = Color(0xFF1C1C1E)
+val CardBackground = Color.White
+val CardBackgroundDark = Color(0xFF2C2C2E)
+
+// Text
+val TextPrimary = Color(0xFF1C1C1E)
+val TextPrimaryDark = Color(0xFFF2F2F7)
+val TextSecondary = Color(0xFF6C6C70)
+val TextSecondaryDark = Color(0xFF8E8E93)
+
+// Status
+val Success = Color(0xFF34C759)
+val Error = Color(0xFFFF3B30)
+val Warning = Color(0xFFFF9500)
