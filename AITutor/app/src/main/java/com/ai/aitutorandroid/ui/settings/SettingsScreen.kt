@@ -13,6 +13,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ai.aitutorandroid.models.*
+import com.ai.aitutorandroid.ui.components.ProviderLinksSection
 import com.ai.aitutorandroid.viewmodels.AppViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -63,6 +64,10 @@ fun SettingsScreen(viewModel: AppViewModel, innerPadding: PaddingValues) {
                 "设置", fontSize = 28.sp, fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
+
+            SettingsSection(title = "推荐服务商") {
+                ProviderLinksSection()
+            }
 
             SettingsSection(title = "API Keys") {
                 ApiKeyField(

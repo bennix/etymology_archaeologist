@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ai.aitutorandroid.models.APIConfig
+import com.ai.aitutorandroid.ui.components.ProviderLinksSection
 import com.ai.aitutorandroid.viewmodels.AppViewModel
 
 @Composable
@@ -45,6 +46,22 @@ fun APIKeySetupScreen(viewModel: AppViewModel, onComplete: () -> Unit) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 8.dp))
 
             Spacer(Modifier.height(40.dp))
+
+            // Recommended provider links
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+                    Text(
+                        "推荐服务商",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ProviderLinksSection()
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
 
             // Tu-zi Card (recommended)
             ProviderCard(
