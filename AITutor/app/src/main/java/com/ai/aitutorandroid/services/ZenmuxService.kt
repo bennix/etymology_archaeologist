@@ -144,13 +144,25 @@ class ZenmuxService @Inject constructor() {
         config: APIConfig,
         modelId: String,
         subject: Subject,
-        language: OutputLanguage
+        language: OutputLanguage,
+        reportContext: String = ""
     ): Flow<String> = flow {
+        val systemContent = buildString {
+            append("你是一个${subject.rawValue}解题助手。")
+            if (reportContext.isNotBlank()) {
+                append("以下是刚刚生成的完整解题报告（包含解法一、解法二和专家点评），用户将对报告内容进行追问，请严格基于报告内容回答。\n\n")
+                append("=== 解题报告 ===\n")
+                append(reportContext)
+                append("\n=== 报告结束 ===\n\n")
+            }
+            append("回答时使用 LaTeX 公式（行内用 \$…\$，独立行用 \$\$…\$\$），并以 Markdown 格式组织答案。")
+            append(language.systemPromptSuffix)
+        }
         val allMessages = JSONArray()
         allMessages.put(
             JSONObject()
                 .put("role", "system")
-                .put("content", "你是一个${subject.rawValue}解题助手。以下是刚刚生成的解题报告，用户可能对报告中的内容进行追问。请基于报告内容回答。${language.systemPromptSuffix}")
+                .put("content", systemContent)
         )
         for (msg in messages) {
             allMessages.put(

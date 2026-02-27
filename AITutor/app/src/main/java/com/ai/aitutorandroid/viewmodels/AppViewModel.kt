@@ -218,8 +218,10 @@ class AppViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val allMessages = _reportMessages.value.dropLast(1) // exclude the empty assistant slot
-                zenmuxService.streamChat(allMessages, cfg, _settings.value.expertCModelId,
-                    _settings.value.selectedSubject, _settings.value.outputLanguage
+                zenmuxService.streamChat(
+                    allMessages, cfg, _settings.value.expertCModelId,
+                    _settings.value.selectedSubject, _settings.value.outputLanguage,
+                    reportContext = fullReport()
                 ).collect { chunk ->
                     _reportMessages.update { list ->
                         list.map { if (it.id == assistantMsg.id) it.copy(content = it.content + chunk) else it }
