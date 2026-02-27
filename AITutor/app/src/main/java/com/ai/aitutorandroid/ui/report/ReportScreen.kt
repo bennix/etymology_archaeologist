@@ -1,6 +1,7 @@
 package com.ai.aitutorandroid.ui.report
 
 import android.content.Intent
+import androidx.core.content.FileProvider
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -41,9 +42,16 @@ fun ReportScreen(viewModel: AppViewModel, onHome: () -> Unit) {
                 actions = {
                     IconButton(onClick = {
                         val report = viewModel.fullReport()
+                        val file = java.io.File(context.cacheDir, "解题报告.md")
+                        file.writeText(report)
+                        val uri = FileProvider.getUriForFile(
+                            context, "${context.packageName}.provider", file
+                        )
                         val intent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            putExtra(Intent.EXTRA_TEXT, report)
+                            type = "text/markdown"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_SUBJECT, "解题报告")
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
                         context.startActivity(Intent.createChooser(intent, "导出报告"))
                     }) { Icon(Icons.Default.Share, null) }
