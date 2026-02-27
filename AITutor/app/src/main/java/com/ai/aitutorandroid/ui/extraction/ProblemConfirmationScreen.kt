@@ -1,22 +1,77 @@
 package com.ai.aitutorandroid.ui.extraction
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.MergeType
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ai.aitutorandroid.models.Problem
 import com.ai.aitutorandroid.viewmodels.AppViewModel
+
+// ─── Segment model ─────────────────────────────────────────────────────────
+
+private sealed class ProblemSegment {
+    data class Body(val text: String) : ProblemSegment()
+    data class MetaPost(val code: String) : ProblemSegment()
+    data class FigureDesc(val desc: String) : ProblemSegment()
+}
+
+/**
+ * Split fullLatexText into segments:
+ *   ```metapost … ```  → MetaPost code block
+ *   【图形描述】…【/图形描述】 → FigureDesc block
+ *   everything else    → Body text
+ */
+private fun parseSegments(raw: String): List<ProblemSegment> {
+    val result = mutableListOf<ProblemSegment>()
+    val combined = Regex(
+        """(```metapost\s*\n[\s\S]*?\n?```)|(【图形描述】[\s\S]*?【/图形描述】)""",
+        RegexOption.IGNORE_CASE
+    )
+    var cursor = 0
+    for (match in combined.findAll(raw)) {
+        val before = raw.substring(cursor, match.range.first).trim()
+        if (before.isNotEmpty()) result += ProblemSegment.Body(before)
+        when {
+            match.value.startsWith("```metapost", ignoreCase = true) -> {
+                val code = match.value
+                    .removePrefix("```metapost").removeSuffix("```").trim()
+                result += ProblemSegment.MetaPost(code)
+            }
+            match.value.startsWith("【图形描述】") -> {
+                val desc = match.value
+                    .removePrefix("【图形描述】").removeSuffix("【/图形描述】").trim()
+                result += ProblemSegment.FigureDesc(desc)
+            }
+        }
+        cursor = match.range.last + 1
+    }
+    val tail = raw.substring(cursor).trim()
+    if (tail.isNotEmpty()) result += ProblemSegment.Body(tail)
+    return result
+}
+
+// ─── Screen ────────────────────────────────────────────────────────────────
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,6 +129,8 @@ fun ProblemConfirmationScreen(
     }
 }
 
+// ─── Problem card ──────────────────────────────────────────────────────────
+
 @Composable
 private fun ProblemCard(
     problem: Problem,
@@ -81,30 +138,168 @@ private fun ProblemCard(
     onToggleSelect: () -> Unit,
     onMergeWithNext: () -> Unit
 ) {
+    val segments = remember(problem.id) { parseSegments(problem.fullLatexText) }
+
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
+
+            // ── Header row ──────────────────────────────────────────────
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(checked = problem.isSelected, onCheckedChange = { onToggleSelect() })
+                Checkbox(
+                    checked = problem.isSelected,
+                    onCheckedChange = { onToggleSelect() }
+                )
                 Spacer(Modifier.width(8.dp))
-                Text("题目 ${problem.number}", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                Text(
+                    "题目 ${problem.number}",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp
+                )
             }
+
             Spacer(Modifier.height(8.dp))
-            Text(
-                text = problem.fullLatexText.take(200) + if (problem.fullLatexText.length > 200) "…" else "",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = 20.sp
-            )
+
+            // ── Segments ────────────────────────────────────────────────
+            segments.forEach { seg ->
+                when (seg) {
+                    is ProblemSegment.Body -> {
+                        Text(
+                            text = seg.text,
+                            fontSize = 14.sp,
+                            lineHeight = 22.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    is ProblemSegment.MetaPost -> {
+                        CollapsibleBlock(
+                            label = "MetaPost 图形代码",
+                            icon = {
+                                Icon(
+                                    Icons.Filled.Code, null,
+                                    modifier = Modifier.size(15.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        ) {
+                            Text(
+                                text = seg.code,
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 12.sp,
+                                lineHeight = 18.sp,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState())
+                                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                            )
+                        }
+                    }
+                    is ProblemSegment.FigureDesc -> {
+                        CollapsibleBlock(
+                            label = "图形描述",
+                            icon = {
+                                Icon(
+                                    Icons.Filled.Image, null,
+                                    modifier = Modifier.size(15.dp),
+                                    tint = MaterialTheme.colorScheme.secondary
+                                )
+                            }
+                        ) {
+                            Text(
+                                text = seg.desc,
+                                fontSize = 13.sp,
+                                lineHeight = 20.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                            )
+                        }
+                    }
+                }
+                Spacer(Modifier.height(6.dp))
+            }
+
+            // ── Known data ───────────────────────────────────────────────
+            if (problem.knownDataMarkdown.isNotEmpty()) {
+                HorizontalDivider(modifier = Modifier.padding(vertical = 6.dp))
+                Text(
+                    "已知条件",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = problem.knownDataMarkdown,
+                    fontSize = 13.sp,
+                    lineHeight = 20.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            // ── Merge button ─────────────────────────────────────────────
             if (showMergeButton) {
                 Spacer(Modifier.height(8.dp))
                 TextButton(
                     onClick = onMergeWithNext,
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.MergeType, null, modifier = Modifier.size(16.dp))
+                    Icon(
+                        Icons.AutoMirrored.Filled.MergeType, null,
+                        modifier = Modifier.size(16.dp)
+                    )
                     Spacer(Modifier.width(4.dp))
                     Text("与下一题合并", fontSize = 13.sp)
                 }
+            }
+        }
+    }
+}
+
+// ─── Collapsible block ─────────────────────────────────────────────────────
+
+@Composable
+private fun CollapsibleBlock(
+    label: String,
+    icon: @Composable () -> Unit,
+    content: @Composable () -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(6.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        // ── Tap header to expand / collapse ──────────────────────────────
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = !expanded }
+                .padding(horizontal = 10.dp, vertical = 7.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            icon()
+            Spacer(Modifier.width(6.dp))
+            Text(
+                text = label,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                contentDescription = if (expanded) "收起" else "展开",
+                modifier = Modifier.size(16.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        // ── Animated body ─────────────────────────────────────────────────
+        AnimatedVisibility(visible = expanded) {
+            Column {
+                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                content()
             }
         }
     }
