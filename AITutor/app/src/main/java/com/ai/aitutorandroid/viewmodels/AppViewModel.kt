@@ -274,9 +274,15 @@ class AppViewModel @Inject constructor(
     private val _testConnectionResult = MutableStateFlow<Boolean?>(null)
     val testConnectionResult: StateFlow<Boolean?> = _testConnectionResult.asStateFlow()
 
+    private val _isTestingConnection = MutableStateFlow(false)
+    val isTestingConnection: StateFlow<Boolean> = _isTestingConnection.asStateFlow()
+
     fun testConnection(config: APIConfig) {
         viewModelScope.launch {
+            _isTestingConnection.value = true
+            _testConnectionResult.value = null
             _testConnectionResult.value = zenmuxService.testConnection(config)
+            _isTestingConnection.value = false
         }
     }
     fun clearTestResult() { _testConnectionResult.value = null }
