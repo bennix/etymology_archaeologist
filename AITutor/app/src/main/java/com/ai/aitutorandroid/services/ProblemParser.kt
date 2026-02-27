@@ -18,7 +18,7 @@ object ProblemParser {
             .trim()
 
         return tryParseJsonArray(stripped)
-            ?: listOf(Problem(number = 1, fullLatexText = rawText.trim(), knownDataMarkdown = ""))
+            ?: listOf(Problem(number = 1, fullLatexText = stripped, knownDataMarkdown = ""))
     }
 
     private fun tryParseJsonArray(text: String): List<Problem>? {

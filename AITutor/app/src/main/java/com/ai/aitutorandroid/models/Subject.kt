@@ -37,7 +37,7 @@ enum class OutputLanguage(val rawValue: String, val systemPromptSuffix: String) 
 }
 
 enum class ZenmuxModel(val rawValue: String, val displayName: String) {
-    GEMINI31PRO("google/gemini-3-pro-preview", "Gemini 3.1 Pro"),
+    GEMINI31PRO("google/gemini-3-pro-preview", "Gemini 3 Pro"),
     CLAUDE_SONNET46("anthropic/claude-sonnet-4.6", "Claude Sonnet 4.6"),
     QWEN35PLUS("qwen/qwen3.5-plus", "Qwen 3.5 Plus");
     companion object {
