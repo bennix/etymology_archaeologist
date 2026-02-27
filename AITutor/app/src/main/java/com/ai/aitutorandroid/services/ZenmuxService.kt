@@ -5,6 +5,7 @@ import com.ai.aitutorandroid.models.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -133,8 +134,8 @@ class ZenmuxService @Inject constructor() {
         }
 
         if (hitTokenLimit) throw Exception("输出已达 token 上限，解答不完整")
-        if (!doneSeen) throw Exception("响应流意外中断")
-    }
+        // Note: some servers omit the [DONE] sentinel — treat as normal completion
+    }.flowOn(Dispatchers.IO)
 
     // ─── Streaming chat ───────────────────────────────────────────────────────
 
@@ -185,7 +186,7 @@ class ZenmuxService @Inject constructor() {
             } catch (e: Exception) { continue }
             chunk.choices.firstOrNull()?.delta?.content?.takeIf { it.isNotEmpty() }?.let { emit(it) }
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     // ─── Test connection ──────────────────────────────────────────────────────
 
