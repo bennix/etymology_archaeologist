@@ -18,15 +18,14 @@ fun ExtractionLoadingScreen(
 ) {
     val isExtracting by viewModel.isExtracting.collectAsState()
     val error by viewModel.extractionError.collectAsState()
-    val problems by viewModel.problems.collectAsState()
     val images by viewModel.capturedImages.collectAsState()
 
+    // Single navigation trigger: extractProblems calls onSuccess exactly once via
+    // its callback. The previous LaunchedEffect(problems) was a duplicate that issued
+    // a second navigate() racing with this one, sometimes popping the back stack
+    // unexpectedly and sending the user back to the extraction/input screen.
     LaunchedEffect(Unit) {
         viewModel.extractProblems(onSuccess = onSuccess)
-    }
-
-    LaunchedEffect(problems) {
-        if (problems.isNotEmpty()) onSuccess()
     }
 
     Scaffold { padding ->

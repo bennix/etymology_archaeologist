@@ -94,6 +94,7 @@ class AppViewModel @Inject constructor(
     fun extractProblems(onSuccess: () -> Unit) {
         val cfg = _settings.value.extractionConfig ?: return
         val images = _capturedImages.value
+        _problems.value = emptyList()   // clear stale results from any previous run
         _isExtracting.value = true
         _extractionError.value = null
         viewModelScope.launch {
