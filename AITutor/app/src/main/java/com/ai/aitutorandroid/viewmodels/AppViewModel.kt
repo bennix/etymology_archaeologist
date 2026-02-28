@@ -15,6 +15,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +27,87 @@ class AppViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val prefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+
+    // ─── Session persistence ──────────────────────────────────────────────────
+    // Survives process death (screen-off memory reclaim) by serialising
+    // problems + completed solutions to a JSON file in filesDir.
+    private val sessionFile = java.io.File(context.filesDir, "session.json")
+
+    init { restoreSession() }
+
+    private fun restoreSession() {
+        try {
+            if (!sessionFile.exists()) return
+            val root = JSONObject(sessionFile.readText())
+
+            val problemsArr = root.getJSONArray("problems")
+            val problems = (0 until problemsArr.length()).map { i ->
+                val p = problemsArr.getJSONObject(i)
+                Problem(
+                    id               = p.getString("id"),
+                    number           = p.getInt("number"),
+                    fullLatexText    = p.getString("fullLatexText"),
+                    knownDataMarkdown = p.getString("knownDataMarkdown"),
+                    isSelected       = p.getBoolean("isSelected")
+                )
+            }
+
+            val solutionsObj = root.getJSONObject("solutions")
+            val solutions = solutionsObj.keys().asSequence().associate { pid ->
+                val arr = solutionsObj.getJSONArray(pid)
+                pid to (0 until arr.length()).map { i ->
+                    val s = arr.getJSONObject(i)
+                    ExpertSolution(
+                        expert     = ExpertType.valueOf(s.getString("expert")),
+                        content    = s.getString("content"),
+                        isComplete = true
+                    )
+                }
+            }
+
+            _problems.value  = problems
+            _solutions.value = solutions
+        } catch (_: Exception) {
+            sessionFile.delete()
+        }
+    }
+
+    private fun persistSession() {
+        try {
+            val problemsArr = JSONArray().also { arr ->
+                _problems.value.forEach { p ->
+                    arr.put(JSONObject().apply {
+                        put("id",               p.id)
+                        put("number",           p.number)
+                        put("fullLatexText",    p.fullLatexText)
+                        put("knownDataMarkdown", p.knownDataMarkdown)
+                        put("isSelected",       p.isSelected)
+                    })
+                }
+            }
+
+            val solutionsObj = JSONObject().also { obj ->
+                _solutions.value.forEach { (pid, list) ->
+                    val completed = list.filter { it.isComplete }
+                    if (completed.isNotEmpty()) {
+                        obj.put(pid, JSONArray().also { arr ->
+                            completed.forEach { s ->
+                                arr.put(JSONObject().apply {
+                                    put("expert",  s.expert.name)
+                                    put("content", s.content)
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+
+            sessionFile.writeText(JSONObject().apply {
+                put("problems",  problemsArr)
+                put("solutions", solutionsObj)
+            }.toString())
+        } catch (_: Exception) { /* best-effort */ }
+    }
 
     // ─── Settings ─────────────────────────────────────────────────────────────
     private val _settings = MutableStateFlow(loadSettings())
@@ -101,6 +184,7 @@ class AppViewModel @Inject constructor(
             try {
                 val raw = zenmuxService.extractProblems(images, cfg, _settings.value.selectedSubject, _settings.value.outputLanguage)
                 _problems.value = ProblemParser.parse(raw)
+                persistSession()
                 onSuccess()
             } catch (e: Exception) {
                 _extractionError.value = e.message ?: "提取失败"
@@ -193,6 +277,7 @@ class AppViewModel @Inject constructor(
                 updateSolution(problem.id, expert) { it.copy(content = it.content + chunk) }
             }
             updateSolution(problem.id, expert) { it.copy(isStreaming = false, isComplete = true) }
+            persistSession()
         } catch (e: Exception) {
             updateSolution(problem.id, expert) { it.copy(isStreaming = false, errorMessage = e.message) }
         }
@@ -271,6 +356,7 @@ class AppViewModel @Inject constructor(
         _reportMessages.value = emptyList()
         _isExtracting.value = false
         _extractionError.value = null
+        sessionFile.delete()
     }
 
     // ─── API key test ─────────────────────────────────────────────────────────

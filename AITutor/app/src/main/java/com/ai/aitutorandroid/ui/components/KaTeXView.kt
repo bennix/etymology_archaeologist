@@ -15,17 +15,20 @@ fun KaTeXView(
     modifier: Modifier = Modifier,
     darkMode: Boolean = false
 ) {
-    var webViewRef by remember { mutableStateOf<WebView?>(null) }
-    var contentLoaded by remember { mutableStateOf(false) }
-    var pendingContent by remember { mutableStateOf(content) }
+    // Always holds the latest content regardless of composition timing.
+    // SideEffect runs after every successful recomposition, so this ref is
+    // never stale — even when onPageFinished fires after a WebView renderer
+    // restart (which happens after the screen turns off and the system reclaims
+    // the renderer process).
+    val latestContent = remember { mutableStateOf(content) }
+    SideEffect { latestContent.value = content }
 
-    // When content changes after load, inject via JS
-    LaunchedEffect(content, contentLoaded) {
-        if (contentLoaded) {
-            webViewRef?.injectContent(content)
-        } else {
-            pendingContent = content
-        }
+    var webViewRef by remember { mutableStateOf<WebView?>(null) }
+    var pageReady  by remember { mutableStateOf(false) }
+
+    // Re-inject whenever content changes and the page is already loaded
+    LaunchedEffect(content) {
+        if (pageReady) webViewRef?.injectContent(content)
     }
 
     AndroidView(
@@ -38,15 +41,16 @@ fun KaTeXView(
 
                 addJavascriptInterface(object {
                     @JavascriptInterface
-                    fun setHeight(height: Int) {
-                        // Height reporting available for future use
-                    }
+                    fun setHeight(height: Int) { }
                 }, "AndroidBridge")
 
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
-                        contentLoaded = true
-                        view?.injectContent(pendingContent)
+                        pageReady = true
+                        // Use latestContent.value (not a stale captured variable)
+                        // so content is correct even if the page reloaded after
+                        // the WebView renderer was killed during screen-off.
+                        view?.injectContent(latestContent.value)
                     }
                 }
 
@@ -54,7 +58,7 @@ fun KaTeXView(
                 webViewRef = this
             }
         },
-        update = { /* updates handled via LaunchedEffect */ },
+        update = { },
         modifier = modifier
     )
 }
