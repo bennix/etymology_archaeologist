@@ -242,10 +242,7 @@ fun ImageInputScreen(
         Spacer(Modifier.height(16.dp))
 
         Button(
-            onClick = {
-                viewModel.extractProblems(onSuccess = onAnalyze)
-                onAnalyze()
-            },
+            onClick = { onAnalyze() },
             enabled = images.isNotEmpty(),
             modifier = Modifier
                 .fillMaxWidth()
