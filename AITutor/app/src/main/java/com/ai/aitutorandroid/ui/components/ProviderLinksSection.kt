@@ -2,7 +2,7 @@ package com.ai.aitutorandroid.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Launch
+import androidx.compose.material.icons.automirrored.filled.Launch
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +43,7 @@ fun ProviderLinksSection(modifier: Modifier = Modifier) {
                     Text("注册获取 Key", fontSize = 12.sp)
                     Spacer(Modifier.width(2.dp))
                     Icon(
-                        Icons.Filled.Launch, null,
+                        Icons.AutoMirrored.Filled.Launch, null,
                         modifier = Modifier.size(13.dp)
                     )
                 }

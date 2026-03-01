@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val zenmuxService: ZenmuxService,
     private val keystoreService: KeystoreService
 ) : ViewModel() {

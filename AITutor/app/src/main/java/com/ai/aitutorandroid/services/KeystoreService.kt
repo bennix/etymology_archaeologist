@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class KeystoreService @Inject constructor(
-    @ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context
 ) {
     private val prefs by lazy {
         val masterKey = MasterKey.Builder(context)
