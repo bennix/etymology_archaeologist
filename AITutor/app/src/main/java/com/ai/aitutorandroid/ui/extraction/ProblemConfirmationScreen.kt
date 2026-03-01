@@ -25,7 +25,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.graphicsLayer
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
@@ -33,8 +34,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.math.roundToInt
 import com.ai.aitutorandroid.models.Problem
 import com.ai.aitutorandroid.viewmodels.AppViewModel
 
@@ -409,20 +412,22 @@ private fun ImageViewerPanel(
                 offsetMap[page] = if (newScale > 1f) prevOffset + panChange else Offset.Zero
             }
 
-            Image(
-                bitmap = images[page].asImageBitmap(),
-                contentDescription = "原图 ${page + 1}",
-                contentScale = ContentScale.Fit,
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .graphicsLayer {
-                        scaleX = scale
-                        scaleY = scale
-                        translationX = offset.x
-                        translationY = offset.y
-                    }
-                    .transformable(state = transformState)
-            )
+                    .clipToBounds()
+            ) {
+                Image(
+                    bitmap = images[page].asImageBitmap(),
+                    contentDescription = "原图 ${page + 1}",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .scale(scale)
+                        .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                        .transformable(state = transformState)
+                )
+            }
         }
 
         // ── Zoom controls (top-right) ────────────────────────────────────
