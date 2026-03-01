@@ -1,28 +1,35 @@
 package com.ai.aitutorandroid.ui.extraction
 
+import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.MergeType
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Code
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material.icons.filled.Image
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -83,6 +90,7 @@ fun ProblemConfirmationScreen(
     onBack: () -> Unit
 ) {
     val problems by viewModel.problems.collectAsState()
+    val images   by viewModel.capturedImages.collectAsState()
     val selectedCount = problems.count { it.isSelected }
 
     Scaffold(
@@ -111,21 +119,39 @@ fun ProblemConfirmationScreen(
             }
         }
     ) { padding ->
-        LazyColumn(
-            contentPadding = PaddingValues(
-                start = 16.dp, end = 16.dp,
-                top = padding.calculateTopPadding() + 8.dp,
-                bottom = padding.calculateBottomPadding()
-            ),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding())
         ) {
-            itemsIndexed(problems) { index, problem ->
-                ProblemCard(
-                    problem = problem,
-                    showMergeButton = index < problems.size - 1,
-                    onToggleSelect = { viewModel.toggleProblemSelection(problem.id) },
-                    onMergeWithNext = { viewModel.mergeProblems(index, index + 1) },
-                    onSaveEdit = { newText -> viewModel.updateProblemText(problem.id, newText) }
+            // ── Top viewport: extracted / edit content ───────────────────
+            LazyColumn(
+                contentPadding = PaddingValues(
+                    start = 16.dp, end = 16.dp,
+                    top = 8.dp, bottom = 8.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.weight(1f)
+            ) {
+                itemsIndexed(problems) { index, problem ->
+                    ProblemCard(
+                        problem = problem,
+                        showMergeButton = index < problems.size - 1,
+                        onToggleSelect = { viewModel.toggleProblemSelection(problem.id) },
+                        onMergeWithNext = { viewModel.mergeProblems(index, index + 1) },
+                        onSaveEdit = { newText -> viewModel.updateProblemText(problem.id, newText) }
+                    )
+                }
+            }
+
+            // ── Bottom viewport: original images ─────────────────────────
+            if (images.isNotEmpty()) {
+                HorizontalDivider()
+                ImageViewerPanel(
+                    images = images,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(240.dp)
                 )
             }
         }
@@ -344,5 +370,135 @@ private fun CollapsibleBlock(
                 content()
             }
         }
+    }
+}
+
+// ─── Image viewer panel ────────────────────────────────────────────────────
+
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
+@Composable
+private fun ImageViewerPanel(
+    images: List<Bitmap>,
+    modifier: Modifier = Modifier
+) {
+    // Per-page transform state — keyed by page index
+    val scaleMap  = remember { mutableStateMapOf<Int, Float>() }
+    val offsetMap = remember { mutableStateMapOf<Int, Offset>() }
+
+    val pagerState   = rememberPagerState(pageCount = { images.size })
+    val currentPage  = pagerState.currentPage
+    val currentScale = scaleMap[currentPage] ?: 1f
+
+    Box(modifier = modifier.background(Color(0xFF111111))) {
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize(),
+            // Disable horizontal swipe while zoomed in so pan gesture wins
+            userScrollEnabled = currentScale <= 1.05f
+        ) { page ->
+            val scale  = scaleMap[page]  ?: 1f
+            val offset = offsetMap[page] ?: Offset.Zero
+
+            val transformState = rememberTransformableState { zoomChange, panChange, _ ->
+                val prevScale  = scaleMap[page]  ?: 1f
+                val prevOffset = offsetMap[page] ?: Offset.Zero
+                val newScale   = (prevScale * zoomChange).coerceIn(1f, 5f)
+                scaleMap[page]  = newScale
+                offsetMap[page] = if (newScale > 1f) prevOffset + panChange else Offset.Zero
+            }
+
+            Image(
+                bitmap = images[page].asImageBitmap(),
+                contentDescription = "原图 ${page + 1}",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer(
+                        scaleX = scale,
+                        scaleY = scale,
+                        translationX = offset.x,
+                        translationY = offset.y
+                    )
+                    .transformable(state = transformState)
+            )
+        }
+
+        // ── Zoom controls (top-right) ────────────────────────────────────
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(6.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            ZoomIconButton(Icons.Filled.ZoomIn) {
+                val pg = pagerState.currentPage
+                scaleMap[pg] = ((scaleMap[pg] ?: 1f) * 1.5f).coerceAtMost(5f)
+            }
+            ZoomIconButton(Icons.Filled.ZoomOut) {
+                val pg = pagerState.currentPage
+                val ns = ((scaleMap[pg] ?: 1f) / 1.5f).coerceAtLeast(1f)
+                scaleMap[pg]  = ns
+                if (ns <= 1f) offsetMap[pg] = Offset.Zero
+            }
+            ZoomIconButton(Icons.Filled.ZoomOutMap) {
+                val pg = pagerState.currentPage
+                scaleMap[pg]  = 1f
+                offsetMap[pg] = Offset.Zero
+            }
+        }
+
+        // ── Page counter badge (top-left, only when multiple images) ──────
+        if (images.size > 1) {
+            Text(
+                text = "${currentPage + 1} / ${images.size}",
+                color = Color.White,
+                fontSize = 11.sp,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(6.dp)
+                    .background(Color.Black.copy(alpha = 0.55f), RoundedCornerShape(4.dp))
+                    .padding(horizontal = 6.dp, vertical = 2.dp)
+            )
+
+            // ── Page dots (bottom-center) ─────────────────────────────────
+            Row(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                images.indices.forEach { i ->
+                    val active = pagerState.currentPage == i
+                    Box(
+                        modifier = Modifier
+                            .size(if (active) 8.dp else 5.dp)
+                            .background(
+                                if (active) Color.White else Color.White.copy(alpha = 0.4f),
+                                CircleShape
+                            )
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ZoomIconButton(icon: ImageVector, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .size(32.dp)
+            .background(Color.Black.copy(alpha = 0.55f), CircleShape)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(18.dp)
+        )
     }
 }
