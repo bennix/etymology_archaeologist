@@ -12,7 +12,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.MergeType
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Image
@@ -122,7 +124,8 @@ fun ProblemConfirmationScreen(
                     problem = problem,
                     showMergeButton = index < problems.size - 1,
                     onToggleSelect = { viewModel.toggleProblemSelection(problem.id) },
-                    onMergeWithNext = { viewModel.mergeProblems(index, index + 1) }
+                    onMergeWithNext = { viewModel.mergeProblems(index, index + 1) },
+                    onSaveEdit = { newText -> viewModel.updateProblemText(problem.id, newText) }
                 )
             }
         }
@@ -136,9 +139,12 @@ private fun ProblemCard(
     problem: Problem,
     showMergeButton: Boolean,
     onToggleSelect: () -> Unit,
-    onMergeWithNext: () -> Unit
+    onMergeWithNext: () -> Unit,
+    onSaveEdit: (String) -> Unit
 ) {
-    val segments = remember(problem.id) { parseSegments(problem.fullLatexText) }
+    var isEditing by remember { mutableStateOf(false) }
+    var editText by remember(problem.id) { mutableStateOf(problem.fullLatexText) }
+    val segments = remember(problem.id, problem.fullLatexText) { parseSegments(problem.fullLatexText) }
 
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -153,11 +159,47 @@ private fun ProblemCard(
                 Text(
                     "题目 ${problem.number}",
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    modifier = Modifier.weight(1f)
                 )
+                IconButton(onClick = {
+                    if (isEditing) {
+                        onSaveEdit(editText)
+                        isEditing = false
+                    } else {
+                        editText = problem.fullLatexText
+                        isEditing = true
+                    }
+                }) {
+                    Icon(
+                        imageVector = if (isEditing) Icons.Filled.Check else Icons.Filled.Edit,
+                        contentDescription = if (isEditing) "保存" else "编辑",
+                        tint = if (isEditing) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
 
             Spacer(Modifier.height(8.dp))
+
+            // ── Inline LaTeX editor ──────────────────────────────────────
+            if (isEditing) {
+                OutlinedTextField(
+                    value = editText,
+                    onValueChange = { editText = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 140.dp),
+                    label = { Text("LaTeX / Markdown 原文", fontSize = 12.sp) },
+                    textStyle = LocalTextStyle.current.copy(
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 13.sp,
+                        lineHeight = 20.sp
+                    ),
+                    minLines = 6
+                )
+                Spacer(Modifier.height(8.dp))
+            }
 
             // ── Segments ────────────────────────────────────────────────
             segments.forEach { seg ->

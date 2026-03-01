@@ -216,6 +216,13 @@ class AppViewModel @Inject constructor(
         }
     }
 
+    fun updateProblemText(problemId: String, newText: String) {
+        _problems.update { list ->
+            list.map { if (it.id == problemId) it.copy(fullLatexText = newText) else it }
+        }
+        persistSession()
+    }
+
     // ─── Solution state ───────────────────────────────────────────────────────
     private val _solutions = MutableStateFlow<Map<String, List<ExpertSolution>>>(emptyMap())
     val solutions: StateFlow<Map<String, List<ExpertSolution>>> = _solutions.asStateFlow()
@@ -270,13 +277,22 @@ class AppViewModel @Inject constructor(
         }
         updateSolution(problem.id, expert) { it.copy(isStreaming = true) }
         try {
+            val buffer = StringBuilder()
+            var lastEmitMs = 0L
             zenmuxService.streamSolution(problem, expert, modelId, config,
                 _settings.value.selectedSubject, _settings.value.outputLanguage,
                 solutionA, solutionB
             ).collect { chunk ->
-                updateSolution(problem.id, expert) { it.copy(content = it.content + chunk) }
+                buffer.append(chunk)
+                val now = System.currentTimeMillis()
+                if (now - lastEmitMs >= 80L) {
+                    val snapshot = buffer.toString()
+                    updateSolution(problem.id, expert) { it.copy(content = snapshot) }
+                    lastEmitMs = now
+                }
             }
-            updateSolution(problem.id, expert) { it.copy(isStreaming = false, isComplete = true) }
+            val finalContent = buffer.toString()
+            updateSolution(problem.id, expert) { it.copy(content = finalContent, isStreaming = false, isComplete = true) }
             persistSession()
         } catch (e: Exception) {
             updateSolution(problem.id, expert) { it.copy(isStreaming = false, errorMessage = e.message) }
