@@ -51,7 +51,7 @@ struct APIKeySetupView: View {
                                         Image(systemName: "arrow.up.right.square").font(.caption).foregroundStyle(.blue)
                                     }
                                 }
-                                .padding(.horizontal, 16).padding(.vertical, 10)
+                                .padding(.horizontal, 16).padding(.vertical, 12)
                             }
                             Divider().padding(.leading, 16)
                             Link(destination: URL(string: "https://zenmux.ai/invite/GBQMC5")!) {
@@ -66,7 +66,7 @@ struct APIKeySetupView: View {
                                         Image(systemName: "arrow.up.right.square").font(.caption).foregroundStyle(.blue)
                                     }
                                 }
-                                .padding(.horizontal, 16).padding(.vertical, 10)
+                                .padding(.horizontal, 16).padding(.vertical, 12)
                             }
                         }
                         .background(Color(UIColor.secondarySystemBackground))
