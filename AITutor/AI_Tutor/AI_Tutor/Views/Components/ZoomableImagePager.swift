@@ -1,6 +1,5 @@
 // AI_Tutor/Views/Components/ZoomableImagePager.swift
 import SwiftUI
-import UIKit
 
 /// A horizontally-pageable image viewer with pinch-to-zoom and pan support.
 /// Mirrors the ImageViewerPanel from Android's ProblemConfirmationScreen.
