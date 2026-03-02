@@ -17,6 +17,15 @@ struct ZoomableImagePager: View {
     }
 
     var body: some View {
+        if images.isEmpty {
+            EmptyView()
+        } else {
+            imageContent
+        }
+    }
+
+    @ViewBuilder
+    private var imageContent: some View {
         ZStack {
             Color.black.ignoresSafeArea()
 
@@ -31,7 +40,7 @@ struct ZoomableImagePager: View {
                     .tag(i)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: images.count > 1 ? .always : .never))
+            .tabViewStyle(.page(indexDisplayMode: .never))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
 
             // Page counter badge (top-left)
@@ -57,16 +66,22 @@ struct ZoomableImagePager: View {
                     Spacer()
                     VStack(spacing: 4) {
                         ZoomButton(icon: "plus.magnifyingglass") {
-                            scales[currentPage] = min(5.0, scales[currentPage] * 1.5)
+                            withAnimation(.spring()) {
+                                scales[currentPage] = min(5.0, scales[currentPage] * 1.5)
+                            }
                         }
                         ZoomButton(icon: "minus.magnifyingglass") {
-                            let ns = max(1.0, scales[currentPage] / 1.5)
-                            scales[currentPage]  = ns
-                            if ns <= 1.0 { offsets[currentPage] = .zero }
+                            withAnimation(.spring()) {
+                                let ns = max(1.0, scales[currentPage] / 1.5)
+                                scales[currentPage]  = ns
+                                if ns <= 1.0 { offsets[currentPage] = .zero }
+                            }
                         }
-                        ZoomButton(icon: "arrow.up.left.and.down.right.magnifyingglass") {
-                            scales[currentPage]  = 1.0
-                            offsets[currentPage] = .zero
+                        ZoomButton(icon: "arrow.up.left.and.arrow.down.right") {
+                            withAnimation(.spring()) {
+                                scales[currentPage]  = 1.0
+                                offsets[currentPage] = .zero
+                            }
                         }
                     }
                     .padding(6)
