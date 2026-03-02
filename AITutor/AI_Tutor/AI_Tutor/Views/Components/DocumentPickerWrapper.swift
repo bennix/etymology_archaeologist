@@ -1,5 +1,6 @@
 // AI_Tutor/Views/Components/DocumentPickerWrapper.swift
 import SwiftUI
+import UIKit
 import UniformTypeIdentifiers
 
 struct DocumentPickerWrapper: UIViewControllerRepresentable {

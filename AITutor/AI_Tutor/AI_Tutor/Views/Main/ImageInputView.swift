@@ -105,6 +105,30 @@ struct ImageInputView: View {
 
     private var atMax: Bool { appState.capturedImages.count >= maxImages }
 
+    @ViewBuilder
+    private var filePickerButton: some View {
+        Button {
+            showFilePicker = true
+        } label: {
+            Label("文件", systemImage: "folder")
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(atMax ? Color.gray.opacity(0.1) : Color.blue.opacity(0.08))
+                .foregroundStyle(atMax ? AnyShapeStyle(.secondary) : AnyShapeStyle(Color.blue))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+        .disabled(atMax)
+        .sheet(isPresented: $showFilePicker) {
+            DocumentPickerWrapper(
+                images: Binding<[UIImage]>(
+                    get: { appState.capturedImages },
+                    set: { appState.capturedImages = $0 }
+                )
+            )
+        }
+    }
+
     private var buttonRow: some View {
         VStack(spacing: 8) {
             HStack(spacing: 12) {
@@ -134,26 +158,7 @@ struct ImageInputView: View {
                 }
                 .disabled(atMax)
 
-                Button {
-                    showFilePicker = true
-                } label: {
-                    Label("文件", systemImage: "folder")
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(atMax ? Color.gray.opacity(0.1) : Color.blue.opacity(0.08))
-                        .foregroundStyle(atMax ? AnyShapeStyle(.secondary) : AnyShapeStyle(Color.blue))
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
-                }
-                .disabled(atMax)
-                .sheet(isPresented: $showFilePicker) {
-                    DocumentPickerWrapper(
-                        images: Binding(
-                            get: { appState.capturedImages },
-                            set: { appState.capturedImages = $0 }
-                        )
-                    )
-                }
+                filePickerButton
             }
 
             if !appState.capturedImages.isEmpty {
