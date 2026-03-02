@@ -63,6 +63,20 @@ struct ImageInputView: View {
         .onChange(of: appState.navigationResetTrigger) { _, _ in
             navigateToExtraction = false
         }
+        .fileImporter(
+            isPresented: $showFilePicker,
+            allowedContentTypes: [.image],
+            allowsMultipleSelection: true
+        ) { result in
+            guard case .success(let urls) = result else { return }
+            let loaded = urls.compactMap { url -> UIImage? in
+                guard url.startAccessingSecurityScopedResource() else { return nil }
+                defer { url.stopAccessingSecurityScopedResource() }
+                guard let data = try? Data(contentsOf: url) else { return nil }
+                return UIImage(data: data)
+            }
+            appState.capturedImages.append(contentsOf: loaded)
+        }
     }
 
     // MARK: - Subject picker
@@ -119,14 +133,6 @@ struct ImageInputView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .disabled(atMax)
-        .sheet(isPresented: $showFilePicker) {
-            DocumentPickerWrapper(
-                images: Binding<[UIImage]>(
-                    get: { appState.capturedImages },
-                    set: { appState.capturedImages = $0 }
-                )
-            )
-        }
     }
 
     private var buttonRow: some View {
