@@ -36,7 +36,7 @@ struct CollapsibleBlock<Label: View, Content: View>: View {
                 content()
             }
         }
-        .background(Color(.secondarySystemBackground))
+        .background(Color(UIColor.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 6))
     }
 }
