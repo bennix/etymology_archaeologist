@@ -168,7 +168,7 @@ private struct ProblemCard: View {
                         .font(.system(.body, design: .monospaced))
                         .frame(minHeight: 140)
                         .padding(8)
-                        .background(Color(UIColor.secondarySystemBackground))
+                        .background(Color(uiColor: .secondarySystemBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .padding(.horizontal, 10)
                         .padding(.vertical, 8)
@@ -198,7 +198,7 @@ private struct ProblemCard: View {
                 }
             }
         }
-        .background(Color(.systemBackground))
+        .background(Color(uiColor: .systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 14))
         .overlay(
             RoundedRectangle(cornerRadius: 14)
