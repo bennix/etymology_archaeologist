@@ -172,8 +172,8 @@ private struct ProblemCard: View {
                 } else {
                     // ── Segment-based rendering ──────────────────────────
                     VStack(alignment: .leading, spacing: 8) {
-                        ForEach(Array(cachedSegments.enumerated()), id: \.offset) { _, seg in
-                            segmentView(for: seg)
+                        ForEach(cachedSegments.indices, id: \.self) { i in
+                            segmentView(for: cachedSegments[i])
                         }
                     }
                     .padding(.horizontal, 8)
