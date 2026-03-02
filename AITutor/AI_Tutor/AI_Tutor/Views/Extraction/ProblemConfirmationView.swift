@@ -4,6 +4,7 @@ import SwiftUI
 struct ProblemConfirmationView: View {
     @Environment(AppState.self) private var appState
     @State private var navigateToSolving = false
+    @State private var isKeyboardVisible = false
 
     var selectedCount: Int { appState.problems.filter(\.isSelected).count }
 
@@ -58,7 +59,8 @@ struct ProblemConfirmationView: View {
             // ── Bottom: original image panel ─────────────────────────────
             if !appState.capturedImages.isEmpty {
                 ZoomableImagePager(images: appState.capturedImages)
-                    .frame(height: 240)
+                    .frame(height: isKeyboardVisible ? 120 : 240)
+                    .animation(.easeInOut(duration: 0.25), value: isKeyboardVisible)
             }
 
             // ── Sticky CTA ───────────────────────────────────────────────
@@ -86,6 +88,12 @@ struct ProblemConfirmationView: View {
         }
         .navigationTitle("确认题目")
         .navigationBarTitleDisplayMode(.inline)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            isKeyboardVisible = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            isKeyboardVisible = false
+        }
         .navigationDestination(isPresented: $navigateToSolving) {
             SolvingContainerView()
         }
