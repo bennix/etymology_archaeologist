@@ -57,7 +57,6 @@ struct ProblemConfirmationView: View {
 
             // ── Bottom: original image panel ─────────────────────────────
             if !appState.capturedImages.isEmpty {
-                Divider()
                 ZoomableImagePager(images: appState.capturedImages)
                     .frame(height: 240)
             }
@@ -114,7 +113,7 @@ private struct ProblemCard: View {
     @State private var editText   = ""
     @State private var isExpanded = true
 
-    var segments: [ProblemSegment] { ProblemSegment.parse(problem.fullLatexText) }
+    @State private var cachedSegments: [ProblemSegment] = []
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -156,8 +155,6 @@ private struct ProblemCard: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 12)
-            .contentShape(Rectangle())
-            .onTapGesture { problem.isSelected.toggle() }
 
             if isExpanded {
                 Divider().padding(.horizontal)
@@ -175,7 +172,7 @@ private struct ProblemCard: View {
                 } else {
                     // ── Segment-based rendering ──────────────────────────
                     VStack(alignment: .leading, spacing: 8) {
-                        ForEach(Array(segments.enumerated()), id: \.offset) { _, seg in
+                        ForEach(Array(cachedSegments.enumerated()), id: \.offset) { _, seg in
                             segmentView(for: seg)
                         }
                     }
@@ -209,6 +206,10 @@ private struct ProblemCard: View {
         )
         .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
         .animation(.easeInOut(duration: 0.15), value: problem.isSelected)
+        .onAppear { cachedSegments = ProblemSegment.parse(problem.fullLatexText) }
+        .onChange(of: problem.fullLatexText) { _, newText in
+            cachedSegments = ProblemSegment.parse(newText)
+        }
     }
 
     @ViewBuilder
