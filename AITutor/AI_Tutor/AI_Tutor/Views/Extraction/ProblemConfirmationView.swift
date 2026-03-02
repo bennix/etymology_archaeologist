@@ -203,7 +203,7 @@ private struct ProblemCard: View {
         .overlay(
             RoundedRectangle(cornerRadius: 14)
                 .stroke(
-                    problem.isSelected ? Color.blue.opacity(0.5) : Color(.systemGray4),
+                    problem.isSelected ? Color.blue.opacity(0.5) : Color(uiColor: .systemGray4),
                     lineWidth: 1.5
                 )
         )
