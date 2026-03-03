@@ -93,7 +93,10 @@ struct APIConfig {
         APIConfig(
             baseURL: "https://zenmux.ai/api/v1/chat/completions",
             apiKey: apiKey,
-            extractionModel: "google/gemini-3-pro-preview",
+            // GPT-4o for extraction: Zenmux's Gemini proxy converts base64 to a temp
+            // file path which Vertex AI rejects (requires gs:// or HTTPS URI).
+            // GPT-4o accepts base64 inline images directly.
+            extractionModel: "openai/gpt-4o",
             defaultModel: "anthropic/claude-sonnet-4.6",
             providerName: "Zenmux"
         )
@@ -275,9 +278,10 @@ class AppSettings {
         return nil
     }
 
-    /// Config for image extraction — always prefers Zenmux (Gemini 3 Pro).
-    /// Falls back to Tu-zi (Gemini 3 Pro Thinking) when Zenmux is unconfigured; both providers
-    /// support Gemini vision with base64 inline images.
+    /// Config for image extraction — prefers Zenmux (GPT-4o, base64 works).
+    /// Falls back to Tu-zi (Gemini 3 Pro Thinking) when Zenmux is unconfigured.
+    /// Note: Zenmux's Gemini proxy cannot handle base64 images (Vertex AI rejects temp file URIs),
+    /// so extraction on Zenmux stays on GPT-4o; Tu-zi uses Gemini.
     var extractionConfig: APIConfig? {
         let z = zenmuxApiKey.trimmingCharacters(in: .whitespaces)
         let t = tuziApiKey.trimmingCharacters(in: .whitespaces)
