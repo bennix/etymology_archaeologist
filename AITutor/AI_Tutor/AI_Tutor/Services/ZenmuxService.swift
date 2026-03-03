@@ -15,25 +15,13 @@ struct ZenmuxService {
         var parts: [ExtractionContentPart] = [.text(extractionPrompt)]
 
         for image in images {
-            // Resize to max 1536px — keeps text legible while staying within API payload limits
-            let maxPx: CGFloat = 1536
-            let longest = max(image.size.width, image.size.height)
-            let scale: CGFloat = longest > maxPx ? maxPx / longest : 1.0
-            let targetSize = CGSize(width: floor(image.size.width * scale),
-                                    height: floor(image.size.height * scale))
-            let resized: UIImage
-            if scale < 1.0 {
-                let renderer = UIGraphicsImageRenderer(size: targetSize)
-                resized = renderer.image { _ in image.draw(in: CGRect(origin: .zero, size: targetSize)) }
-            } else {
-                resized = image
+            if let b64 = encodeImage(image) {
+                parts.append(.image(url: "data:image/jpeg;base64,\(b64)"))
             }
-            guard let jpeg = resized.jpegData(compressionQuality: 0.75), !jpeg.isEmpty else { continue }
-            parts.append(.image(url: "data:image/jpeg;base64,\(jpeg.base64EncodedString())"))
         }
 
         let body = ExtractionBody(
-            model: config.gptModel,
+            model: config.extractionModel,
             messages: [.init(role: "user", content: parts)]
         )
         let request = try buildRequest(config: config, bodyData: try JSONEncoder().encode(body))
@@ -60,15 +48,31 @@ struct ZenmuxService {
         language: OutputLanguage,
         solutionA: String = "",
         solutionB: String = "",
+        images: [UIImage] = [],
         onChunk: (String) -> Void
     ) async throws {
         let systemPrompt = buildExpertSystemPrompt(expert: expert, subject: subject, language: language)
         let userPrompt = buildExpertUserPrompt(problem: problem, subject: subject, solutionA: solutionA, solutionB: solutionB)
+
+        // Expert C reviews A/B solutions — images not needed; A/B get original problem images
+        let userContent: Any
+        if !images.isEmpty && expert != .c {
+            var parts: [[String: Any]] = [["type": "text", "text": userPrompt]]
+            for image in images {
+                if let b64 = encodeImage(image) {
+                    parts.append(["type": "image_url", "image_url": "data:image/jpeg;base64,\(b64)"])
+                }
+            }
+            userContent = parts
+        } else {
+            userContent = userPrompt
+        }
+
         let body: [String: Any] = [
             "model": modelId,
             "messages": [
                 ["role": "system", "content": systemPrompt],
-                ["role": "user",   "content": userPrompt]
+                ["role": "user",   "content": userContent]
             ],
             "max_tokens": 65000,
             "stream": true
@@ -201,6 +205,26 @@ struct ZenmuxService {
         request.setValue("Bearer \(config.apiKey)", forHTTPHeaderField: "Authorization")
         request.httpBody = bodyData
         return request
+    }
+
+    // MARK: - Image encoding helper
+
+    /// Resize and JPEG-encode a UIImage for multimodal API requests.
+    /// Returns base64 string, or nil if encoding fails.
+    private static func encodeImage(_ image: UIImage, maxPx: CGFloat = 1536) -> String? {
+        let longest = max(image.size.width, image.size.height)
+        let scale: CGFloat = longest > maxPx ? maxPx / longest : 1.0
+        let resized: UIImage
+        if scale < 1.0 {
+            let targetSize = CGSize(width: floor(image.size.width * scale),
+                                    height: floor(image.size.height * scale))
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            resized = renderer.image { _ in image.draw(in: CGRect(origin: .zero, size: targetSize)) }
+        } else {
+            resized = image
+        }
+        guard let jpeg = resized.jpegData(compressionQuality: 0.75), !jpeg.isEmpty else { return nil }
+        return jpeg.base64EncodedString()
     }
 
     // MARK: - Prompt builders

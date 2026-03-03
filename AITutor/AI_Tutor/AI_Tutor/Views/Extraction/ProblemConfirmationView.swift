@@ -1,5 +1,6 @@
 // AI_Tutor/Views/Extraction/ProblemConfirmationView.swift
 import SwiftUI
+import UIKit
 
 struct ProblemConfirmationView: View {
     @Environment(AppState.self) private var appState
@@ -60,7 +61,7 @@ struct ProblemConfirmationView: View {
             if !appState.capturedImages.isEmpty {
                 ZoomableImagePager(images: appState.capturedImages)
                     .frame(height: isKeyboardVisible ? 120 : 240)
-                    .animation(.easeInOut(duration: 0.25), value: isKeyboardVisible)
+                    .clipped()
             }
 
             // ── Sticky CTA ───────────────────────────────────────────────
@@ -120,6 +121,7 @@ private struct ProblemCard: View {
     @State private var isEditing  = false
     @State private var editText   = ""
     @State private var isExpanded = true
+    @State private var cursorOffset = 0  // persists insertion point across edit sessions
 
     @State private var cachedSegments: [ProblemSegment] = []
 
@@ -169,12 +171,8 @@ private struct ProblemCard: View {
 
                 if isEditing {
                     // ── Inline LaTeX / Markdown editor ──────────────────
-                    TextEditor(text: $editText)
-                        .font(.system(.body, design: .monospaced))
+                    PersistentCursorTextEditor(text: $editText, cursorOffset: $cursorOffset)
                         .frame(minHeight: 140)
-                        .padding(8)
-                        .background(Color(uiColor: .secondarySystemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
                         .padding(.horizontal, 10)
                         .padding(.vertical, 8)
                 } else {
@@ -256,6 +254,52 @@ private struct ProblemCard: View {
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 12).padding(.vertical, 8)
             }
+        }
+    }
+}
+
+// MARK: - Cursor-preserving text editor
+/// UITextView wrapper that persists the insertion-point position across editing sessions.
+/// When `isEditing` toggles back to true the cursor returns to where the user left off,
+/// instead of jumping to the beginning as SwiftUI's TextEditor would.
+private struct PersistentCursorTextEditor: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var cursorOffset: Int
+
+    func makeUIView(context: Context) -> UITextView {
+        let tv = UITextView()
+        tv.delegate = context.coordinator
+        tv.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
+        tv.backgroundColor = UIColor.secondarySystemBackground
+        tv.layer.cornerRadius = 8
+        tv.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
+        return tv
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        // Guard prevents overwriting cursor mid-typing: textViewDidChange keeps
+        // uiView.text == text, so this branch only runs when entering edit mode.
+        guard uiView.text != text else { return }
+        uiView.text = text
+        let offset = min(cursorOffset, text.utf16.count)
+        if let pos = uiView.position(from: uiView.beginningOfDocument, offset: offset) {
+            uiView.selectedTextRange = uiView.textRange(from: pos, to: pos)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+
+    final class Coordinator: NSObject, UITextViewDelegate {
+        var parent: PersistentCursorTextEditor
+        init(_ parent: PersistentCursorTextEditor) { self.parent = parent }
+
+        func textViewDidChange(_ textView: UITextView) {
+            parent.text = textView.text
+        }
+
+        func textViewDidChangeSelection(_ textView: UITextView) {
+            guard let range = textView.selectedTextRange else { return }
+            parent.cursorOffset = textView.offset(from: textView.beginningOfDocument, to: range.start)
         }
     }
 }

@@ -1,19 +1,28 @@
 // AI_Tutor/Views/Components/ZoomableImagePager.swift
 import SwiftUI
 
+// MARK: - Zoom state (reference type — survives all parent re-renders)
+@Observable
+private final class ZoomState {
+    var scales:      [CGFloat]
+    var offsets:     [CGSize]
+    var currentPage: Int = 0
+
+    init(count: Int) {
+        scales  = Array(repeating: 1.0,  count: count)
+        offsets = Array(repeating: .zero, count: count)
+    }
+}
+
 /// A horizontally-pageable image viewer with pinch-to-zoom and pan support.
 /// Mirrors the ImageViewerPanel from Android's ProblemConfirmationScreen.
 struct ZoomableImagePager: View {
     let images: [UIImage]
-
-    @State private var currentPage = 0
-    @State private var scales:  [CGFloat]
-    @State private var offsets: [CGSize]
+    @State private var zoom: ZoomState
 
     init(images: [UIImage]) {
-        self.images  = images
-        _scales  = State(initialValue: Array(repeating: 1.0, count: images.count))
-        _offsets = State(initialValue: Array(repeating: .zero, count: images.count))
+        self.images = images
+        _zoom = State(initialValue: ZoomState(count: images.count))
     }
 
     var body: some View {
@@ -26,28 +35,31 @@ struct ZoomableImagePager: View {
 
     @ViewBuilder
     private var imageContent: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
+        // @Bindable registers zoom property accesses with @Observable tracking,
+        // so mutations in button actions correctly trigger re-renders.
+        @Bindable var z = zoom
 
-            // Horizontal pager (TabView .page style)
-            TabView(selection: $currentPage) {
+        ZStack {
+            Color.black
+
+            TabView(selection: $z.currentPage) {
                 ForEach(images.indices, id: \.self) { i in
                     ZoomableImageCell(
                         image:  images[i],
-                        scale:  $scales[i],
-                        offset: $offsets[i]
+                        scale:  $z.scales[i],
+                        offset: $z.offsets[i]
                     )
                     .tag(i)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .clipped()
 
             // Page counter badge (top-left)
             if images.count > 1 {
                 VStack {
                     HStack {
-                        Text("\(currentPage + 1) / \(images.count)")
+                        Text("\(z.currentPage + 1) / \(images.count)")
                             .font(.caption2)
                             .foregroundStyle(.white)
                             .padding(.horizontal, 6).padding(.vertical, 2)
@@ -67,20 +79,20 @@ struct ZoomableImagePager: View {
                     VStack(spacing: 4) {
                         ZoomButton(icon: "plus.magnifyingglass") {
                             withAnimation(.spring()) {
-                                scales[currentPage] = min(5.0, scales[currentPage] * 1.5)
+                                z.scales[z.currentPage] = min(5.0, z.scales[z.currentPage] * 1.5)
                             }
                         }
                         ZoomButton(icon: "minus.magnifyingglass") {
                             withAnimation(.spring()) {
-                                let ns = max(1.0, scales[currentPage] / 1.5)
-                                scales[currentPage]  = ns
-                                if ns <= 1.0 { offsets[currentPage] = .zero }
+                                let ns = max(1.0, z.scales[z.currentPage] / 1.5)
+                                z.scales[z.currentPage]  = ns
+                                if ns <= 1.0 { z.offsets[z.currentPage] = .zero }
                             }
                         }
                         ZoomButton(icon: "arrow.up.left.and.arrow.down.right") {
                             withAnimation(.spring()) {
-                                scales[currentPage]  = 1.0
-                                offsets[currentPage] = .zero
+                                z.scales[z.currentPage]  = 1.0
+                                z.offsets[z.currentPage] = .zero
                             }
                         }
                     }
@@ -98,9 +110,9 @@ private struct ZoomableImageCell: View {
     @Binding var scale:  CGFloat
     @Binding var offset: CGSize
 
-    // Gesture state
-    @GestureState private var dragDelta:    CGSize  = .zero
-    @GestureState private var pinchDelta:   CGFloat = 1.0
+    // Gesture state (ephemeral — committed to bindings on gesture end)
+    @GestureState private var dragDelta:  CGSize  = .zero
+    @GestureState private var pinchDelta: CGFloat = 1.0
 
     var body: some View {
         Image(uiImage: image)

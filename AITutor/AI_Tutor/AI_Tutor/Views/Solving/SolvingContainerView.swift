@@ -246,7 +246,8 @@ struct SolvingContainerView: View {
                     subject: appState.settings.selectedSubject,
                     language: appState.settings.outputLanguage,
                     solutionA: solutionA,
-                    solutionB: solutionB
+                    solutionB: solutionB,
+                    images: appState.capturedImages
                 ) { chunk in
                     buffer += chunk
                     if Date().timeIntervalSince(lastFlush) >= 0.05 {
