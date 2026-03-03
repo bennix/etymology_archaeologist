@@ -472,8 +472,9 @@ private enum ExtractionContentPart: Encodable {
             try c.encode(t, forKey: .text)
         case .image(let url):
             try c.encode("image_url", forKey: .type)
-            // Standard OpenAI vision format: image_url as {"url": "..."} object
-            try c.encode(["url": url], forKey: .imageURL)
+            // Zenmux GPT-4o expects image_url as a plain string data URI.
+            // (Standard {"url":"..."} object format is rejected by this endpoint.)
+            try c.encode(url, forKey: .imageURL)
         }
     }
 }
