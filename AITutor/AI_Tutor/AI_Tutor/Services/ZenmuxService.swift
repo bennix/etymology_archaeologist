@@ -60,7 +60,7 @@ struct ZenmuxService {
             var parts: [[String: Any]] = [["type": "text", "text": userPrompt]]
             for image in images {
                 if let b64 = encodeImage(image) {
-                    parts.append(["type": "image_url", "image_url": "data:image/jpeg;base64,\(b64)"])
+                    parts.append(["type": "image_url", "image_url": ["url": "data:image/jpeg;base64,\(b64)"]])
                 }
             }
             userContent = parts
@@ -472,8 +472,8 @@ private enum ExtractionContentPart: Encodable {
             try c.encode(t, forKey: .text)
         case .image(let url):
             try c.encode("image_url", forKey: .type)
-            // Zenmux expects image_url as a plain string, not {"url": "..."} object
-            try c.encode(url, forKey: .imageURL)
+            // Standard OpenAI vision format: image_url as {"url": "..."} object
+            try c.encode(["url": url], forKey: .imageURL)
         }
     }
 }
